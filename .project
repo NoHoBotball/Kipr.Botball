@@ -14,4 +14,17 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>CBCJVM</name>
+			<type>2</type>
+			<locationURI>GIT_HOME/CBCJVM/cbc/CBCJVM/src</locationURI>
+		</link>
+	</linkedResources>
+	<variableList>
+		<variable>
+			<name>GIT_HOME</name>
+			<value>file:/C:/Users/Joseph/git</value>
+		</variable>
+	</variableList>
 </projectDescription>
