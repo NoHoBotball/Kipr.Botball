@@ -1,21 +1,23 @@
 package sensors;
 
 import cbccore.low.Sensor;
+import utils.DimensionalConsistencyException;
 
 public class Accelerometer implements Runnable{
 
-	Sensor cbc = new Sensor();
+	private Sensor cbc = new Sensor();
 	
 	
 	//a value of 1365 is approximately 1 G (9.8    m/sec^2 - accel of gravity)	
 	//a value of 1365 is approximately 1 G (9.8e3 mm/sec^2 - accel of gravity)	
 	
-	final static double ACCEL_UNIT = 9.8E3 / 1365; // mm/sec^2
+	public final static double ACCEL_UNIT = 9.8E3 / 1365; // mm/sec^2
 	
 	private long time;
 	private long lag;
 	private long endTime;
 	
+	public int dimensions;
 	private double[] pos  = new double[3];
 	private double[] dPos = new double[3];
 	private double[] v  = new double[3];
@@ -27,10 +29,21 @@ public class Accelerometer implements Runnable{
 	 * @param lag - time in milliseconds between updates
 	 * @param timeout - time in milliseconds until position tracking instance times out
 	 */
-	Accelerometer(double[] pos, double[] v, long lag, long timeout){
+	public Accelerometer(){
+	}
+	
+	public Accelerometer(double[] pos, double[] v, long lag, long timeout){
 		this.pos = pos;
 		this.v = v;
-		for(int i = 0; i<3; i++)
+		dimensions = pos.length;
+		if(dimensions != v.length) throw new DimensionalConsistencyException("" +
+				"Initial position and velocity vectors must have the same" +
+				"number of dimensions.");
+		if(dimensions > 3) throw new IllegalArgumentException("This position" +
+				"tracking method can only handle 3 dimensions.  You are" +
+				"trying to use" + dimensions);
+		
+		for(int i = 0; i<dimensions; i++)
 			a[i] = getAccel(i);
 		
 		this.lag = lag;
@@ -59,15 +72,41 @@ public class Accelerometer implements Runnable{
 			accel = cbc.accel_z();
 			break;
 		default:
-			System.err.println("There are only three dimensions." +
-					"Choose one, dumbass.");
-			accel = 0;
+			throw new IllegalArgumentException("This position tracking method" +
+				"can only handle 3 dimensions.  You are trying to use" + axis);
 		}
 		
 		//convert accel into mm/sec^2
 		accel = accel/ACCEL_UNIT;
 		return accel;
 	}
+	public double getAccel(char axis) {
+		double accel;
+		
+		switch(axis){
+		case 'x':
+		case 'X':
+			accel = cbc.accel_x();
+			break;
+		case 'y':
+		case 'Y':
+			accel = cbc.accel_y();
+			break;
+		case 'z':
+		case 'Z':
+			accel = cbc.accel_z();
+			break;
+		default:
+			throw new IllegalArgumentException("This position tracking method" +
+				"can only handle the X,Y, and Z axis.  You are trying to" +
+				"use the" + axis + "axis.");
+		}
+		
+		//convert accel into mm/sec^2
+		accel = accel/ACCEL_UNIT;
+		return accel;
+	}
+	
 	public double[] getAccel() {
 		double[] accel = new double[3];
 		
@@ -90,7 +129,7 @@ public class Accelerometer implements Runnable{
 	public double[] getdV() {
 		double[] dV = this.dV;
 		for(int i = 0; i<3; i++)
-			this.dV[i] += 0;
+			this.dV[i] = 0;
 		return dV;
 	}
 	
@@ -100,7 +139,7 @@ public class Accelerometer implements Runnable{
 	public double[] getdPos() {
 		double[] dPos = this.dPos;
 		for(int i = 0; i<3; i++)
-			this.dPos[i] += 0;
+			this.dPos[i] = 0;
 		return dPos;
 	}
 	
