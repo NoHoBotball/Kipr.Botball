@@ -17,15 +17,15 @@ import java.util.regex.Pattern;
  * @author Joseph McGee
  *
  */
-public class DataSheet extends FileReader{
+public class DataSheetReader extends FileReader{
 	
-	DataSheet(File file) throws IOException {
+	DataSheetReader(File file) throws IOException {
 		super(file);
 	}
-	DataSheet(String fileName) throws IOException {
+	DataSheetReader(String fileName) throws IOException {
 		super(fileName);
 	}
-	DataSheet(FileDescriptor fileDescriptor) {
+	DataSheetReader(FileDescriptor fileDescriptor) {
 		super(fileDescriptor);
 	}
 	
