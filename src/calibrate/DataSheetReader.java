@@ -173,10 +173,10 @@ public class DataSheetReader extends FileReader{
 	
 
 
-    static private Pattern floatPattern;
+//    static private Pattern floatPattern;
     //Altered floatPattern to accept "null" for Float or Double objects
     static private Pattern floatObjPattern;
-    static private Pattern decimalPattern;
+//    static private Pattern decimalPattern;
     static private void buildFloatAndDecimalPattern() {
     	
     	//this part is mostly copied from Scanner.class source attachment
@@ -213,12 +213,12 @@ public class DataSheetReader extends FileReader{
         String signedNonNumber = "(([-+]?"+nonNumber+")|" +
                                  positiveNonNumber + "|" + 
                                  negativeNonNumber + ")";
-        floatPattern = Pattern.compile(decimal + "|" + hexFloat + "|" +
-                                       signedNonNumber);
+//        floatPattern = Pattern.compile(decimal + "|" + hexFloat + "|" +
+//                                       signedNonNumber);
         //Altered floatPattern to accept "null" for Float or Double objects
         floatObjPattern = Pattern.compile(decimal + "|" + hexFloat + "|" +
                 signedNonNumber + "|" + nullString);
-        decimalPattern = Pattern.compile(decimal);
+//        decimalPattern = Pattern.compile(decimal);
     }
 	
 
