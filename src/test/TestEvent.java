@@ -71,7 +71,7 @@ public abstract class TestEvent {
 	};
 	
 	public int counter() throws FileNotFoundException {
-		File counterSource = new File(testName + "_counter");
+		File counterSource = new File(testName + ".countd");
 		PrintWriter counterW = new PrintWriter(counterSource);
 		Scanner counterR = new Scanner(counterSource);
 		

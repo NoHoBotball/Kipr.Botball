@@ -30,7 +30,7 @@ public abstract class Test {
 	}
 	
 	private int counter() throws FileNotFoundException {
-		File counterSource = new File(testName + "_counter");
+		File counterSource = new File(testName + ".count");
 		try {
 			counterSource.createNewFile();
 		} catch (IOException e) {
