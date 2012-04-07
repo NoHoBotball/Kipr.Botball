@@ -51,20 +51,22 @@ public abstract class Test {
 		return counter;
 	}
 	
-	private Double target() {
+	protected Double target() {
 		System.err.println("Idiot.  I told you to override target().  --Joseph McGee");
 		return null;
 	}
-	private Double result() {
+	protected Double result() {
 		System.err.println("Idiot.  I told you to override result().  --Joseph McGee");
 		return null;
 	}
 	
 	public void main() {
-		dataStream.println("target" + "\t\t" + "result");
+		dataStream.println("target" + "\t" + "result");
 		while(!endTest()) {
 			doTestCall();
 		}
+		dataStream.flush();
+		dataStream.close();
 	}
 	
 	protected void doTestCall(){
@@ -73,7 +75,7 @@ public abstract class Test {
 	}
 	protected void doTest() {
 		if(i<n){
-			dataStream.println(target() + "\t\t" + result());
+			dataStream.println("" + target() + '\t' + result());
 			i++;
 		}
 	}
