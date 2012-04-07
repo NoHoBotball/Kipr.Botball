@@ -31,6 +31,8 @@ public class DataSheetReader extends FileReader{
 	
 	Double[][] dataByCol;
 	Double[][] dataByRow;
+	private int row, max_row = 0;
+	private int col, max_col = 0;
 	
 	/**
 	 * @return Data read from the file, organized by column and row into arrays
@@ -47,6 +49,7 @@ public class DataSheetReader extends FileReader{
 	 */
 	public Double[][] getDataByCol() throws IOException{
 		if(dataByCol == null) _readDataSheet();
+		col = max_col+1;
 		return dataByCol;
 	}
 	/**
@@ -56,6 +59,7 @@ public class DataSheetReader extends FileReader{
 	 */
 	public Double[][] getDataByRow() throws IOException{
 		if(dataByRow == null) _readDataSheet();
+		row = max_row+1;
 		return dataByRow;
 	}
 	
@@ -65,8 +69,9 @@ public class DataSheetReader extends FileReader{
 	 * 			to bottom. First value is assumed to be a label and discarded.
 	 * @throws IOException
 	 */
-	public Double[] getDataCol(int col) throws IOException{
+	public Double[] getCol(int col) throws IOException{
 		if(dataByCol == null) _readDataSheet();
+		this.col = col+1;
 		return dataByCol[col];
 	}
 	
@@ -76,19 +81,26 @@ public class DataSheetReader extends FileReader{
 	 * 			to right. First value is assumed to be a label and discarded.
 	 * @throws IOException
 	 */
-	public Double[] getDataRow(int row) throws IOException{
+	public Double[] getRow(int row) throws IOException{
 		if(dataByRow == null) _readDataSheet();
+		this.row = row+1;
 		return dataByRow[row];
-	}	
+	}
 	
+	public Double[] getCol() throws IOException{
+		return getCol(col);
+	}
+	public Double[] getRow() throws IOException{
+		return getRow(row);
+	}
+
 	
 	private void _readDataSheet() throws IOException {
 		
 		Scanner source = new Scanner(this);
 
 		//Keep track of current and maximum row/column
-		int row, max_row = 0;
-		int col, max_col = 0;
+
 		
 		/*
 		 * extra contains ArrayLists which contain doubles.
