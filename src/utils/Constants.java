@@ -58,8 +58,8 @@ public class Constants {
 	 */
 	public static enum Block {
 		RED (0),
-		BLUE (1),
-		YELLOW (2);
+		YELLOW (2),
+		BLUE (3);
 		
 		private int channel;
 		
