@@ -44,7 +44,7 @@ public abstract class Task {
 		
 		for (int i = 0; i < locations.length; i++) {
 			
-			boolean flag = false; // Used for handling special cases
+			boolean botCentered = false; // Set to true to indicate the the bot has been re-centered on the location
 			
 			switch (locations[i]) {
 				case BLOCK_FENCE:
@@ -52,25 +52,24 @@ public abstract class Task {
 						case BLOCK_CORNER:
 							if (offset != Direction.CENTER && offset != Direction.NORTH) {
 								tasks.add(DriveTask.getHalfCubeTask());
-								flag = true;
+								botCentered = true;
 							}
 							tasks.add(new TurnTask(90 - rotation, Constants.STANDARD_SPEED)); // Turn to face up
-							tasks.add(DriveTask.getMoveCubeDistanceTask(flag)); // Drive to cube
+							tasks.add(DriveTask.getMoveCubeDistanceTask(botCentered)); // Drive to cube
 							offset = Direction.NORTH; rotation = 90;
 							break;
 						case BLOCK_SIDE:
 							if (offset != Direction.CENTER && offset != Direction.NORTH) {
 								tasks.add(DriveTask.getHalfCubeTask());
-								flag = true;
+								botCentered = true;
 							}
 							tasks.add(new TurnTask(90 - rotation, Constants.STANDARD_SPEED)); // Turn to face up
-							tasks.add(DriveTask.getMoveToCenterTask(flag)); // Drive up
+							tasks.add(DriveTask.getMoveToCenterTask(botCentered)); // Drive up
 							tasks.add(new TurnTask(-90, Constants.STANDARD_SPEED)); // Turn to face right
 							tasks.add(DriveTask.getMoveCubeDistanceTask(true)); // Drive to cube
 							offset = Direction.EAST; rotation = 0;
 							break;
 					}
-					location = BotLocation.BLOCK_FENCE;
 					break;
 				case BLOCK_CORNER:
 					switch (location) {
@@ -82,23 +81,22 @@ public abstract class Task {
 						case BLOCK_FENCE:
 							if (offset != Direction.CENTER && offset != Direction.SOUTH) {
 								tasks.add(DriveTask.getHalfCubeTask());
-								flag = true;
+								botCentered = true;
 							}
 							tasks.add(new TurnTask(270 - rotation, Constants.STANDARD_SPEED)); // Turn to face down
-							tasks.add(DriveTask.getMoveCubeDistanceTask(flag)); // Drive to cube
+							tasks.add(DriveTask.getMoveCubeDistanceTask(botCentered)); // Drive to cube
 							offset = Direction.SOUTH; rotation = 270;
 							break;
 						case BLOCK_SIDE:
 							if (offset != Direction.CENTER && offset != Direction.EAST) {
 								tasks.add(DriveTask.getHalfCubeTask());
-								flag = true;
+								botCentered = true;
 							}
 							tasks.add(new TurnTask(0 - rotation, Constants.STANDARD_SPEED)); // Turn to face right
-							tasks.add(DriveTask.getMoveCubeDistanceTask(flag)); // Drive to cube
+							tasks.add(DriveTask.getMoveCubeDistanceTask(botCentered)); // Drive to cube
 							offset = Direction.EAST; rotation = 0;
 							break;
 					}
-					location = BotLocation.BLOCK_CORNER;
 					break;
 				case BLOCK_SIDE:
 					switch (location) {
@@ -110,10 +108,10 @@ public abstract class Task {
 						case BLOCK_FENCE:
 							if (offset != Direction.CENTER && offset != Direction.WEST) {
 								tasks.add(DriveTask.getHalfCubeTask());
-								flag = true;
+								botCentered = true;
 							}
 							tasks.add(new TurnTask(180 - rotation, Constants.STANDARD_SPEED)); // Turn to face left
-							tasks.add(DriveTask.getMoveToCenterTask(flag)); // Drive left
+							tasks.add(DriveTask.getMoveToCenterTask(botCentered)); // Drive left
 							tasks.add(new TurnTask(90, Constants.STANDARD_SPEED)); // Turn to face down
 							tasks.add(DriveTask.getMoveCubeDistanceTask(true)); // Drive to cube
 							offset = Direction.SOUTH; rotation = 270;
@@ -121,18 +119,18 @@ public abstract class Task {
 						case BLOCK_CORNER:
 							if (offset != Direction.CENTER && offset != Direction.WEST) {
 								tasks.add(DriveTask.getHalfCubeTask());
-								flag = true;
+								botCentered = true;
 							}
 							tasks.add(new TurnTask(180 - rotation, Constants.STANDARD_SPEED)); // Turn to face left
-							tasks.add(DriveTask.getMoveCubeDistanceTask(flag)); // Drive to cube
+							tasks.add(DriveTask.getMoveCubeDistanceTask(botCentered)); // Drive to cube
 							offset = Direction.WEST; rotation = 180;
 							break;
 					}
-					location = BotLocation.BLOCK_SIDE;
 					break;
 			}
 			
 			tasks.add(GrabTask.getTask()); // Grab cube
+			location = locations[i]; // Update bot state
 			
 		}
 		
