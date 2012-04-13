@@ -2,6 +2,13 @@ package utils;
 
 public class Constants {
 	
+	/* ------- Tweakable Settings ------- */
+	
+	/**
+	 * The default all-around speed. Should probably be removed later; use as a stand-in unit for now.
+	 */
+	public static final int STANDARD_SPEED = 100;
+	
 	/* ------- Measurements ------- */
 	
 	/**

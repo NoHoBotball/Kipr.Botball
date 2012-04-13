@@ -10,9 +10,6 @@ public abstract class Task {
 	
 	public static List<Task> getTaskChain(Block[] blocks, boolean skipFirstBlock) {
 		
-		// Default task values (we can mess with these)
-		int defSpeed = 100;
-		
 		// Initialize task chain
 		List<Task> tasks = new ArrayList<Task>();
 		
@@ -53,22 +50,22 @@ public abstract class Task {
 					switch (location) {
 						case 1:
 							if (offset != 0 && offset != 1) {
-								tasks.add(new DriveTask(Constants.CUBE_WIDTH/2, defSpeed));
+								tasks.add(DriveTask.getHalfCubeTask());
 								flag = true;
 							}
-							tasks.add(new TurnTask(90 - rotation, defSpeed)); // Turn to face up
-							tasks.add(new DriveTask(Constants.CUBE_DISTANCE - Constants.BOT_OFFSET * (flag ? 2 : 1), defSpeed)); // Drive to cube
+							tasks.add(new TurnTask(90 - rotation, Constants.STANDARD_SPEED)); // Turn to face up
+							tasks.add(DriveTask.getMoveCubeDistanceTask(flag)); // Drive to cube
 							offset = 1; rotation = 90;
 							break;
 						case 2:
 							if (offset != 0 && offset != 1) {
-								tasks.add(new DriveTask(Constants.CUBE_WIDTH/2, defSpeed));
+								tasks.add(DriveTask.getHalfCubeTask());
 								flag = true;
 							}
-							tasks.add(new TurnTask(90 - rotation, defSpeed)); // Turn to face up
-							tasks.add(new DriveTask(Constants.CUBE_DISTANCE - Constants.BOT_OFFSET * (flag ? 2 : 1), defSpeed)); // Drive up
-							tasks.add(new TurnTask(-90, defSpeed)); // Turn to face right
-							tasks.add(new DriveTask(Constants.CUBE_DISTANCE - Constants.BOT_OFFSET, defSpeed)); // Drive to cube
+							tasks.add(new TurnTask(90 - rotation, Constants.STANDARD_SPEED)); // Turn to face up
+							tasks.add(DriveTask.getMoveToCenterTask(flag)); // Drive up
+							tasks.add(new TurnTask(-90, Constants.STANDARD_SPEED)); // Turn to face right
+							tasks.add(DriveTask.getMoveCubeDistanceTask(true)); // Drive to cube
 							offset = 2; rotation = 0;
 							break;
 					}
@@ -77,26 +74,26 @@ public abstract class Task {
 				case 1: // Location in corner
 					switch (location) {
 						case -1:
-							tasks.add(new TurnTask(90, defSpeed)); // Turn to face right
-							tasks.add(new DriveTask(Constants.CUBE_DISTANCE/2 - Constants.BOT_OFFSET, defSpeed)); // Drive to cube
+							tasks.add(new TurnTask(90, Constants.STANDARD_SPEED)); // Turn to face right
+							tasks.add(new DriveTask(Constants.CUBE_DISTANCE/2 - Constants.BOT_OFFSET, Constants.STANDARD_SPEED)); // Drive to cube
 							rotation = 0;
 							break;
 						case 0:
 							if (offset != 0 && offset != 3) {
-								tasks.add(new DriveTask(Constants.CUBE_WIDTH/2, defSpeed));
+								tasks.add(DriveTask.getHalfCubeTask());
 								flag = true;
 							}
-							tasks.add(new TurnTask(270 - rotation, defSpeed)); // Turn to face down
-							tasks.add(new DriveTask(Constants.CUBE_DISTANCE - Constants.BOT_OFFSET * (flag ? 2 : 1), defSpeed)); // Drive to cube
+							tasks.add(new TurnTask(270 - rotation, Constants.STANDARD_SPEED)); // Turn to face down
+							tasks.add(DriveTask.getMoveCubeDistanceTask(flag)); // Drive to cube
 							offset = 3; rotation = 270;
 							break;
 						case 2:
 							if (offset != 0 && offset != 2) {
-								tasks.add(new DriveTask(Constants.CUBE_WIDTH/2, defSpeed));
+								tasks.add(DriveTask.getHalfCubeTask());
 								flag = true;
 							}
-							tasks.add(new TurnTask(0 - rotation, defSpeed)); // Turn to face right
-							tasks.add(new DriveTask(Constants.CUBE_DISTANCE - Constants.BOT_OFFSET * (flag ? 2 : 1), defSpeed)); // Drive to cube
+							tasks.add(new TurnTask(0 - rotation, Constants.STANDARD_SPEED)); // Turn to face right
+							tasks.add(DriveTask.getMoveCubeDistanceTask(flag)); // Drive to cube
 							offset = 2; rotation = 0;
 							break;
 					}
@@ -105,28 +102,28 @@ public abstract class Task {
 				case 2: // Location on side
 					switch (location) {
 						case -1:
-							tasks.add(new TurnTask(90, defSpeed)); // Turn to face left
-							tasks.add(new DriveTask(Constants.CUBE_DISTANCE/2 - Constants.BOT_OFFSET, defSpeed)); // Drive to cube
+							tasks.add(new TurnTask(90, Constants.STANDARD_SPEED)); // Turn to face left
+							tasks.add(new DriveTask(Constants.CUBE_DISTANCE/2 - Constants.BOT_OFFSET, Constants.STANDARD_SPEED)); // Drive to cube
 							rotation = 180;
 							break;
 						case 0:
 							if (offset != 0 && offset != 4) {
-								tasks.add(new DriveTask(Constants.CUBE_WIDTH/2, defSpeed));
+								tasks.add(DriveTask.getHalfCubeTask());
 								flag = true;
 							}
-							tasks.add(new TurnTask(180 - rotation, defSpeed)); // Turn to face left
-							tasks.add(new DriveTask(Constants.CUBE_DISTANCE, defSpeed)); // Drive left
-							tasks.add(new TurnTask(90, defSpeed)); // Turn to face down
-							tasks.add(new DriveTask(Constants.CUBE_DISTANCE - Constants.BOT_OFFSET * (flag ? 2 : 1), defSpeed)); // Drive to cube
+							tasks.add(new TurnTask(180 - rotation, Constants.STANDARD_SPEED)); // Turn to face left
+							tasks.add(DriveTask.getMoveToCenterTask(flag)); // Drive left
+							tasks.add(new TurnTask(90, Constants.STANDARD_SPEED)); // Turn to face down
+							tasks.add(DriveTask.getMoveCubeDistanceTask(true)); // Drive to cube
 							offset = 3; rotation = 270;
 							break;
 						case 1:
 							if (offset != 0 && offset != 4) {
-								tasks.add(new DriveTask(Constants.CUBE_WIDTH/2, defSpeed));
+								tasks.add(DriveTask.getHalfCubeTask());
 								flag = true;
 							}
-							tasks.add(new TurnTask(180 - rotation, defSpeed)); // Turn to face left
-							tasks.add(new DriveTask(Constants.CUBE_DISTANCE - Constants.BOT_OFFSET * (flag ? 2 : 1), defSpeed)); // Drive to cube
+							tasks.add(new TurnTask(180 - rotation, Constants.STANDARD_SPEED)); // Turn to face left
+							tasks.add(DriveTask.getMoveCubeDistanceTask(flag)); // Drive to cube
 							offset = 4; rotation = 180;
 							break;
 					}
@@ -135,7 +132,6 @@ public abstract class Task {
 			}
 			
 			tasks.add(new GrabTask()); // Grab cube
-			tasks.add(new DriveTask(Constants.CUBE_WIDTH/2, defSpeed)); // Center on cube location
 			
 		}
 		
