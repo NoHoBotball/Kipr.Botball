@@ -89,4 +89,25 @@ public class Constants {
 		}
 	}
 	
+	public static enum BotLocation {
+		BLOCK_FENCE,
+		BLOCK_CORNER,
+		BLOCK_SIDE,
+		GATHER_START;
+		
+		private static final BotLocation[] blockLocations = new BotLocation[] {BLOCK_FENCE, BLOCK_CORNER, BLOCK_SIDE};
+		
+		public static BotLocation[] getBlockLocations() {
+			return blockLocations;
+		}
+	}
+	
+	public static enum Direction {
+		CENTER,
+		NORTH,
+		SOUTH,
+		EAST,
+		WEST;
+	}
+	
 }
