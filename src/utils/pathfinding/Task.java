@@ -131,7 +131,7 @@ public abstract class Task {
 					break;
 			}
 			
-			tasks.add(new GrabTask()); // Grab cube
+			tasks.add(GrabTask.getTask()); // Grab cube
 			
 		}
 		
