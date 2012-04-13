@@ -50,74 +50,64 @@ public abstract class Task {
 						case 1:
 							tasks.add(new TurnTask(90 - rotation, defSpeed)); // Turn to face up
 							tasks.add(new DriveTask(Constants.CUBE_DISTANCE, defSpeed)); // Drive to cube
-							tasks.add(new GrabTask()); // Grab cube
-							tasks.add(new DriveTask(Constants.CUBE_WIDTH/2, defSpeed)); // Center on cube location
-							rotation = 90; location = 0;
+							rotation = 90;
 							break;
 						case 2:
 							tasks.add(new TurnTask(90 - rotation, defSpeed)); // Turn to face up
 							tasks.add(new DriveTask(Constants.CUBE_DISTANCE, defSpeed)); // Drive up
 							tasks.add(new TurnTask(-90, defSpeed)); // Turn to face right
 							tasks.add(new DriveTask(Constants.CUBE_DISTANCE, defSpeed)); // Drive to cube
-							tasks.add(new GrabTask()); // Grab cube
-							tasks.add(new DriveTask(Constants.CUBE_WIDTH/2, defSpeed)); // Center on cube location
-							rotation = 0; location = 0;
+							rotation = 0;
 							break;
 					}
+					location = 0;
 					break;
 				case 1: // Location in corner
 					switch (location) {
 						case -1:
 							tasks.add(new TurnTask(90, defSpeed)); // Turn to face right
 							tasks.add(new DriveTask(Constants.CUBE_DISTANCE/2, defSpeed)); // Drive to cube
-							tasks.add(new GrabTask()); // Grab cube
-							tasks.add(new DriveTask(Constants.CUBE_WIDTH/2, defSpeed)); // Center on cube
-							rotation = 0; location = 1;
+							rotation = 0;
 							break;
 						case 0:
 							tasks.add(new TurnTask(270 - rotation, defSpeed)); // Turn to face down
 							tasks.add(new DriveTask(Constants.CUBE_DISTANCE, defSpeed)); // Drive to cube
-							tasks.add(new GrabTask()); // Grab cube
-							tasks.add(new DriveTask(Constants.CUBE_WIDTH/2, defSpeed)); // Center on cube
-							rotation = 270; location = 1;
+							rotation = 270;
 							break;
 						case 2:
 							tasks.add(new TurnTask(0 - rotation, defSpeed)); // Turn to face right
 							tasks.add(new DriveTask(Constants.CUBE_DISTANCE, defSpeed)); // Drive to cube
-							tasks.add(new GrabTask()); // Grab cube
-							tasks.add(new DriveTask(Constants.CUBE_WIDTH/2, defSpeed)); // Center on cube
-							rotation = 0; location = 1;
+							rotation = 0;
 							break;
 					}
+					location = 1;
 					break;
 				case 2: // Location on side
 					switch (location) {
 						case -1:
 							tasks.add(new TurnTask(90, defSpeed)); // Turn to face left
 							tasks.add(new DriveTask(Constants.CUBE_DISTANCE/2, defSpeed)); // Drive to cube
-							tasks.add(new GrabTask()); // Grab cube
-							tasks.add(new DriveTask(Constants.CUBE_WIDTH/2, defSpeed)); // Center on cube
-							rotation = 180; location = 2;
+							rotation = 180;
 							break;
 						case 0:
 							tasks.add(new TurnTask(180 - rotation, defSpeed)); // Turn to face left
 							tasks.add(new DriveTask(Constants.CUBE_DISTANCE, defSpeed)); // Drive left
 							tasks.add(new TurnTask(90, defSpeed)); // Turn to face down
 							tasks.add(new DriveTask(Constants.CUBE_DISTANCE, defSpeed)); // Drive down
-							tasks.add(new GrabTask()); // Grab cube
-							tasks.add(new DriveTask(Constants.CUBE_WIDTH/2, defSpeed)); // Center on cube
-							rotation = 270; location = 2;
+							rotation = 270;
 							break;
 						case 1:
 							tasks.add(new TurnTask(180 - rotation, defSpeed)); // Turn to face left
 							tasks.add(new DriveTask(Constants.CUBE_DISTANCE, defSpeed)); // Drive to cube
-							tasks.add(new GrabTask()); // Grab cube
-							tasks.add(new DriveTask(Constants.CUBE_WIDTH/2, defSpeed)); // Center on cube
-							rotation = 180; location = 2;
+							rotation = 180;
 							break;
 					}
+					location = 2;
 					break;
 			}
+			
+			tasks.add(new GrabTask()); // Grab cube
+			tasks.add(new DriveTask(Constants.CUBE_WIDTH/2, defSpeed)); // Center on cube location
 			
 		}
 		
