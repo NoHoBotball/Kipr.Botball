@@ -2,26 +2,26 @@ package test;
 
 import java.io.FileNotFoundException;
 
-public class Accelerometer extends Test{
+public class Accelerometer extends AbstractTest{
 
 	String className = "Accelerometer";
 	
-	sensors.Accelerometer cbc = new sensors.Accelerometer();
+	sensors.SimulatedAccelerometer cbc = new sensors.SimulatedAccelerometer();
 	double target;
-	char axis;
+	String axis;
 	
 	public Accelerometer() throws FileNotFoundException {
 		super("Accelerometer", 100);
 		className = "Accelerometer";
 		target = 9.8e3;// mm/sec^2
-		axis = 'z';
+		axis = "xyz";
 	}
-	public Accelerometer(int n, double target, char axis) throws FileNotFoundException {
+	public Accelerometer(int n, double target, String axis) throws FileNotFoundException {
 		super("Accelerometer", n);
 		this.target = target;
 		this.axis = axis;
 	}
-	public Accelerometer(String testName, int n, double target, char axis) throws FileNotFoundException {
+	public Accelerometer(String testName, int n, double target, String axis) throws FileNotFoundException {
 		super(testName, n);
 		this.target = target;
 		this.axis = axis;
@@ -32,10 +32,13 @@ public class Accelerometer extends Test{
 		return target;
 	}
 	protected Double result() {
-		return cbc.getAccel(axis);
-	}
-	
-	protected void doTestCall() {
-		doTest();
+		double x = 0.0;
+		double y = 0.0;
+		double z = 0.0;
+		if(axis.contains("x")) x = cbc.getAccel('x');
+		if(axis.contains("y")) y = cbc.getAccel('y');
+		if(axis.contains("z")) z = cbc.getAccel('z');
+
+		return Math.sqrt(x*x + y*y + z*z);
 	}
 }

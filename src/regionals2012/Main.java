@@ -10,7 +10,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		try {
-			Accelerometer test = new Accelerometer("Accelerometer", 2, 9.8e3, 'z');
+			Accelerometer test = new Accelerometer();
 			test.main();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
