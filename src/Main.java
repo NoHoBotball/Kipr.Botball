@@ -18,17 +18,27 @@ public class Main {
 		
 		Block[] blocks = new Block[3];
 		
+		System.out.println("Input block formation (A = RED, B = YELLOW, BLACK = BLUE):");
+		
 		for (int i = 0; i < 3; i++) {
 			
-			System.out.println("Input block " + i + " (A = RED, B = YELLOW, BLACK = BLUE)");
+			System.out.print("Block " + i + ":");
+			
 			boolean a = false, b = false;
 			while ((a = new AButton().isNotPushed()) && (b = new BButton().isNotPushed()) && (new BlackButton().isNotPushed()));
-			if (a)
+			if (a) {
 				blocks[i] = Block.RED;
-			else if (b)
+				while(new AButton().isPushed());
+				System.out.println("RED");
+			} else if (b) {
 				blocks[i] = Block.YELLOW;
-			else
+				while(new BButton().isPushed());
+				System.out.println("YELLOW");
+			} else {
 				blocks[i] = Block.BLUE;
+				while(new BlackButton().isPushed());
+				System.out.println("BLUE");
+			}
 			
 		}
 		
