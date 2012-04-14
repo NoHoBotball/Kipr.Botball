@@ -5,9 +5,9 @@ public class Constants {
 	/* ------- Tweakable Settings ------- */
 	
 	/**
-	 * The default all-around speed. Should probably be removed later; use as a stand-in unit for now.
+	 * The default all-around speed in cm/s. Should probably be removed later; use as a stand-in unit for now.
 	 */
-	public static final int STANDARD_SPEED = 100;
+	public static final int STANDARD_SPEED = 20;
 	
 	/* ------- Measurements ------- */
 	
@@ -30,6 +30,16 @@ public class Constants {
 	 * The width of the entire game board in inches.
 	 */
 	public static final double GAME_BOARD_WIDTH = 96;
+	
+	/**
+	 * Converts an inch amount to centimeters.
+	 * 
+	 * @param inches
+	 * @return centimeters
+	 */
+	public static double inchesToCentimeters(double inches) {
+		return 2.54 * inches;
+	}
 	
 	/* ------- Block Data ------- */
 	
@@ -87,6 +97,27 @@ public class Constants {
 		public int getChannel() {
 			return channel;
 		}
+	}
+	
+	public static enum BotLocation {
+		BLOCK_FENCE,
+		BLOCK_CORNER,
+		BLOCK_SIDE,
+		GATHER_START;
+		
+		private static final BotLocation[] blockLocations = new BotLocation[] {BLOCK_FENCE, BLOCK_CORNER, BLOCK_SIDE};
+		
+		public static BotLocation[] getBlockLocations() {
+			return blockLocations;
+		}
+	}
+	
+	public static enum Direction {
+		CENTER,
+		NORTH,
+		SOUTH,
+		EAST,
+		WEST;
 	}
 	
 }
