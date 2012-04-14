@@ -7,7 +7,7 @@ public class Constants {
 	/**
 	 * The default all-around speed in cm/s. Should probably be removed later; use as a stand-in unit for now.
 	 */
-	public static final int STANDARD_SPEED = 10;
+	public static final int STANDARD_SPEED = 20;
 	
 	/* ------- Measurements ------- */
 	
