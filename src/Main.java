@@ -42,7 +42,7 @@ public class Main {
 			
 		}
 		
-		List<Task> blockChain = Task.getTaskChain(blocks, blocks[0] == Block.RED);
+		List<Task> blockChain = Task.getTaskChain(blocks, blocks[0] == Block.RED ? 1 : 0);
 		
 		TaskRunner blockTask = new TaskRunner(blockChain);
 		blockTask.run();

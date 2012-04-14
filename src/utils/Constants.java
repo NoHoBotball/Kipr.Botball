@@ -79,15 +79,29 @@ public class Constants {
 	 * Represents the various block types.
 	 */
 	public static enum Block {
-		RED (0),
-		YELLOW (2),
-		BLUE (3);
+		RED (0){
+			public int getPriority() {
+				return 0;
+			}
+		},
+		YELLOW (2){
+			public int getPriority() {
+				return 1;
+			}
+		},
+		BLUE (3){
+			public int getPriority() {
+				return 2;
+			}
+		};
 		
 		private int channel;
 		
 		Block (int channel) {
 			this.channel = channel;
 		}
+		
+		public abstract int getPriority();
 		
 		/**
 		 * Gets the channel number for the CBC camera's color tracking.
@@ -113,11 +127,33 @@ public class Constants {
 	}
 	
 	public static enum Direction {
-		CENTER,
-		NORTH,
-		SOUTH,
-		EAST,
-		WEST;
+		CENTER{
+			public int getHeading(){
+				return -1;
+			}
+		},
+		NORTH{
+			public int getHeading(){
+				return 90;
+			}
+		},
+		SOUTH{
+			public int getHeading(){
+				return 270;
+			}
+		},
+		EAST{
+			public int getHeading(){
+				return 0;
+			}
+		},
+		WEST{
+			public int getHeading(){
+				return 180;
+			}
+		};
+		
+		abstract int getHeading();
 	}
 	
 }

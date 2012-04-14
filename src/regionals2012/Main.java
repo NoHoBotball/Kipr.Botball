@@ -2,7 +2,7 @@ package regionals2012;
 
 import java.io.FileNotFoundException;
 
-import test.Accelerometer;
+import utils.tests.Accelerometer;
 public class Main {
 
 	/**
