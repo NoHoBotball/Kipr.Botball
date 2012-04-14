@@ -8,20 +8,24 @@ public abstract class AbstractTest {
 	
 	private String testName;
 	PrintWriter dataFile;
-	int n;
+	String[] labels = {"Target", "Result"};
+	Double[][] data;
+	int n, i=0;
 	
 	public AbstractTest(int n) throws FileNotFoundException {
 		this.n = n;
 		setOut();
 	}
 	
-	public AbstractTest(String testName, int n) throws FileNotFoundException {
+	public AbstractTest(String testName, String[] labels, int n) throws FileNotFoundException {
 		this.testName = testName;
 		this.n = n;
 		setOut();
 	}
 	
 	public void setOut() throws FileNotFoundException {
+		data = new Double[labels.length][n];
+
 		File dataFile;
 		for(int i = 0;; i++){
 			dataFile = new File(testName + "_" + i + ".test");
@@ -32,22 +36,13 @@ public abstract class AbstractTest {
 		this.dataFile = new PrintWriter(dataFile);
 	}
 	
-	protected Double target() {
-		System.err.println("Idiot.  I told you to override target().  --Joseph McGee");
-		return null;
-	}
-	protected Double result() {
-		System.err.println("Idiot.  I told you to override result().  --Joseph McGee");
-		return null;
-	}
-	
 	public void main() {
-		dataFile.println("target" + "\t" + "result");
 		begin();
-		for(int i = 0; i<n && !endTest(); i++) {
+		for(i = 0; i<n && !endTest(); i++) {
 			doTest();
 		}
 		end();
+		printData();
 		dataFile.flush();
 		dataFile.close();
 	}
@@ -57,9 +52,7 @@ public abstract class AbstractTest {
 	}
 
 	void doTest() {
-		dataFile.printf("%5.3g\t", target());
-		dataFile.printf("%5.3g\t", result());
-		dataFile.println();
+		
 	}
 	
 	boolean endTest(){
@@ -68,6 +61,19 @@ public abstract class AbstractTest {
 	
 	void end() {
 		
+	}
+	
+	void printData() {
+		for(int labelNum = 0; labelNum < labels.length; labelNum++) {
+			dataFile.print(labels[labelNum] + "= {");
+			for(int testNum = 0; testNum < n; testNum++) {
+				dataFile.print(' ');
+				dataFile.print(data[labelNum][testNum]);
+				if(testNum == n-1) break;
+				dataFile.print(',');
+			}
+			dataFile.println('}');
+		}
 	}
 	
 }

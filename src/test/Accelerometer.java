@@ -11,34 +11,58 @@ public class Accelerometer extends AbstractTest{
 	String axis;
 	
 	public Accelerometer() throws FileNotFoundException {
-		super("Accelerometer", 100);
+		super("Accelerometer", new String[] {"Target", "Result", "X", "Y", "Z"}, 100);
 		className = "Accelerometer";
 		target = 9.8e3;// mm/sec^2
 		axis = "xyz";
 	}
-	public Accelerometer(int n, double target, String axis) throws FileNotFoundException {
-		super("Accelerometer", n);
+	public Accelerometer(String[] labels, int n, double target, String axis) throws FileNotFoundException {
+		super("Accelerometer", labels, n);
 		this.target = target;
 		this.axis = axis;
 	}
-	public Accelerometer(String testName, int n, double target, String axis) throws FileNotFoundException {
-		super(testName, n);
+	public Accelerometer(String testName, String[] labels, int n, double target, String axis) throws FileNotFoundException {
+		super(testName, labels, n);
 		this.target = target;
 		this.axis = axis;
 	}
 	
 
-	protected Double target() {
+	Double target() {
 		return target;
 	}
-	protected Double result() {
-		double x = 0.0;
-		double y = 0.0;
-		double z = 0.0;
-		if(axis.contains("x")) x = cbc.getAccel('x');
-		if(axis.contains("y")) y = cbc.getAccel('y');
-		if(axis.contains("z")) z = cbc.getAccel('z');
-
-		return Math.sqrt(x*x + y*y + z*z);
+	Double result() {
+		double result = 0.0;
+		
+		X(); Y(); Z();
+		
+		for(int axis = 0; axis < 3; axis++) {
+			result += data[axis + 2][this.i];
+		}
+		result = Math.sqrt(result);
+		
+		return result;
+	}
+	
+	Double X() {
+		data[2][n] = 0.0;
+		if(axis.contains("x")){
+			data[2][n] = cbc.getAccel('x');
+		}
+		return data[2][n];
+	}
+	Double Y() {
+		data[3][n] = 0.0;
+		if(axis.contains("x")){
+			data[3][n] = cbc.getAccel('x');
+		}
+		return data[3][n];
+	}
+	Double Z() {
+		data[4][n] = 0.0;
+		if(axis.contains("x")){
+			data[4][n] = cbc.getAccel('x');
+		}
+		return data[4][n];
 	}
 }
