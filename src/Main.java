@@ -1,10 +1,12 @@
 import java.util.List;
 
+import cbccore.create.CreateConnectException;
 import cbccore.sensors.buttons.AButton;
 import cbccore.sensors.buttons.BButton;
 import cbccore.sensors.buttons.BlackButton;
 
 import regionals2012.TaskRunner;
+import robot.BlockRobot;
 
 import utils.Constants.Block;
 import utils.pathfinding.Task;
@@ -44,8 +46,12 @@ public class Main {
 		
 		List<Task> blockChain = Task.getTaskChain(blocks, blocks[0] == Block.RED ? 1 : 0);
 		
-		TaskRunner blockTask = new TaskRunner(blockChain);
-		blockTask.run();
+		try {
+			TaskRunner blockTask = new TaskRunner(new BlockRobot(), blockChain);
+			blockTask.run();
+		} catch (CreateConnectException e){
+			e.printStackTrace();
+		}
 		
 	}
 

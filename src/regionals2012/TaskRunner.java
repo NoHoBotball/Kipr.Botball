@@ -2,10 +2,9 @@ package regionals2012;
 
 import java.util.List;
 
-import cbccore.create.Create;
-import cbccore.create.CreateConnectException;
+import robot.Robot;
+
 import cbccore.movement.DriveTrain;
-import cbccore.movement.plugins.create.CreateMovementPlugin;
 
 import utils.Constants;
 import utils.pathfinding.DriveTask;
@@ -19,15 +18,9 @@ public class TaskRunner implements Runnable {
 	
 	private List<Task> taskChain;
 	
-	public TaskRunner (List<Task> taskChain) {
-		this.taskChain = taskChain;
-		
-		try {
-			driveTrain = new DriveTrain(new CreateMovementPlugin(new Create()));
-		} catch (CreateConnectException e) {
-			e.printStackTrace();
-		}
-		
+	public TaskRunner (Robot robot, List<Task> taskChain) {
+		this.taskChain = taskChain;	
+		this.driveTrain = robot.getDriveTrain();	
 	}
 	
 	@Override
