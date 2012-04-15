@@ -128,6 +128,10 @@ public class Constants {
 		public int getHeading() {
 			return heading;
 		}
+		
+		public int degreesTo(Direction d) {
+			return d.getHeading() - this.getHeading();
+		}
 	}
 	
 }
