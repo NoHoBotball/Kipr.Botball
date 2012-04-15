@@ -1,4 +1,4 @@
-package sensors;
+package utils.sensors;
 
 import cbccore.low.Sensor;
 import utils.DimensionalConsistencyException;

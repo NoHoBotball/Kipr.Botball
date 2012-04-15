@@ -6,7 +6,7 @@ public class Accelerometer extends AbstractTest{
 
 	String className = "Accelerometer";
 	
-	sensors.SimulatedAccelerometer cbc = new sensors.SimulatedAccelerometer();
+	utils.sensors.SimulatedAccelerometer cbc = new utils.sensors.SimulatedAccelerometer();
 	double target;
 	String axis;
 	
