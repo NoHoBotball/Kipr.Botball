@@ -45,7 +45,7 @@ public abstract class Task {
 							}
 							tasks.add(new TurnTask(heading.degreesTo(Direction.NORTH), Constants.STANDARD_SPEED)); // Turn to face up
 							tasks.add(DriveTask.getMoveCubeDistanceTask(botCentered)); // Drive to cube
-							offset = Direction.NORTH; heading = Direction.NORTH;
+							offset = heading = Direction.NORTH;
 							break;
 						case BLOCK_SIDE:
 							if (offset != Direction.CENTER && offset != Direction.NORTH) {
@@ -56,7 +56,7 @@ public abstract class Task {
 							tasks.add(DriveTask.getMoveToCenterTask(botCentered)); // Drive up
 							tasks.add(new TurnTask(-90, Constants.STANDARD_SPEED)); // Turn to face right
 							tasks.add(DriveTask.getMoveCubeDistanceTask(true)); // Drive to cube
-							offset = Direction.EAST; heading = Direction.EAST;
+							offset = heading = Direction.EAST;
 							break;
 					}
 					break;
@@ -74,7 +74,7 @@ public abstract class Task {
 							}
 							tasks.add(new TurnTask(heading.degreesTo(Direction.SOUTH), Constants.STANDARD_SPEED)); // Turn to face down
 							tasks.add(DriveTask.getMoveCubeDistanceTask(botCentered)); // Drive to cube
-							offset = Direction.SOUTH; heading = Direction.SOUTH;
+							offset = heading = Direction.SOUTH;
 							break;
 						case BLOCK_SIDE:
 							if (offset != Direction.CENTER && offset != Direction.EAST) {
@@ -83,7 +83,7 @@ public abstract class Task {
 							}
 							tasks.add(new TurnTask(heading.degreesTo(Direction.EAST), Constants.STANDARD_SPEED)); // Turn to face right
 							tasks.add(DriveTask.getMoveCubeDistanceTask(botCentered)); // Drive to cube
-							offset = Direction.EAST; heading = Direction.EAST;
+							offset = heading = Direction.EAST;
 							break;
 					}
 					break;
@@ -103,7 +103,7 @@ public abstract class Task {
 							tasks.add(DriveTask.getMoveToCenterTask(botCentered)); // Drive left
 							tasks.add(new TurnTask(90, Constants.STANDARD_SPEED)); // Turn to face down
 							tasks.add(DriveTask.getMoveCubeDistanceTask(true)); // Drive to cube
-							offset = Direction.SOUTH; heading = Direction.SOUTH;
+							offset = heading = Direction.SOUTH;
 							break;
 						case BLOCK_CORNER:
 							if (offset != Direction.CENTER && offset != Direction.WEST) {
@@ -112,7 +112,7 @@ public abstract class Task {
 							}
 							tasks.add(new TurnTask(heading.degreesTo(Direction.WEST), Constants.STANDARD_SPEED)); // Turn to face left
 							tasks.add(DriveTask.getMoveCubeDistanceTask(botCentered)); // Drive to cube
-							offset = Direction.WEST; heading = Direction.WEST;
+							offset = heading = Direction.WEST;
 							break;
 					}
 					break;
