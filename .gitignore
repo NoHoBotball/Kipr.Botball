@@ -1,1 +1,4 @@
 /bin
+/cbcjvm
+*.test
+*.count

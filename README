@@ -1,1 +1,7 @@
-This is the North Hollywood Robotics Club's code for the 2012 Greater Los Angeles Botball Competition
+This is the North Hollywood Robotics Club's code for the 2012 Greater LA Botball
+Competition.
+
+I will update the files in the "src_CBCJVM" folder weekly based upon the files
+in the "/cbc/CBCJVM/src" folder of the CBCJVM repo in NHHSRoboticsClub, which
+will also be updated weekly with a pull from upstream.
+    --Joseph McGee
