@@ -79,14 +79,13 @@ public class Constants {
 	 * Represents the various block types.
 	 */
 	public static enum Block {
-		RED (0, 0),
-		YELLOW (2, 1),
-		BLUE (3, 2);
+		RED (0),
+		YELLOW (2),
+		BLUE (3);
 		
 		private int channel;
-		private int priority;
 		
-		Block (int channel, int priority) {
+		Block (int channel) {
 			this.channel = channel;
 		}
 		
@@ -97,10 +96,6 @@ public class Constants {
 		 */
 		public int getChannel() {
 			return channel;
-		}
-		
-		public int getPriority() {
-			return priority;
 		}
 	}
 	

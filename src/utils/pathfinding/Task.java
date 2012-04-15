@@ -24,7 +24,7 @@ public abstract class Task {
 		BotLocation[] destination = new BotLocation[3 - startingBlock];
 		
 		for (int i = startingBlock; i < 3; i++) {
-			int priority = blocks[i].getPriority() - startingBlock;
+			int priority = blocks[i].ordinal() - startingBlock;
 
 			destination[priority] = BotLocation.getBlockLocations()[i];
 		}
