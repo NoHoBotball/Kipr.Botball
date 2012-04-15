@@ -67,8 +67,7 @@ public abstract class AbstractTest {
 		for(int labelNum = 0; labelNum < labels.length; labelNum++) {
 			dataFile.print(labels[labelNum] + "= {");
 			for(int testNum = 0; testNum < n; testNum++) {
-				dataFile.print(' ');
-				dataFile.print(data[labelNum][testNum]);
+				dataFile.print(" " + data[labelNum][testNum] + " ");
 				if(testNum == n-1) break;
 				dataFile.print(',');
 			}
