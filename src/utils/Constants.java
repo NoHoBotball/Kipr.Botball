@@ -5,9 +5,9 @@ public class Constants {
 	/* ------- Tweakable Settings ------- */
 	
 	/**
-	 * The default all-around speed. Should probably be removed later; use as a stand-in unit for now.
+	 * The default all-around speed in cm/s. Should probably be removed later; use as a stand-in unit for now.
 	 */
-	public static final int STANDARD_SPEED = 100;
+	public static final int STANDARD_SPEED = 20;
 	
 	/* ------- Measurements ------- */
 	
@@ -31,61 +31,48 @@ public class Constants {
 	 */
 	public static final double GAME_BOARD_WIDTH = 96;
 	
-	/* ------- Block Data ------- */
-	
-	private static Block[] blockOrder = new Block[3];
-	
 	/**
-	 * Sets the color of a specified block.
+	 * Converts an inch amount to centimeters.
 	 * 
-	 * Block 0 is the block near the fence, 1 is the corner block, 2 is the block near the board edge.
-	 * 
-	 * @param index block index
-	 * @param b block color to use
+	 * @param inches
+	 * @return centimeters
 	 */
-	public static void setBlock(int index, Block b) {
-		if (index < 0 || index > 2)
-			throw new IllegalArgumentException("Block index cannot be greater than 2.");
-		if (blockOrder[index] != null)
-			throw new RuntimeException("The first block was already set.");
-		blockOrder[index] = b;
+	public static double inchesToCentimeters(double inches) {
+		return 2.54 * inches;
+	}
+		
+	public static enum BotLocation {
+		BLOCK_FENCE,
+		BLOCK_CORNER,
+		BLOCK_SIDE,
+		GATHER_START;
+		
+		private static final BotLocation[] blockLocations = new BotLocation[] {BLOCK_FENCE, BLOCK_CORNER, BLOCK_SIDE};
+		
+		public static BotLocation[] getBlockLocations() {
+			return blockLocations;
+		}
 	}
 	
-	/**
-	 * Gets the color of a specified block.
-	 * 
-	 * Block 0 is the block near the fence, 1 is the corner block, 2 is the block near the board edge.
-	 * 
-	 * @param index block index
-	 * @return block color
-	 */
-	public static Block getBlock(int index) {
-		if (index < 0 || index > 2)
-			throw new IllegalArgumentException("Block index cannot be greater than 2.");
-		return blockOrder[index];
-	}
-	
-	/**
-	 * Represents the various block types.
-	 */
-	public static enum Block {
-		RED (0),
-		YELLOW (2),
-		BLUE (3);
+	public static enum Direction {
+		CENTER (-1),
+		NORTH (90),
+		SOUTH (270),
+		EAST (0),
+		WEST (180);
 		
-		private int channel;
+		private int heading;
 		
-		Block (int channel) {
-			this.channel = channel;
+		Direction(int heading) {
+			this.heading = heading;
 		}
 		
-		/**
-		 * Gets the channel number for the CBC camera's color tracking.
-		 * 
-		 * @return channel number
-		 */
-		public int getChannel() {
-			return channel;
+		public int getHeading() {
+			return heading;
+		}
+		
+		public int degreesTo(Direction d) {
+			return d.getHeading() - this.getHeading();
 		}
 	}
 	
