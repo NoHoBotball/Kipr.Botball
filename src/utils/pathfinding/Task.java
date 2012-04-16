@@ -18,13 +18,13 @@ public abstract class Task {
 		// Store robot state as the chain builds
 		BotLocation location = BotLocation.GATHER_START; // Robot is in starting position for block grabbing
 		Direction offset = Direction.CENTER; // Robot is on exact spot; different values define where the bot is relative to a block's center position
-		int heading = 270; // Robot is facing down
+		Direction heading = Direction.SOUTH; // Robot is facing down
 		
 		// Get block path order
 		BotLocation[] destination = new BotLocation[3 - startingBlock];
 		
 		for (int i = startingBlock; i < 3; i++) {
-			int priority = blocks[i].getPriority() - startingBlock;
+			int priority = blocks[i].ordinal() - startingBlock;
 
 			destination[priority] = BotLocation.getBlockLocations()[i];
 		}
@@ -43,20 +43,20 @@ public abstract class Task {
 								tasks.add(DriveTask.getHalfCubeTask());
 								botCentered = true;
 							}
-							tasks.add(new TurnTask(90 - heading, Constants.STANDARD_SPEED)); // Turn to face up
+							tasks.add(new TurnTask(heading.degreesTo(Direction.NORTH), Constants.STANDARD_SPEED)); // Turn to face up
 							tasks.add(DriveTask.getMoveCubeDistanceTask(botCentered)); // Drive to cube
-							offset = Direction.NORTH; heading = 90;
+							offset = heading = Direction.NORTH;
 							break;
 						case BLOCK_SIDE:
 							if (offset != Direction.CENTER && offset != Direction.NORTH) {
 								tasks.add(DriveTask.getHalfCubeTask());
 								botCentered = true;
 							}
-							tasks.add(new TurnTask(90 - heading, Constants.STANDARD_SPEED)); // Turn to face up
+							tasks.add(new TurnTask(heading.degreesTo(Direction.NORTH), Constants.STANDARD_SPEED)); // Turn to face up
 							tasks.add(DriveTask.getMoveToCenterTask(botCentered)); // Drive up
 							tasks.add(new TurnTask(-90, Constants.STANDARD_SPEED)); // Turn to face right
 							tasks.add(DriveTask.getMoveCubeDistanceTask(true)); // Drive to cube
-							offset = Direction.EAST; heading = 0;
+							offset = heading = Direction.EAST;
 							break;
 					}
 					break;
@@ -65,25 +65,25 @@ public abstract class Task {
 						case GATHER_START:
 							tasks.add(new TurnTask(90, Constants.STANDARD_SPEED)); // Turn to face right
 							tasks.add(new DriveTask(Constants.CUBE_DISTANCE/2 - Constants.BOT_OFFSET, Constants.STANDARD_SPEED)); // Drive to cube
-							heading = 0;
+							heading = Direction.EAST;
 							break;
 						case BLOCK_FENCE:
 							if (offset != Direction.CENTER && offset != Direction.SOUTH) {
 								tasks.add(DriveTask.getHalfCubeTask());
 								botCentered = true;
 							}
-							tasks.add(new TurnTask(270 - heading, Constants.STANDARD_SPEED)); // Turn to face down
+							tasks.add(new TurnTask(heading.degreesTo(Direction.SOUTH), Constants.STANDARD_SPEED)); // Turn to face down
 							tasks.add(DriveTask.getMoveCubeDistanceTask(botCentered)); // Drive to cube
-							offset = Direction.SOUTH; heading = 270;
+							offset = heading = Direction.SOUTH;
 							break;
 						case BLOCK_SIDE:
 							if (offset != Direction.CENTER && offset != Direction.EAST) {
 								tasks.add(DriveTask.getHalfCubeTask());
 								botCentered = true;
 							}
-							tasks.add(new TurnTask(0 - heading, Constants.STANDARD_SPEED)); // Turn to face right
+							tasks.add(new TurnTask(heading.degreesTo(Direction.EAST), Constants.STANDARD_SPEED)); // Turn to face right
 							tasks.add(DriveTask.getMoveCubeDistanceTask(botCentered)); // Drive to cube
-							offset = Direction.EAST; heading = 0;
+							offset = heading = Direction.EAST;
 							break;
 					}
 					break;
@@ -92,27 +92,27 @@ public abstract class Task {
 						case GATHER_START:
 							tasks.add(new TurnTask(90, Constants.STANDARD_SPEED)); // Turn to face left
 							tasks.add(new DriveTask(Constants.CUBE_DISTANCE/2 - Constants.BOT_OFFSET, Constants.STANDARD_SPEED)); // Drive to cube
-							heading = 180;
+							heading = Direction.WEST;
 							break;
 						case BLOCK_FENCE:
 							if (offset != Direction.CENTER && offset != Direction.WEST) {
 								tasks.add(DriveTask.getHalfCubeTask());
 								botCentered = true;
 							}
-							tasks.add(new TurnTask(180 - heading, Constants.STANDARD_SPEED)); // Turn to face left
+							tasks.add(new TurnTask(heading.degreesTo(Direction.WEST), Constants.STANDARD_SPEED)); // Turn to face left
 							tasks.add(DriveTask.getMoveToCenterTask(botCentered)); // Drive left
 							tasks.add(new TurnTask(90, Constants.STANDARD_SPEED)); // Turn to face down
 							tasks.add(DriveTask.getMoveCubeDistanceTask(true)); // Drive to cube
-							offset = Direction.SOUTH; heading = 270;
+							offset = heading = Direction.SOUTH;
 							break;
 						case BLOCK_CORNER:
 							if (offset != Direction.CENTER && offset != Direction.WEST) {
 								tasks.add(DriveTask.getHalfCubeTask());
 								botCentered = true;
 							}
-							tasks.add(new TurnTask(180 - heading, Constants.STANDARD_SPEED)); // Turn to face left
+							tasks.add(new TurnTask(heading.degreesTo(Direction.WEST), Constants.STANDARD_SPEED)); // Turn to face left
 							tasks.add(DriveTask.getMoveCubeDistanceTask(botCentered)); // Drive to cube
-							offset = Direction.WEST; heading = 180;
+							offset = heading = Direction.WEST;
 							break;
 					}
 					break;

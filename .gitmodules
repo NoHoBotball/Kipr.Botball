@@ -1,0 +1,3 @@
+[submodule "CBCJVM"]
+	path = CBCJVM
+	url = git://github.com/NHHSRoboticsClub/CBCJVM.git
