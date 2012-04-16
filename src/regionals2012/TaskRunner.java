@@ -2,6 +2,7 @@ package regionals2012;
 
 import java.util.List;
 
+import robot.GrabRobot;
 import robot.Robot;
 
 import cbccore.movement.DriveTrain;
@@ -14,8 +15,8 @@ import utils.pathfinding.TurnTask;
 
 public class TaskRunner implements Runnable {
 	
+	private Robot robot;
 	private DriveTrain driveTrain;
-	
 	private List<Task> taskChain;
 	
 	public TaskRunner (Robot robot, List<Task> taskChain) {
@@ -36,14 +37,9 @@ public class TaskRunner implements Runnable {
 			} else if (task instanceof TurnTask) {
 				TurnTask turnTask = (TurnTask) task;
 				driveTrain.rotateDegrees(turnTask.getAngle(), turnTask.getSpeed());
-			} else if (task instanceof GrabTask) {
+			} else if (task instanceof GrabTask && robot instanceof GrabRobot) {
 				System.out.println("Claw, go!");
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				// TODO: Implement claw motion
+				((GrabRobot)robot).grab();
 				System.out.println("Grabbed.");
 			}
 			
