@@ -10,7 +10,7 @@ import utils.Constants.Direction;
 
 public abstract class Task {
 	
-	public static List<Task> getTaskChain(Block[] blocks, int startingBlock) {
+	public static List<Task> getBlockGatherChain(Block[] blocks, int startingBlock) {
 		
 		// Initialize task chain
 		List<Task> tasks = new ArrayList<Task>();

@@ -44,7 +44,7 @@ public class Main {
 			
 		}
 		
-		List<Task> blockChain = Task.getTaskChain(blocks, blocks[0] == Block.RED ? 1 : 0);
+		List<Task> blockChain = Task.getBlockGatherChain(blocks, blocks[0] == Block.RED ? 1 : 0);
 		
 		try {
 			TaskRunner blockTask = new TaskRunner(new BlockRobot(), blockChain);
