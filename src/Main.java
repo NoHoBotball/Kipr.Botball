@@ -8,7 +8,7 @@ import cbccore.sensors.buttons.BlackButton;
 import regionals2012.TaskRunner;
 import robot.BlockRobot;
 
-import utils.Constants.Block;
+import utils.vision.Block;
 import utils.pathfinding.Task;
 
 public class Main {

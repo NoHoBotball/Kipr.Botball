@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import utils.Constants;
-import utils.Constants.Block;
+import utils.vision.Block;
 import utils.Constants.BotLocation;
 import utils.Constants.Direction;
 

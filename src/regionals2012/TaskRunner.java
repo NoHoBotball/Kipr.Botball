@@ -2,8 +2,8 @@ package regionals2012;
 
 import java.util.List;
 
-import robot.GrabRobot;
 import robot.Robot;
+import robot.extentions.GrabRobot;
 
 import cbccore.movement.DriveTrain;
 

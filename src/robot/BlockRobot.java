@@ -1,8 +1,9 @@
 package robot;
 
 import cbccore.create.CreateConnectException;
-import robot.extentions.Arm;
-import robot.extentions.Claw;
+import robot.extentions.ArmRobot;
+import robot.extentions.ClawRobot;
+import robot.extentions.GrabRobot;
 
 public class BlockRobot extends CreateRobot implements ArmRobot, ClawRobot, GrabRobot {
 
