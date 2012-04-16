@@ -1,7 +1,6 @@
 package utils.sensors;
 
 import cbccore.low.simulator.SimulatedSensor;
-import utils.DimensionalConsistencyException;
 
 public class SimulatedAccelerometer implements Runnable{
 
@@ -36,7 +35,7 @@ public class SimulatedAccelerometer implements Runnable{
 		this.pos = pos;
 		this.v = v;
 		dimensions = pos.length;
-		if(dimensions != v.length) throw new DimensionalConsistencyException("" +
+		if(dimensions != v.length) throw new IllegalArgumentException("" +
 				"Initial position and velocity vectors must have the same" +
 				"number of dimensions.");
 		if(dimensions > 3) throw new IllegalArgumentException("This position" +
