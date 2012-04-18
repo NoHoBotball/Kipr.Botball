@@ -4,7 +4,6 @@ import cbccore.create.Create;
 import cbccore.create.CreateConnectException;
 import cbccore.movement.DriveTrain;
 import cbccore.movement.efficiency.IEfficiencyCalibrator;
-import cbccore.movement.efficiency.SingleValueEfficiencyCalibrator;
 import cbccore.movement.plugins.create.CreateMovementPlugin;
 
 public abstract class CreateRobot extends Robot {

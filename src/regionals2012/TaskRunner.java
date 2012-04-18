@@ -8,20 +8,21 @@ import robot.extentions.GrabRobot;
 import cbccore.movement.DriveTrain;
 
 import utils.Constants;
+import utils.Constants.BotLocation;
+import utils.pathfinding.BlockTask;
 import utils.pathfinding.DriveTask;
 import utils.pathfinding.GrabTask;
 import utils.pathfinding.Task;
 import utils.pathfinding.TurnTask;
+import utils.vision.Block;
 
 public class TaskRunner implements Runnable {
 	
 	private Robot robot;
-	private DriveTrain driveTrain;
 	private List<Task> taskChain;
 	
 	public TaskRunner (Robot robot, List<Task> taskChain) {
 		this.taskChain = taskChain;	
-		this.driveTrain = robot.getDriveTrain();	
 	}
 	
 	@Override
@@ -33,14 +34,17 @@ public class TaskRunner implements Runnable {
 			// Handle task type
 			if (task instanceof DriveTask) {
 				DriveTask driveTask = (DriveTask) task;
-				driveTrain.moveCm(Constants.inchesToCentimeters(driveTask.getDistance()), -driveTask.getSpeed());
+				robot.getDriveTrain().moveCm(Constants.inchesToCentimeters(driveTask.getDistance()), -driveTask.getSpeed());
 			} else if (task instanceof TurnTask) {
 				TurnTask turnTask = (TurnTask) task;
-				driveTrain.rotateDegrees(turnTask.getAngle(), turnTask.getSpeed());
+				robot.getDriveTrain().rotateDegrees(turnTask.getAngle(), turnTask.getSpeed());
 			} else if (task instanceof GrabTask && robot instanceof GrabRobot) {
 				System.out.println("Claw, go!");
 				((GrabRobot)robot).grab();
 				System.out.println("Grabbed.");
+			} else if (task instanceof BlockTask) {
+				BlockTask blockTask = (BlockTask) task;
+				Block.setBlock(blockTask.getLocation(), blockTask.getBlock());
 			}
 			
 		}
