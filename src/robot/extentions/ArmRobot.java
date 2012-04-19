@@ -14,9 +14,11 @@ public interface ArmRobot {
 		public void raise() {
 			goToPos(Level[Level.length - 1]);
 		}
+		
 		public void lower() {
 			goToPos(Level[0]);
 		}
+		
 		public abstract void goToPos(int pos);
 
 	}

@@ -1,3 +1,5 @@
+package test;
+
 import cbccore.motors.Servo;
 import cbccore.sensors.buttons.*;
 import cbccore.create.Create;
