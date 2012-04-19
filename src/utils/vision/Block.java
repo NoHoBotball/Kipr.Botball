@@ -1,5 +1,7 @@
 package utils.vision;
 
+import utils.Constants.BotLocation;
+
 /* ------- Block Data ------- */
 /**
  * Represents the various block types.
@@ -43,6 +45,23 @@ public enum Block {
 	}
 	
 	/**
+	 * Sets the color of a block, specified by its location.
+	 * 
+	 * Block 0 is the block near the fence, 1 is the corner block, 2 is the block near the board edge.
+	 * 
+	 * @param location block location
+	 * @param b block color to use
+	 */
+	public static void setBlock(BotLocation location, Block b) {
+		int index;
+		for(index = 0; index < BotLocation.getBlockLocations().length; index++){
+			if(location == BotLocation.getBlockLocations()[index]){
+				Block.setBlock(index, b);
+				break;
+			}
+		}
+	}
+	/**
 	 * Gets the color of a specified block.
 	 * 
 	 * Block 0 is the block near the fence, 1 is the corner block, 2 is the block near the board edge.
@@ -56,13 +75,17 @@ public enum Block {
 		return blockOrder[index];
 	}
 	
-	public static Block getBlock(Blob blob){
+	/**
+	 * Gets the color of the block currently in the frame of the camera.
+	 * 
+	 * @return block color
+	 */
+	public static Block getBlock(){
 		Block block;
 		
 		Blob red = new Blob(Block.RED.getChannel(), 0);
 		Blob yellow = new Blob(Block.YELLOW.getChannel(), 0);
 		Blob blue = new Blob(Block.BLUE.getChannel(), 0);
-		
 		                                                                    block = Block.RED;
 		if(yellow.score() > red.score() && yellow.score() > red   .score()) block = Block.YELLOW;
 		if(blue  .score() > red.score() && blue  .score() > yellow.score()) block = Block.BLUE;

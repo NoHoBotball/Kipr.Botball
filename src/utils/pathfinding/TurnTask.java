@@ -1,6 +1,6 @@
 package utils.pathfinding;
 
-public class TurnTask extends Task {
+public class TurnTask implements Task {
 	
 	private int angle;
 	private int speed;

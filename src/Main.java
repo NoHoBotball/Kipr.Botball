@@ -5,6 +5,7 @@ import cbccore.sensors.buttons.AButton;
 import cbccore.sensors.buttons.BButton;
 import cbccore.sensors.buttons.BlackButton;
 
+import regionals2012.TaskChain;
 import regionals2012.TaskRunner;
 import robot.BlockRobot;
 
@@ -44,7 +45,7 @@ public class Main {
 			
 		}
 		
-		List<Task> blockChain = Task.getBlockGatherChain(blocks, blocks[0] == Block.RED ? 1 : 0);
+		List<Task> blockChain = TaskChain.getBlockGatherChain(blocks, blocks[0] == Block.RED ? 1 : 0);
 		
 		try {
 			TaskRunner blockTask = new TaskRunner(new BlockRobot(), blockChain);
