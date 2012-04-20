@@ -1,6 +1,6 @@
 package utils.vision;
 
-import utils.Constants.BotLocation;
+import utils.Constants.Location;
 
 /* ------- Block Data ------- */
 /**
@@ -52,10 +52,10 @@ public enum Block {
 	 * @param location block location
 	 * @param b block color to use
 	 */
-	public static void setBlock(BotLocation location, Block b) {
+	public static void setBlock(Location location, Block b) {
 		int index;
-		for(index = 0; index < BotLocation.getBlockLocations().length; index++){
-			if(location == BotLocation.getBlockLocations()[index]){
+		for(index = 0; index < Location.getBlockLocations().length; index++){
+			if(location == Location.getBlockLocations()[index]){
 				Block.setBlock(index, b);
 				break;
 			}

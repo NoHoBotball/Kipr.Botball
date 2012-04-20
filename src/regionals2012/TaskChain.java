@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import utils.Constants;
-import utils.Constants.BotLocation;
+import utils.Constants.Location;
 import utils.Constants.Direction;
 import utils.pathfinding.DriveTask;
 import utils.pathfinding.GrabTask;
 import utils.pathfinding.Task;
+import utils.pathfinding.TaskException;
 import utils.pathfinding.TurnTask;
 import utils.vision.Block;
 
@@ -19,23 +20,68 @@ import utils.vision.Block;
  *
  */
 public class TaskChain {
-	public static List<Task> getBlockGatherChain(Block[] blocks, int startingBlock) {
+	// Store robot state as the chain builds
+	static Location location = Location.GAME_START; // Robot is in starting position for block grabbing
+	static Direction offset = Direction.CENTER; // Robot is on exact spot; different values define where the bot is relative to a block's center position
+	static Direction heading = Direction.SOUTH; // Robot is facing down
+
+	public static List<Task> getOpeningMovesChain() throws TaskException{
+		// Initialize task chain
+		List<Task> tasks = new ArrayList<Task>();
+		
+		if(location != Location.GAME_START // Robot is in starting position for block grabbing
+				   || offset != Direction.CENTER // Robot is on exact spot; different values define where the bot is relative to a block's center position
+				   || heading != Direction.SOUTH // Robot is facing down
+				   ) throw new TaskException("Robot must be in the correct position and have the correct heading to generate this task chain");
+		
+		
+		//TODO: Fill out and plan opening moves.
+		
+		
+		location = Location.BLOCK_FENCE; // Robot is in starting position for block grabbing
+		offset = Direction.CENTER; // Robot is on exact spot; different values define where the bot is relative to a block's center position
+		heading = Direction.SOUTH; // Robot is facing down
+		return tasks;
+	}
+	
+	public static List<Task> getBlockColorChain() throws TaskException {
+		// Initialize task chain
+		List<Task> tasks = new ArrayList<Task>();
+
+		// Store robot state as the chain builds
+		if(location != Location.BLOCK_FENCE // Robot is in starting position for block grabbing
+					|| offset != Direction.CENTER
+					|| heading != Direction.SOUTH // Robot is facing down
+		   ) throw new TaskException("Robot must be in the correct position and have the correct heading to generate this task chain");
+		
+		
+		//TODO: Fill out and plan moves.
+		
+		
+		offset = Direction.CENTER; // Robot is on exact spot; different values define where the bot is relative to a block's center position
+		heading = Direction.SOUTH; // Robot is facing down
+		return tasks;
+	}
+	
+	
+	public static List<Task> getBlockGatherChain(Block[] blocks, int startingBlock) throws TaskException{
 		
 		// Initialize task chain
 		List<Task> tasks = new ArrayList<Task>();
 		
 		// Store robot state as the chain builds
-		BotLocation location = BotLocation.GATHER_START; // Robot is in starting position for block grabbing
-		Direction offset = Direction.CENTER; // Robot is on exact spot; different values define where the bot is relative to a block's center position
-		Direction heading = Direction.SOUTH; // Robot is facing down
+		if((location != Location.BLOCK_FENCE && location != Location.BLOCK_CORNER)
+				   || offset != Direction.CENTER
+				   || heading != Direction.SOUTH
+				   ) throw new TaskException("Robot must be in the correct position and have the correct heading to generate this task chain");
 		
 		// Get block path order
-		BotLocation[] destination = new BotLocation[3 - startingBlock];
+		Location[] destination = new Location[3 - startingBlock];
 		
 		for (int i = startingBlock; i < 3; i++) {
 			int priority = blocks[i].ordinal() - startingBlock;
 
-			destination[priority] = BotLocation.getBlockLocations()[i];
+			destination[priority] = Location.getBlockLocations()[i];
 		}
 		
 		// TODO: Implement the rest of the pathfinding/make it actually practical

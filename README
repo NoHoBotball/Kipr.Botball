@@ -1,7 +1,19 @@
 This is the North Hollywood Robotics Club's code for the 2012 Greater LA Botball
 Competition.
 
-I will update the files in the "src_CBCJVM" folder weekly based upon the files
-in the "/cbc/CBCJVM/src" folder of the CBCJVM repo in NHHSRoboticsClub, which
-will also be updated weekly with a pull from upstream.
+
+We need to:
+
+    1 . Implement the get...Chain() methods in the TaskChain class
+    2 . Make said implementations and variables dynamic rather than static, probably by makin the task chain organizational more object-oriented.
+    3 . Define and write strategies for the KelpRobot.
+    4 . Calibrate our robots' drive trains
+    ...
+    ...
+    ...
+    ...
+    ??. Test our finished programs.
+    
     --Joseph McGee
+    
+    P.S. Feel Free to add objectives you feel important to this list
