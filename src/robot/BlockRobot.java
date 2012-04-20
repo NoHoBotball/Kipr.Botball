@@ -16,7 +16,8 @@ public class BlockRobot extends CreateRobot implements ArmRobot, ClawRobot, Grab
 		super();
 	}
 	
-	Arm arm = new Arm(Values.armLevels){
+	private Arm arm = new Arm(Values.armLevels){
+		@Override
 		public void goToPos(int pos) {
 			try {
 				Thread.sleep(1000);
@@ -26,12 +27,15 @@ public class BlockRobot extends CreateRobot implements ArmRobot, ClawRobot, Grab
 			// TODO: Implement arm motion
 		}
 	};
+	
+	@Override
 	public Arm getArm() {
 		return arm;
 	}
 	
 	
-	Claw claw = new Claw(){
+	private Claw claw = new Claw(){
+		@Override
 		public void open() {
 			try {
 				Thread.sleep(1000);
@@ -40,6 +44,7 @@ public class BlockRobot extends CreateRobot implements ArmRobot, ClawRobot, Grab
 			}
 			// TODO: Implement claw motion
 		}
+		@Override
 		public void close() {
 			try {
 				Thread.sleep(1000);
@@ -49,10 +54,13 @@ public class BlockRobot extends CreateRobot implements ArmRobot, ClawRobot, Grab
 			// TODO: Implement claw motion
 		}
 	};
+	
+	@Override
 	public Claw getClaw() {
 		return claw;
 	}
 	
+	@Override
 	public void grab() {
 		
 	}
