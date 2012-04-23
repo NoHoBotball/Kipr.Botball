@@ -11,6 +11,7 @@ import robot.BlockRobot;
 
 import utils.vision.Block;
 import utils.pathfinding.Task;
+import utils.pathfinding.TaskException;
 
 public class Main {
 
@@ -45,11 +46,13 @@ public class Main {
 			
 		}
 		
-		List<Task> blockChain = TaskChain.getBlockGatherChain(blocks, blocks[0] == Block.RED ? 1 : 0);
 		
 		try {
+			List<Task> blockChain = TaskChain.getBlockGatherChain(blocks, blocks[0] == Block.RED ? 1 : 0);
 			TaskRunner blockTask = new TaskRunner(new BlockRobot(), blockChain);
 			blockTask.run();
+		} catch (TaskException e){
+			e.printStackTrace();
 		} catch (CreateConnectException e){
 			e.printStackTrace();
 		}

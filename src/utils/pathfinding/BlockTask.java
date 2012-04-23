@@ -1,30 +1,28 @@
 package utils.pathfinding;
 
-import utils.Constants.BotLocation;
+import utils.Constants.Location;
 import utils.vision.Block;
 
 public class BlockTask implements Task{
-	private BotLocation location;
-	private Block block;
+	private Location location;
 	
-	BlockTask(BotLocation location) {
-		for(BotLocation testLocation : BotLocation.getBlockLocations()){
+	BlockTask(Location location) {
+		for(Location testLocation : Location.getBlockLocations()){
 			if(location == testLocation){
 				this.location = testLocation;
 				break;
 			}
 		}
-		block = Block.getBlock();
 	}
 	/**
 	 * 
 	 * @return The location that the robot was in when this task was queued.
 	 */
-	public BotLocation getLocation() {
+	public Location getLocation() {
 		return location;
 	}
 	
 	public Block getBlock() {
-		return block;
+		return 	Block.getBlock();
 	}
 }
