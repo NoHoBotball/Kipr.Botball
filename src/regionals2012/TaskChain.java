@@ -135,4 +135,11 @@ public class TaskChain {
 		return tasks;
 		
 	}
+	
+	public static List<Task> getKelpChain() {
+		List<Task> tasks = new ArrayList<Task>();
+		tasks.add(DriveTask.getExitSBDistanceTask());
+		return null;
+		
+	}
 }

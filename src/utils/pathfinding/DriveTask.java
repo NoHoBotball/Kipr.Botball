@@ -9,6 +9,7 @@ public class DriveTask implements Task {
 	private static final DriveTask BETWEEN_CUBES_SHORT = new DriveTask(Constants.CUBE_DISTANCE - Constants.BOT_OFFSET*2, Constants.STANDARD_SPEED);
 	private static final DriveTask TO_CENTER_LONG = new DriveTask(Constants.CUBE_WIDTH + Constants.CUBE_DISTANCE, Constants.STANDARD_SPEED);
 	private static final DriveTask TO_CENTER_SHORT = new DriveTask(Constants.CUBE_WIDTH/2 + Constants.CUBE_DISTANCE, Constants.STANDARD_SPEED);
+	private static final DriveTask EXIT_STARTING_BOX = new DriveTask(30, Constants.STANDARD_SPEED_KELP);
 	
 	public static DriveTask getHalfCubeTask() {
 		return HALF_CUBE;
@@ -36,6 +37,13 @@ public class DriveTask implements Task {
 	
 	public double getSpeed() {
 		return speed;
+	}
+
+	public static DriveTask getExitSBDistanceTask() {
+		// TODO Auto-generated method stub
+		/*Do I need to make a DriveTask for every little movement, even if I only do those movements once in the 
+		entire game? */
+		return null;
 	}
 	
 }
