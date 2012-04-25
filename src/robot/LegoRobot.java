@@ -6,16 +6,18 @@ import cbccore.movement.DriveTrainPosition;
 import cbccore.movement.plugins.MovementPlugin;
 import cbccore.movement.plugins.motor.MotorMovementPlugin;
 import cbccore.movement.plugins.motor.Wheel;
+import utils.Constants;
 
 
 public abstract class LegoRobot extends Robot {
+	public static Wheel wheelR =  new Wheel(Constants.WHEEL_RIGHT_PORT, Constants.WHEEL_CIRCUMFERENCE);
+	public static Wheel wheelL = new Wheel(Constants.WHEEL_LEFT_PORT, Constants.WHEEL_CIRCUMFERENCE);
 
-	LegoRobot(int mPortR, int mPortL, double wheelCircumference, double wheelDistance) {																																								
-		super(new DriveTrain(new MotorMovementPlugin(new Wheel(mPortR, wheelCircumference), 
-				new Wheel(mPortL, wheelCircumference), wheelDistance)));
+
+	LegoRobot() {																																								
+		super(new DriveTrain(new MotorMovementPlugin(wheelR, wheelL, Constants.WHEEL_DISTANCE)));
 		// TODO Auto-generated constructor stub
 	}
-
 
 
 

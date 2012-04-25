@@ -3,25 +3,28 @@ package robot;
 
 import cbccore.motors.Motor;
 import cbccore.motors.Servo;
+import cbccore.sensors.analog.Analog;
 import cbccore.sensors.digital.Touch;
 import robot.extentions.ArmRobot;
 import robot.extentions.ClawRobot;
 import robot.extentions.GrabRobot;
+import utils.Constants;
 
 public class KelpRobot extends LegoRobot implements ArmRobot, ClawRobot, GrabRobot {
 
-	Servo servoR = new Servo(3);
-	Servo servoL = new Servo(0);
-	Motor armM = new Motor(0);
-	Touch armTouch = new Touch(0);
+	Servo servoR = new Servo(Constants.SERVO_RIGHT_PORT);
+	Servo servoL = new Servo(Constants.SERVO_LEFT_PORT);
+	Motor armM = new Motor(Constants.ARM_MOTOR_PORT);
+	Touch armTouch = new Touch(Constants.ARM_TOUCH_PORT);
+	Analog ETSensor = new Analog(Constants.ET_PORT);
 
 	public static final class Values{
 		static final int[] armLevels = {0,1};
 	}
 
 
-	public KelpRobot(int serR, int serL, int armPort) {
-		super(0, 3, 3, 5); 
+	public KelpRobot() {
+		super();
 	}
 
 	Arm arm = new Arm(Values.armLevels){

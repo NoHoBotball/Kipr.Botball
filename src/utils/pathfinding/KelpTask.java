@@ -1,12 +1,13 @@
 package utils.pathfinding;
 
-import utils.Constants.BotLocation;
+import utils.Constants;
+import utils.Constants.Location;
 
 public class KelpTask implements Task{
-	private BotLocation location;
+	private Location location;
 	
-	KelpTask(BotLocation location) {
-		for(BotLocation testLocation : BotLocation.getBlockLocations()){
+	KelpTask(Location location) {
+		for(Location testLocation : Location.getBlockLocations()){
 			if(location == testLocation){
 				this.location = testLocation;
 				break;
@@ -17,7 +18,7 @@ public class KelpTask implements Task{
 	 * 
 	 * @return The location that the robot was in when this task was queued.
 	 */
-	public BotLocation getLocation() {
+	public Location getLocation() {
 		return location;
 	}
 	

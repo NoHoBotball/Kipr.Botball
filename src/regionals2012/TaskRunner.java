@@ -56,7 +56,7 @@ public class TaskRunner implements Runnable {
 				// Handle task type
 				if (task instanceof DriveTask) {
 					DriveTask driveTask = (DriveTask) task;
-					robot.getDriveTrain().moveCm(Constants.centimetersToTicks(Constants.inchesToCentimeters(driveTask.getDistance())), driveTask.getSpeed());
+					robot.getDriveTrain().moveCm(Constants.inchesToCentimeters(driveTask.getDistance()), driveTask.getSpeed());
 				} else if (task instanceof TurnTask) {
 					TurnTask turnTask = (TurnTask) task;
 					robot.getDriveTrain().rotateDegrees(turnTask.getAngle(), turnTask.getSpeed());
