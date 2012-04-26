@@ -2,6 +2,12 @@ This is the North Hollywood Robotics Club's code for the 2012 Greater LA Botball
 Competition.
 
 
+IMPORTANT!!!
+Jake, before you proceed any further, commit all significant changes to your code
+and run configure.sh
+After you do so, you and I will work on the block branch, while Jae will work on the kelp branch.
+master is for stable merges from the two branches.
+
 We need to:
 
     1 . Implement the get...Chain() methods in the TaskChain class
