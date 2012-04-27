@@ -24,10 +24,17 @@ public class DriveTask implements Task {
 	
 	private double distance;
 	private int speed;
+	private int ETValue = 0;
+	
 	
 	public DriveTask (double distance, int speed) {
 		this.distance = distance;
 		this.speed = speed;
+	}
+	
+	public DriveTask(int speed, int ETValue){
+		this.speed = speed;
+		this.ETValue = ETValue;
 	}
 	
 	public double getDistance() {
@@ -36,6 +43,10 @@ public class DriveTask implements Task {
 	
 	public double getSpeed() {
 		return speed;
+	}
+	
+	public double getETValue() {
+		return ETValue;
 	}
 
 	

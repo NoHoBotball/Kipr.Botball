@@ -10,15 +10,25 @@ import utils.Constants;
 
 
 public abstract class LegoRobot extends Robot {
-	public static Wheel wheelR =  new Wheel(Constants.WHEEL_RIGHT_PORT, Constants.WHEEL_CIRCUMFERENCE);
-	public static Wheel wheelL = new Wheel(Constants.WHEEL_LEFT_PORT, Constants.WHEEL_CIRCUMFERENCE);
-
+	
+	public static final int WHEEL_RIGHT_PORT = 3;
+	public static final int WHEEL_LEFT_PORT = 0;
+	public static final double WHEEL_DIAMETER = 5;
+	public static final double WHEEL_CIRCUMFERENCE = Math.PI*WHEEL_DIAMETER;
+	public static final double WHEEL_DISTANCE = 5;
+	public static final int SERVO_RIGHT_PORT = 3;
+	public static final int SERVO_LEFT_PORT = 0;
+	public static final int ARM_MOTOR_PORT = 1;
+	public static final int ET_PORT = 0;
+	public static final int ARM_TOUCH_PORT = 8;
+	public static final int ET_STOP_VALUE = 450;
+	
+	public static Wheel wheelR =  new Wheel(WHEEL_RIGHT_PORT, WHEEL_CIRCUMFERENCE);
+	public static Wheel wheelL = new Wheel(WHEEL_LEFT_PORT, WHEEL_CIRCUMFERENCE);
+	
 
 	LegoRobot() {																																								
-		super(new DriveTrain(new MotorMovementPlugin(wheelR, wheelL, Constants.WHEEL_DISTANCE)));
+		super(new DriveTrain(new MotorMovementPlugin(wheelR, wheelL, WHEEL_DISTANCE)));
 		// TODO Auto-generated constructor stub
 	}
-
-
-
 }

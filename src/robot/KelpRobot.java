@@ -5,18 +5,21 @@ import cbccore.motors.Motor;
 import cbccore.motors.Servo;
 import cbccore.sensors.analog.Analog;
 import cbccore.sensors.digital.Touch;
+import cbccore.sensors.analog.ETSensor;
 import robot.extentions.ArmRobot;
 import robot.extentions.ClawRobot;
 import robot.extentions.GrabRobot;
 import utils.Constants;
 
 public class KelpRobot extends LegoRobot implements ArmRobot, ClawRobot, GrabRobot {
+	
 
-	Servo servoR = new Servo(Constants.SERVO_RIGHT_PORT);
-	Servo servoL = new Servo(Constants.SERVO_LEFT_PORT);
-	Motor armM = new Motor(Constants.ARM_MOTOR_PORT);
-	Touch armTouch = new Touch(Constants.ARM_TOUCH_PORT);
-	Analog ETSensor = new Analog(Constants.ET_PORT);
+
+	Servo servoR = new Servo(SERVO_RIGHT_PORT);
+	Servo servoL = new Servo(SERVO_LEFT_PORT);
+	Motor armM = new Motor(ARM_MOTOR_PORT);
+	Touch armTouch = new Touch(ARM_TOUCH_PORT);
+	Analog ETSensor = new Analog(ET_PORT);
 
 	public static final class Values{
 		static final int[] armLevels = {0,1};
@@ -87,7 +90,15 @@ public class KelpRobot extends LegoRobot implements ArmRobot, ClawRobot, GrabRob
 	}
 
 	public void grab() { //should move forward while raising claw while spinning arm
-
+		claw.open();
+		arm.goToPos(0);
+		while(ETSensor.getValueHigh() > 450){
+			super.getDriveTrain().moveAtCmps(ETSensor.getValueHigh()-400);
+		}
+		super.getDriveTrain().kill();
+		claw.close();
+		
+		
 	}
 
 }

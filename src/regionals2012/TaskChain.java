@@ -193,9 +193,17 @@ public class TaskChain {
 
 
 		//TODO: Fill out and plan opening moves.
-		/*tasks.add(new)
+		
 		tasks.add(new DriveTask(1231, Constants.STANDARD_KELP_SPEED)); //Exit SB
-		tasks.add*/
+		tasks.add(TurnTask.turn(90));
+		tasks.add(new DriveTask (123124, Constants.STANDARD_KELP_SPEED));
+		tasks.add(TurnTask.turn(90));
+		tasks.add(new DriveTask(1234, Constants.STANDARD_KELP_SPEED));
+		tasks.add(new DriveTask(Constants.STANDARD_KELP_SPEED, 450));
+		tasks.add(new DriveTask(1232, -Constants.STANDARD_KELP_SPEED));
+		tasks.add(TurnTask.turn(-90));
+		
+		
 
 
 		location = Location.FIRST_KELP; // Robot is in starting position for block grabbing
@@ -213,9 +221,10 @@ public class TaskChain {
 				|| offset != Direction.CENTER
 				|| heading != Direction.EAST // Robot is facing down
 				) throw new TaskException("Robot must be in the correct position and have the correct heading to generate this task chain");
-
-
-		//TODO: Fill out and plan moves.
+		
+		tasks.add(new DriveTask(Constants.STANDARD_KELP_SPEED, 450));
+		
+		
 
 
 		offset = Direction.CENTER; // Robot is on exact spot; different values define where the bot is relative to a block's center position
