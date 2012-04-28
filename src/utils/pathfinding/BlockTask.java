@@ -3,7 +3,7 @@ package utils.pathfinding;
 import utils.Constants.Location;
 import utils.vision.Block;
 
-public class BlockTask implements Task{
+public class BlockTask extends Task{
 	private Location location;
 	
 	BlockTask(Location location) {

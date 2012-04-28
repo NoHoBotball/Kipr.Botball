@@ -2,7 +2,7 @@ package utils.pathfinding;
 
 import utils.Constants;
 
-public class DriveTask implements Task {
+public class DriveTask extends Task {
 	
 	private static final DriveTask HALF_CUBE = new DriveTask(Constants.CUBE_WIDTH/2, Constants.STANDARD_SPEED);
 	private static final DriveTask BETWEEN_CUBES_LONG = new DriveTask(Constants.CUBE_WIDTH/2 + Constants.CUBE_DISTANCE - Constants.BOT_OFFSET, Constants.STANDARD_SPEED);
