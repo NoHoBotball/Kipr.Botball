@@ -2,6 +2,7 @@ package regionals2012;
 
 import java.util.List;
 
+import robot.BlockRobot;
 import robot.Robot;
 import robot.extentions.GrabRobot;
 
@@ -9,6 +10,7 @@ import utils.Constants;
 import utils.pathfinding.BlockTask;
 import utils.pathfinding.DriveTask;
 import utils.pathfinding.GrabTask;
+import utils.pathfinding.ListTask;
 import utils.pathfinding.Task;
 import utils.pathfinding.TurnTask;
 import utils.vision.Block;
@@ -39,9 +41,12 @@ public class TaskRunner implements Runnable {
 				System.out.println("Claw, go!");
 				((GrabRobot)robot).grab();
 				System.out.println("Grabbed.");
-			} else if (task instanceof BlockTask) {
+			} else if (task instanceof BlockTask && robot instanceof BlockRobot) {
 				BlockTask blockTask = (BlockTask) task;
 				Block.setBlock(blockTask.getLocation(), blockTask.getBlock());
+			} else if (task instanceof ListTask) {
+				ListTask tList = (ListTask)task;
+				new TaskRunner(robot, tList.getTaskChain()).run();
 			}
 			
 		}

@@ -8,6 +8,7 @@ import utils.Constants.Location;
 import utils.Constants.Direction;
 import utils.pathfinding.DriveTask;
 import utils.pathfinding.GrabTask;
+import utils.pathfinding.ListTask;
 import utils.pathfinding.Task;
 import utils.pathfinding.TaskException;
 import utils.pathfinding.TurnTask;
@@ -19,13 +20,41 @@ import utils.vision.Block;
  * class as static methods.
  *
  */
-public class TaskChain {
-	// Store robot state as the chain builds
-	static Location location = Location.GAME_START; // Robot is in starting position for block grabbing
-	static Direction offset = Direction.CENTER; // Robot is on exact spot; different values define where the bot is relative to a block's center position
-	static Direction heading = Direction.SOUTH; // Robot is facing down
+public class BlockTaskChain {
+	static Block[] blocks = null;
+	static int startingBlock = 0;
+	
+	public BlockTaskChain() {}
 
-	public static List<Task> getOpeningMovesChain() throws TaskException{
+	public static List<Task> getTaskChain() throws TaskException{
+		List<Task> taskChain = new ArrayList<Task>();
+		
+		taskChain.add(new ListTask(getOpeningMovesChain()));
+		taskChain.add(new ListTask(getBlockColorChain()));
+		taskChain.add(new ListTask(getBlockGatherChain(blocks, startingBlock)));
+
+		return taskChain;
+	}
+	
+	
+	//for testing puposes only
+	public static List<Task> getTaskChain(Block[] blocks, int startingBlock) throws TaskException{
+		List<Task> taskChain = new ArrayList<Task>();
+		
+		taskChain.add(new ListTask(getOpeningMovesChain()));
+		taskChain.add(new ListTask(getBlockColorChain()));
+		taskChain.add(new ListTask(getBlockGatherChain(blocks, startingBlock)));
+
+		return taskChain;
+	}
+	
+	
+	// Store robot state as the chain builds
+	private static Location location = Location.GAME_START; // Robot is in starting position for block grabbing
+	private static Direction offset = Direction.CENTER; // Robot is on exact spot; different values define where the bot is relative to a block's center position
+	private static Direction heading = Direction.SOUTH; // Robot is facing down
+
+	private static List<Task> getOpeningMovesChain() throws TaskException{
 		// Initialize task chain
 		List<Task> tasks = new ArrayList<Task>();
 		
@@ -44,7 +73,7 @@ public class TaskChain {
 		return tasks;
 	}
 	
-	public static List<Task> getBlockColorChain() throws TaskException {
+	private static List<Task> getBlockColorChain() throws TaskException {
 		// Initialize task chain
 		List<Task> tasks = new ArrayList<Task>();
 
@@ -64,7 +93,7 @@ public class TaskChain {
 	}
 	
 	
-	public static List<Task> getBlockGatherChain(Block[] blocks, int startingBlock) throws TaskException{
+	private static List<Task> getBlockGatherChain(Block[] blocks, int startingBlock) throws TaskException{
 		
 		// Initialize task chain
 		List<Task> tasks = new ArrayList<Task>();

@@ -5,7 +5,7 @@ import cbccore.sensors.buttons.AButton;
 import cbccore.sensors.buttons.BButton;
 import cbccore.sensors.buttons.BlackButton;
 
-import regionals2012.TaskChain;
+import regionals2012.BlockTaskChain;
 import regionals2012.TaskRunner;
 import robot.BlockRobot;
 
@@ -48,8 +48,8 @@ public class Main {
 		
 		
 		try {
-			List<Task> blockChain = TaskChain.getBlockGatherChain(blocks, blocks[0] == Block.RED ? 1 : 0);
-			TaskRunner blockTask = new TaskRunner(new BlockRobot(), blockChain);
+			List<Task> blockRobotTaskChain = BlockTaskChain.getTaskChain(blocks, blocks[0] == Block.RED ? 1 : 0);
+			TaskRunner blockTask = new TaskRunner(new BlockRobot(), blockRobotTaskChain);
 			blockTask.run();
 		} catch (TaskException e){
 			e.printStackTrace();
