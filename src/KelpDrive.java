@@ -5,7 +5,7 @@ import cbccore.sensors.buttons.BlackButton;
 import cbccore.sensors.buttons.UpButton;
 import robot.KelpRobot;
 
-public class Main {
+public class KelpDrive {
 	public static void main (String[] args){
 		KelpRobot kelpRobot = new KelpRobot();
 		BlackButton blackButton = new BlackButton();
@@ -21,7 +21,6 @@ public class Main {
 			if (bButton.getValue() == true){
 				kelpRobot.getDriveTrain().rotateDegrees(-90, 15);
 			}
-
 		}
 	}
 }

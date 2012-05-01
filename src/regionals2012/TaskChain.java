@@ -195,10 +195,10 @@ public class TaskChain {
 		//TODO: Fill out and plan opening moves.
 		
 		tasks.add(new DriveTask(1231, Constants.STANDARD_KELP_SPEED)); //Exit SB
-		tasks.add(TurnTask.turn(90));
-		tasks.add(new DriveTask (123124, Constants.STANDARD_KELP_SPEED));
-		tasks.add(TurnTask.turn(90));
-		tasks.add(new DriveTask(1234, Constants.STANDARD_KELP_SPEED));
+		tasks.add(TurnTask.turn(90)); //turn CCW
+		tasks.add(new DriveTask (123124, Constants.STANDARD_KELP_SPEED)); //drive forward 
+		tasks.add(TurnTask.turn(90)); //turn CCW
+		//tasks.add(new DriveTask(1234, Constants.STANDARD_KELP_SPEED));
 		tasks.add(new DriveTask(Constants.STANDARD_KELP_SPEED, 450));
 		tasks.add(new DriveTask(1232, -Constants.STANDARD_KELP_SPEED));
 		tasks.add(TurnTask.turn(-90));
@@ -223,6 +223,7 @@ public class TaskChain {
 				) throw new TaskException("Robot must be in the correct position and have the correct heading to generate this task chain");
 		
 		tasks.add(new DriveTask(Constants.STANDARD_KELP_SPEED, 450));
+		
 		
 		
 
