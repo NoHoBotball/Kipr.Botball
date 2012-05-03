@@ -17,6 +17,16 @@ public class Constants {
 	public static final double BOT_OFFSET = 0.5; // TODO: Set to correct value
 	
 	/**
+	 * The distance to robot has to move to be in line with the first block.
+	 */
+	public static final double STARTING_DISTANCE_VERTICAL = 48; // TODO: Set to correct value
+	
+	/**
+	 * The distance the robot must travel to be one BOT_OFFSET away from the first block.
+	 */
+	public static final double STARTING_DISTANCE_HORIZONAL = 30; // TODO: Set to correct value
+	
+	/**
 	 * The width of each cube in inches.
 	 */
 	public static final double CUBE_WIDTH = 4;

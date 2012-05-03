@@ -64,8 +64,12 @@ public class BlockTaskChain {
 				   ) throw new TaskException("Robot must be in the correct position and have the correct heading to generate this task chain");
 		
 		
-		//TODO: Fill out and plan opening moves.
+		//TODO: Fix distance constants.
 		
+		tasks.add(new DriveTask(Constants.STARTING_DISTANCE_VERTICAL, Constants.STANDARD_SPEED));
+		tasks.add(new TurnTask(90, Constants.STANDARD_SPEED));
+		tasks.add(new DriveTask(Constants.STARTING_DISTANCE_HORIZONAL, Constants.STANDARD_SPEED));
+		tasks.add(new TurnTask(-90, Constants.STANDARD_SPEED));
 		
 		location = Location.BLOCK_FENCE; // Robot is in starting position for block grabbing
 		offset = Direction.CENTER; // Robot is on exact spot; different values define where the bot is relative to a block's center position
