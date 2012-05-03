@@ -8,7 +8,6 @@ import utils.Constants.Location;
 import utils.Constants.Direction;
 import utils.pathfinding.DriveTask;
 import utils.pathfinding.GrabTask;
-import utils.pathfinding.ListTask;
 import utils.pathfinding.Task;
 import utils.pathfinding.TaskException;
 import utils.pathfinding.TurnTask;
@@ -25,28 +24,6 @@ public class BlockTaskChain {
 	static int startingBlock = 0;
 	
 	public BlockTaskChain() {}
-
-	public static List<Task> getTaskChain() throws TaskException{
-		List<Task> taskChain = new ArrayList<Task>();
-		
-		taskChain.add(new ListTask(getOpeningMovesChain()));
-		taskChain.add(new ListTask(getBlockColorChain()));
-		taskChain.add(new ListTask(getBlockGatherChain(blocks, startingBlock)));
-
-		return taskChain;
-	}
-	
-	
-	//for testing puposes only
-	public static List<Task> getTaskChain(Block[] blocks, int startingBlock) throws TaskException{
-		List<Task> taskChain = new ArrayList<Task>();
-		
-		taskChain.add(new ListTask(getOpeningMovesChain()));
-		taskChain.add(new ListTask(getBlockColorChain()));
-		taskChain.add(new ListTask(getBlockGatherChain(blocks, startingBlock)));
-
-		return taskChain;
-	}
 	
 	
 	// Store robot state as the chain builds
@@ -54,7 +31,7 @@ public class BlockTaskChain {
 	private static Direction offset = Direction.CENTER; // Robot is on exact spot; different values define where the bot is relative to a block's center position
 	private static Direction heading = Direction.SOUTH; // Robot is facing down
 
-	private static List<Task> getOpeningMovesChain() throws TaskException{
+	public static List<Task> getOpeningMovesChain() throws TaskException{
 		// Initialize task chain
 		List<Task> tasks = new ArrayList<Task>();
 		
@@ -66,6 +43,7 @@ public class BlockTaskChain {
 		
 		//TODO: Fix distance constants.
 		
+		// Move into place
 		tasks.add(new DriveTask(Constants.STARTING_DISTANCE_VERTICAL, Constants.STANDARD_SPEED));
 		tasks.add(new TurnTask(90, Constants.STANDARD_SPEED));
 		tasks.add(new DriveTask(Constants.STARTING_DISTANCE_HORIZONAL, Constants.STANDARD_SPEED));
@@ -77,7 +55,7 @@ public class BlockTaskChain {
 		return tasks;
 	}
 	
-	private static List<Task> getBlockColorChain() throws TaskException {
+	public static List<Task> getBlockColorChain(boolean gatherFirstBlock) throws TaskException {
 		// Initialize task chain
 		List<Task> tasks = new ArrayList<Task>();
 
@@ -90,14 +68,13 @@ public class BlockTaskChain {
 		
 		//TODO: Fill out and plan moves.
 		
-		
 		offset = Direction.CENTER; // Robot is on exact spot; different values define where the bot is relative to a block's center position
 		heading = Direction.SOUTH; // Robot is facing down
 		return tasks;
 	}
 	
 	
-	private static List<Task> getBlockGatherChain(Block[] blocks, int startingBlock) throws TaskException{
+	public static List<Task> getBlockGatherChain(Block[] blocks, int startingBlock) throws TaskException{
 		
 		// Initialize task chain
 		List<Task> tasks = new ArrayList<Task>();

@@ -10,7 +10,6 @@ import regionals2012.TaskRunner;
 import robot.BlockRobot;
 
 import utils.vision.Block;
-import utils.pathfinding.Task;
 import utils.pathfinding.TaskException;
 
 public class Main {
@@ -48,9 +47,18 @@ public class Main {
 		
 		
 		try {
-			List<Task> blockRobotTaskChain = BlockTaskChain.getTaskChain(blocks, blocks[0] == Block.RED ? 1 : 0);
-			TaskRunner blockTask = new TaskRunner(new BlockRobot(), blockRobotTaskChain);
-			blockTask.run();
+			
+			BlockRobot robot = new BlockRobot();
+			
+			TaskRunner startingChain = new TaskRunner(robot, BlockTaskChain.getOpeningMovesChain());
+			startingChain.run();
+			
+			TaskRunner colorChain = new TaskRunner(robot, BlockTaskChain.getBlockColorChain(Block.getBlock(0) == Block.RED));
+			colorChain.run();
+			
+			TaskRunner gatherChain = new TaskRunner(robot, BlockTaskChain.getBlockGatherChain(blocks, blocks[0] == Block.RED ? 1 : 0));
+			gatherChain.run();
+			
 		} catch (TaskException e){
 			e.printStackTrace();
 		} catch (CreateConnectException e){
