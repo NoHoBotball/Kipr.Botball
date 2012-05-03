@@ -13,6 +13,7 @@ import utils.pathfinding.BlockTask;
 import utils.pathfinding.DriveTask;
 import utils.pathfinding.GrabTask;
 import utils.pathfinding.KelpTask;
+import utils.pathfinding.ReleaseTask;
 import utils.pathfinding.Task;
 import utils.pathfinding.TurnTask;
 import utils.vision.Block;
@@ -55,6 +56,8 @@ public class TaskRunner implements Runnable {
 				System.out.println("Claw, go!");
 				((GrabRobot)robot).grab();
 				System.out.println("Grabbed.");
+			} else if (task instanceof ReleaseTask && robot instanceof GrabRobot){
+				((GrabRobot)robot).release();
 			} else if (task instanceof BlockTask && robot instanceof BlockRobot) {
 				BlockTask blockTask = (BlockTask) task;
 				Block.setBlock(blockTask.getLocation(), blockTask.getBlock());
@@ -64,7 +67,6 @@ public class TaskRunner implements Runnable {
 
 		}
 	}
-
 }
 
 

@@ -10,6 +10,7 @@ import utils.Constants.Location;
 import utils.Constants.Direction;
 import utils.pathfinding.DriveTask;
 import utils.pathfinding.GrabTask;
+import utils.pathfinding.ReleaseTask;
 import utils.pathfinding.Task;
 import utils.pathfinding.TaskException;
 import utils.pathfinding.TurnTask;
@@ -247,11 +248,16 @@ public class TaskChain {
 				) throw new TaskException("Robot must be in the correct position and have the correct heading to generate this task chain");
 		
 
-		tasks.add(GrabTask.getTask()); // Grab cube
+		tasks.add(TurnTask.turn(90));
+		tasks.add(new DriveTask(Constants.STANDARD_KELP_SPEED, 450));
+		tasks.add(new DriveTask(-100, Constants.STANDARD_KELP_SPEED));
+		tasks.add(TurnTask.turn(90));
+		tasks.add(ReleaseTask.getTask());
+		
+		
 		location = Location.DROPOFF;
 		heading = Direction.WEST;
 		
-		tasks.add(TurnTask.turn(90));
 		
 
 		return tasks;

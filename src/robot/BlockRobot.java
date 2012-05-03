@@ -65,4 +65,10 @@ public class BlockRobot extends CreateRobot implements ArmRobot, ClawRobot, Grab
 		
 	}
 
+	@Override
+	public void release() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
