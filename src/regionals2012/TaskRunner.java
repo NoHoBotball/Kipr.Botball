@@ -30,43 +30,41 @@ public class TaskRunner implements Runnable {
 	public void run() {
 		//How to use this code for KelpBot?
 		// Loop through all tasks in chain
-		if (robot instanceof BlockRobot){
-			for (Task task : taskChain) {
+		for (Task task : taskChain) {
+			// Handle task type
+			if (task instanceof DriveTask) {
+				DriveTask driveTask = (DriveTask) task;
 
-				// Handle task type
-				if (task instanceof DriveTask) {
-					DriveTask driveTask = (DriveTask) task;
-					
-					//Added code because create moves forward w/ negative values and lego with positive
-					//or is it ok since we can just flip motor terminals for lego?
-					if (driveTask.getETValue() == 0){
-						if (robot instanceof BlockRobot)
-							robot.getDriveTrain().moveCm(Constants.inchesToCentimeters(driveTask.getDistance()), -driveTask.getSpeed());
-						if (robot instanceof KelpRobot)
-							robot.getDriveTrain().moveCm(Constants.inchesToCentimeters(driveTask.getDistance()), driveTask.getSpeed());
-					} else {
-						if (robot instanceof KelpRobot)
-							robot.getDriveTrain().moveAtCmps(driveTask.getSpeed());
-						while(driveTask.getETValue() > LegoRobot.ET_STOP_VALUE){}
-						robot.getDriveTrain().kill();
-					}
-				} else if (task instanceof TurnTask) {
-					TurnTask turnTask = (TurnTask) task;
-					robot.getDriveTrain().rotateDegrees(turnTask.getAngle(), turnTask.getSpeed());
-				} else if (task instanceof GrabTask && robot instanceof GrabRobot) {
-					System.out.println("Claw, go!");
-					((GrabRobot)robot).grab();
-					System.out.println("Grabbed.");
-				} else if (task instanceof BlockTask && robot instanceof BlockRobot) {
-					BlockTask blockTask = (BlockTask) task;
-					Block.setBlock(blockTask.getLocation(), blockTask.getBlock());
-				} else if (task instanceof KelpTask && robot instanceof KelpRobot){
-					KelpTask kelpTask = (KelpTask) task;
+				//Added code because create moves forward w/ negative values and lego with positive
+				//or is it ok since we can just flip motor terminals for lego?
+				if (driveTask.getETValue() == 0){
+					if (robot instanceof BlockRobot)
+						robot.getDriveTrain().moveCm(Constants.inchesToCentimeters(driveTask.getDistance()), -driveTask.getSpeed());
+					if (robot instanceof KelpRobot)
+						robot.getDriveTrain().moveCm(Constants.inchesToCentimeters(driveTask.getDistance()), driveTask.getSpeed());
+				} else {
+					if (robot instanceof KelpRobot)
+						robot.getDriveTrain().moveAtCmps(driveTask.getSpeed());
+					while(driveTask.getETValue() > LegoRobot.ET_STOP_VALUE){}
+					robot.getDriveTrain().kill();
 				}
+			} else if (task instanceof TurnTask) {
+				TurnTask turnTask = (TurnTask) task;
+				robot.getDriveTrain().rotateDegrees(turnTask.getAngle(), turnTask.getSpeed());
+			} else if (task instanceof GrabTask && robot instanceof GrabRobot) {
+				System.out.println("Claw, go!");
+				((GrabRobot)robot).grab();
+				System.out.println("Grabbed.");
+			} else if (task instanceof BlockTask && robot instanceof BlockRobot) {
+				BlockTask blockTask = (BlockTask) task;
+				Block.setBlock(blockTask.getLocation(), blockTask.getBlock());
+			} /*else if (task instanceof KelpTask && robot instanceof KelpRobot){
+				KelpTask kelpTask = (KelpTask) task;
+			}*/
 
-			}
 		}
-
 	}
 
 }
+
+

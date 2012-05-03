@@ -3,6 +3,8 @@ package regionals2012;
 import java.util.ArrayList;
 import java.util.List;
 
+import robot.KelpRobot;
+
 import utils.Constants;
 import utils.Constants.Location;
 import utils.Constants.Direction;
@@ -222,8 +224,7 @@ public class TaskChain {
 				|| heading != Direction.EAST // Robot is facing down
 				) throw new TaskException("Robot must be in the correct position and have the correct heading to generate this task chain");
 		
-		tasks.add(new DriveTask(Constants.STANDARD_KELP_SPEED, 450));
-		
+		tasks.add(GrabTask.getTask());
 		
 		
 
@@ -234,7 +235,7 @@ public class TaskChain {
 	}
 
 
-	public static List<Task> getReturnKelpChain(int kelpNumber) throws TaskException{
+	public static List<Task> getReturnKelpChain() throws TaskException{
 
 		// Initialize task chain
 		List<Task> tasks = new ArrayList<Task>();
@@ -250,8 +251,8 @@ public class TaskChain {
 		location = Location.DROPOFF;
 		heading = Direction.WEST;
 		
-
-
+		tasks.add(TurnTask.turn(90));
+		
 
 		return tasks;
 
