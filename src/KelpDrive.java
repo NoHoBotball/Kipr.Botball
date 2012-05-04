@@ -1,8 +1,9 @@
 
-import cbccore.sensors.buttons.AButton;
-import cbccore.sensors.buttons.BButton;
-import cbccore.sensors.buttons.BlackButton;
-import cbccore.sensors.buttons.UpButton;
+import cbc.sensors.buttons.LeftButton;
+import cbc.sensors.buttons.AButton;
+import cbc.sensors.buttons.BButton;
+import cbc.sensors.buttons.BlackButton;
+import cbc.sensors.buttons.UpButton;
 import robot.KelpRobot;
 
 public class KelpDrive {
@@ -12,8 +13,9 @@ public class KelpDrive {
 		UpButton upButton = new UpButton();
 		AButton aButton = new AButton();
 		BButton bButton = new BButton();
+		LeftButton leftButton = new LeftButton();
 
-		while(blackButton.getValue() == false){
+		while(leftButton.getValue() == false){
 			if (upButton.getValue() == true)
 				kelpRobot.getDriveTrain().moveCm(100, 800);
 			if (aButton.getValue() == true)

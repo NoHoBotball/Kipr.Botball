@@ -61,10 +61,7 @@ public class TaskRunner implements Runnable {
 			} else if (task instanceof BlockTask && robot instanceof BlockRobot) {
 				BlockTask blockTask = (BlockTask) task;
 				Block.setBlock(blockTask.getLocation(), blockTask.getBlock());
-			} /*else if (task instanceof KelpTask && robot instanceof KelpRobot){
-				KelpTask kelpTask = (KelpTask) task;
-			}*/
-
+			}
 		}
 	}
 }
