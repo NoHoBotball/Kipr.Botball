@@ -1,10 +1,10 @@
 package robot;
 
-import cbccore.create.Create;
-import cbccore.create.CreateConnectException;
-import cbccore.movement.DriveTrain;
-import cbccore.movement.efficiency.IEfficiencyCalibrator;
-import cbccore.movement.plugins.create.CreateMovementPlugin;
+import cbc.create.Create;
+import cbc.create.CreateConnectException;
+import cbc.movement.DriveTrain;
+import cbc.movement.efficiency.IEfficiencyCalibrator;
+import cbc.movement.plugins.create.CreateMovementPlugin;
 
 public abstract class CreateRobot extends Robot {
 

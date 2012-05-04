@@ -1,6 +1,6 @@
 package robot;
 
-import cbccore.movement.DriveTrain;
+import cbc.movement.DriveTrain;
 
 public abstract class Robot {
 	DriveTrain driveTrain;

@@ -1,9 +1,9 @@
 import java.util.List;
 
-import cbccore.create.CreateConnectException;
-import cbccore.sensors.buttons.AButton;
-import cbccore.sensors.buttons.BButton;
-import cbccore.sensors.buttons.BlackButton;
+import cbc.create.CreateConnectException;
+import cbc.sensors.buttons.AButton;
+import cbc.sensors.buttons.BButton;
+import cbc.sensors.buttons.BlackButton;
 
 import regionals2012.TaskChain;
 import regionals2012.TaskRunner;

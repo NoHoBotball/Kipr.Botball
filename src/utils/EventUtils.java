@@ -2,10 +2,10 @@ package utils;
 
 import java.lang.reflect.Method;
 
-import cbccore.events.Event;
-import cbccore.events.EventListenerAdapter;
-import cbccore.events.EventManager;
-import cbccore.events.EventType;
+import cbc.events.Event;
+import cbc.events.EventListenerAdapter;
+import cbc.events.EventManager;
+import cbc.events.EventType;
 
 public class EventUtils {
 	
