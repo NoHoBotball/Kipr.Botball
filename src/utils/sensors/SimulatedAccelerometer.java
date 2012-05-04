@@ -1,6 +1,6 @@
 package utils.sensors;
 
-import cbccore.low.simulator.SimulatedSensor;
+import cbc.low.simulator.SimulatedSensor;
 
 public class SimulatedAccelerometer implements Runnable{
 

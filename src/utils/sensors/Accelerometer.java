@@ -1,6 +1,6 @@
 package utils.sensors;
 
-import cbccore.low.Sensor;
+import cbc.low.Sensor;
 
 public class Accelerometer implements Runnable{
 

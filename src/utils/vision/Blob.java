@@ -1,6 +1,6 @@
 package utils.vision;
 
-import cbccore.sensors.vision.Camera;
+import cbc.sensors.vision.Camera;
 
 public class Blob extends cbccore.sensors.vision.Blob{
 

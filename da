@@ -1,0 +1,210 @@
+[1mdiff --cc src/robot/BlockRobot.java[m
+[1mindex 72030cd,02032ac..0000000[m
+[1m--- a/src/robot/BlockRobot.java[m
+[1m+++ b/src/robot/BlockRobot.java[m
+[36m@@@ -1,74 -1,68 +1,74 @@@[m
+[31m -package robot;[m
+[31m -[m
+[31m -import cbc.create.CreateConnectException;[m
+[31m -import robot.extentions.ArmRobot;[m
+[31m -import robot.extentions.ClawRobot;[m
+[31m -import robot.extentions.GrabRobot;[m
+[31m -[m
+[31m -public class BlockRobot extends CreateRobot implements ArmRobot, ClawRobot, GrabRobot {[m
+[31m -[m
+[31m -	public static final class Values{[m
+[31m -		static final int[] armLevels = {0,1,2};[m
+[31m -	}[m
+[31m -	[m
+[31m -	[m
+[31m -	public BlockRobot() throws CreateConnectException {[m
+[31m -		super();[m
+[31m -	}[m
+[31m -	[m
+[31m -	private Arm arm = new Arm(Values.armLevels){[m
+[31m -		@Override[m
+[31m -		public void goToPos(int pos) {[m
+[31m -			try {[m
+[31m -				Thread.sleep(1000);[m
+[31m -			} catch (InterruptedException e) {[m
+[31m -				e.printStackTrace();[m
+[31m -			}[m
+[31m -			// TODO: Implement arm motion[m
+[31m -		}[m
+[31m -	};[m
+[31m -	[m
+[31m -	@Override[m
+[31m -	public Arm getArm() {[m
+[31m -		return arm;[m
+[31m -	}[m
+[31m -	[m
+[31m -	[m
+[31m -	private Claw claw = new Claw(){[m
+[31m -		@Override[m
+[31m -		public void open() {[m
+[31m -			try {[m
+[31m -				Thread.sleep(1000);[m
+[31m -			} catch (InterruptedException e) {[m
+[31m -				e.printStackTrace();[m
+[31m -			}[m
+[31m -			// TODO: Implement claw motion[m
+[31m -		}[m
+[31m -		@Override[m
+[31m -		public void close() {[m
+[31m -			try {[m
+[31m -				Thread.sleep(1000);[m
+[31m -			} catch (InterruptedException e) {[m
+[31m -				e.printStackTrace();[m
+[31m -			}[m
+[31m -			// TODO: Implement claw motion[m
+[31m -		}[m
+[31m -	};[m
+[31m -	[m
+[31m -	@Override[m
+[31m -	public Claw getClaw() {[m
+[31m -		return claw;[m
+[31m -	}[m
+[31m -	[m
+[31m -	@Override[m
+[31m -	public void grab() {[m
+[31m -		[m
+[31m -	}[m
+[31m -[m
+[31m -}[m
+[32m +package robot;[m
+[32m +[m
+[31m- import cbccore.create.CreateConnectException;[m
+[32m++import cbc.create.CreateConnectException;[m
+[32m +import robot.extentions.ArmRobot;[m
+[32m +import robot.extentions.ClawRobot;[m
+[32m +import robot.extentions.GrabRobot;[m
+[32m +[m
+[32m +public class BlockRobot extends CreateRobot implements ArmRobot, ClawRobot, GrabRobot {[m
+[32m +[m
+[32m +	public static final class Values{[m
+[32m +		static final int[] armLevels = {0,1,2};[m
+[32m +	}[m
+[31m- 	[m
+[31m- 	[m
+[32m++[m
+[32m++[m
+[32m +	public BlockRobot() throws CreateConnectException {[m
+[32m +		super();[m
+[32m +	}[m
+[31m- 	[m
+[32m++[m
+[32m +	private Arm arm = new Arm(Values.armLevels){[m
+[32m +		@Override[m
+[32m +		public void goToPos(int pos) {[m
+[32m +			try {[m
+[32m +				Thread.sleep(1000);[m
+[32m +			} catch (InterruptedException e) {[m
+[32m +				e.printStackTrace();[m
+[32m +			}[m
+[32m +			// TODO: Implement arm motion[m
+[32m +		}[m
+[32m +	};[m
+[31m- 	[m
+[32m++[m
+[32m +	@Override[m
+[32m +	public Arm getArm() {[m
+[32m +		return arm;[m
+[32m +	}[m
+[31m- 	[m
+[31m- 	[m
+[32m++[m
+[32m++[m
+[32m +	private Claw claw = new Claw(){[m
+[32m +		@Override[m
+[32m +		public void open() {[m
+[32m +			try {[m
+[32m +				Thread.sleep(1000);[m
+[32m +			} catch (InterruptedException e) {[m
+[32m +				e.printStackTrace();[m
+[32m +			}[m
+[32m +			// TODO: Implement claw motion[m
+[32m +		}[m
+[32m +		@Override[m
+[32m +		public void close() {[m
+[32m +			try {[m
+[32m +				Thread.sleep(1000);[m
+[32m +			} catch (InterruptedException e) {[m
+[32m +				e.printStackTrace();[m
+[32m +			}[m
+[32m +			// TODO: Implement claw motion[m
+[32m +		}[m
+[32m +	};[m
+[31m- 	[m
+[32m++[m
+[32m +	@Override[m
+[32m +	public Claw getClaw() {[m
+[32m +		return claw;[m
+[32m +	}[m
+[31m- 	[m
+[32m++[m
+[32m +	@Override[m
+[32m +	public void grab() {[m
+[31m- 		[m
+[32m++[m
+[32m +	}[m
+[32m +[m
+[32m +	@Override[m
+[32m +	public void release() {[m
+[32m +		// TODO Auto-generated method stub[m
+[31m- 		[m
+[32m++[m
+[32m +	}[m
+[32m +[m
+[32m +}[m
+[1mdiff --cc src/utils/pathfinding/TurnTask.java[m
+[1mindex 60dfd6d,dcd6f24..0000000[m
+[1m--- a/src/utils/pathfinding/TurnTask.java[m
+[1m+++ b/src/utils/pathfinding/TurnTask.java[m
+[36m@@@ -1,31 -1,21 +1,31 @@@[m
+  package utils.pathfinding;[m
+  [m
+[31m -public class TurnTask extends Task {[m
+[31m -	[m
+[32m +import utils.Constants;[m
+[32m +[m
+[32m +[m
+[32m +public class TurnTask implements Task {[m
+[32m +	private static final TurnTask TURN_CW = new TurnTask(-90, Constants.STANDARD_SPEED);[m
+[31m- 	private static final TurnTask TURN_CCW = new TurnTask(90, Constants.STANDARD_SPEED);[m
+[31m- 	[m
+[32m++	private static final TurnTask TURN_CCW = new TurnTask(90, Constants.STANDARD_SPEED);[m
+[32m++[m
+  	private int angle;[m
+  	private int speed;[m
+[31m--	[m
+[32m++[m
+[32m +	public static TurnTask turn(int degrees) {[m
+[32m +		return new TurnTask(degrees, Constants.STANDARD_SPEED);[m
+[32m +	}[m
+[31m- 	[m
+[32m++[m
+  	public TurnTask (int angle, int speed) {[m
+  		this.angle = angle;[m
+  		this.speed = speed;[m
+  	}[m
+[31m- 		[m
+[31m -	[m
+[32m++[m
+[32m +[m
+  	public int getAngle() {[m
+  		return angle;[m
+  	}[m
+[31m--	[m
+[32m++[m
+  	public int getSpeed() {[m
+  		return speed;[m
+  	}[m
+[31m--	[m
+[32m++[m
+  }[m
+[1mdiff --git a/CBCJVM b/CBCJVM[m
+[1m--- a/CBCJVM[m
+[1m+++ b/CBCJVM[m
+[36m@@ -1 +1 @@[m
+[31m-Subproject commit de6a0fc0219cb1632c1dce32b90911a1f8333ebc[m
+[32m+[m[32mSubproject commit de6a0fc0219cb1632c1dce32b90911a1f8333ebc-dirty[m
