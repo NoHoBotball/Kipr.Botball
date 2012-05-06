@@ -8,16 +8,16 @@ import cbc.movement.plugins.motor.MotorMovementPlugin;
 import cbc.movement.plugins.motor.Wheel;
 import utils.Constants;
 
-
+//RIGHT number goes up as arm goes up
 public abstract class LegoRobot extends Robot {
 	
-	public static final int WHEEL_RIGHT_PORT = 3;
-	public static final int WHEEL_LEFT_PORT = 0;
-	public static final double WHEEL_DIAMETER = 5;
+	public static final int WHEEL_RIGHT_PORT = 0;
+	public static final int WHEEL_LEFT_PORT = 3;
+	public static final double WHEEL_DIAMETER = 5.5;
 	public static final double WHEEL_CIRCUMFERENCE = Math.PI*WHEEL_DIAMETER;
-	public static final double WHEEL_DISTANCE = 5;
-	public static final int SERVO_RIGHT_PORT = 3;
-	public static final int SERVO_LEFT_PORT = 0;
+	public static final double WHEEL_DISTANCE = 14;
+	public static final int SERVO_RIGHT_PORT = 0;
+	public static final int SERVO_LEFT_PORT = 3;
 	public static final int ARM_MOTOR_PORT = 1;
 	public static final int ET_PORT = 0;
 	public static final int ARM_TOUCH_PORT = 8;

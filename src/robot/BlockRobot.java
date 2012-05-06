@@ -54,6 +54,11 @@ public class BlockRobot extends CreateRobot implements ArmRobot, ClawRobot, Grab
 			}
 			// TODO: Implement claw motion
 		}
+		@Override
+		public void halfOpen() {
+			// TODO Auto-generated method stub
+			
+		}
 	};
 	
 	@Override

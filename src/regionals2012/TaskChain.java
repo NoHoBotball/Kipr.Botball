@@ -197,12 +197,13 @@ public class TaskChain {
 
 		//TODO: Fill out and plan opening moves.
 		if (firstOrSecond == 1){
-			tasks.add(new DriveTask(1231, Constants.STANDARD_KELP_SPEED)); //Exit SB
+			tasks.add(TurnTask.turn(90));
+			tasks.add(new DriveTask(Constants.inchesToCentimeters(27), Constants.STANDARD_KELP_SPEED)); //Exit SB
 			tasks.add(TurnTask.turn(90)); //turn CCW
-			tasks.add(new DriveTask (123124, Constants.STANDARD_KELP_SPEED)); //drive forward 
+			tasks.add(new DriveTask(Constants.inchesToCentimeters(19), Constants.STANDARD_KELP_SPEED)); //drive forward 
 			tasks.add(TurnTask.turn(90)); //turn CCW
 			tasks.add(new DriveTask(Constants.STANDARD_KELP_SPEED, 450));
-			tasks.add(new DriveTask(1232, -Constants.STANDARD_KELP_SPEED));
+			tasks.add(new DriveTask(Constants.inchesToCentimeters(18.25), -Constants.STANDARD_KELP_SPEED));
 			tasks.add(TurnTask.turn(-90));
 		} else if (firstOrSecond == 2){
 			tasks.add(new DriveTask(-100, Constants.STANDARD_KELP_SPEED));

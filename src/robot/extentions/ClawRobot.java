@@ -6,5 +6,9 @@ public interface ClawRobot {
 	public abstract class Claw {
 		public abstract void open();
 		public abstract void close();
+		public abstract void halfOpen();
+		// TODO Auto-generated method stub
+
 	}
 }
+
