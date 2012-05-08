@@ -48,6 +48,7 @@ public class BlockTaskChain {
 		tasks.add(new TurnTask(90, Constants.STANDARD_SPEED));
 		tasks.add(new DriveTask(Constants.STARTING_DISTANCE_HORIZONAL, Constants.STANDARD_SPEED));
 		tasks.add(new TurnTask(-90, Constants.STANDARD_SPEED));
+		//tasks.add(new )
 		
 		location = Location.BLOCK_FENCE; // Robot is in starting position for block grabbing
 		offset = Direction.CENTER; // Robot is on exact spot; different values define where the bot is relative to a block's center position

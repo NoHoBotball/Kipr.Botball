@@ -3,10 +3,10 @@ package utils.pathfinding;
 import utils.Constants.Location;
 import utils.vision.Block;
 
-public class BlockTask extends Task{
+public class GetBlockTask extends Task{
 	private Location location;
 	
-	BlockTask(Location location) {
+	GetBlockTask(Location location) {
 		for(Location testLocation : Location.getBlockLocations()){
 			if(location == testLocation){
 				this.location = testLocation;
