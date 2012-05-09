@@ -1,3 +1,4 @@
+
 package robot;
 
 import cbc.create.CreateConnectException;
@@ -53,6 +54,11 @@ public class BlockRobot extends CreateRobot implements ArmRobot, ClawRobot, Grab
 			}
 			// TODO: Implement claw motion
 		}
+		@Override
+		public void halfOpen() {
+			// TODO Auto-generated method stub
+			
+		}
 	};
 	
 	@Override
@@ -62,6 +68,12 @@ public class BlockRobot extends CreateRobot implements ArmRobot, ClawRobot, Grab
 	
 	@Override
 	public void grab() {
+		
+	}
+
+	@Override
+	public void release() {
+		// TODO Auto-generated method stub
 		
 	}
 

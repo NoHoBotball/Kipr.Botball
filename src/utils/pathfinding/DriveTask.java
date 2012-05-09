@@ -2,7 +2,7 @@ package utils.pathfinding;
 
 import utils.Constants;
 
-public class DriveTask extends Task {
+public class DriveTask implements Task {
 	
 	private static final DriveTask HALF_CUBE = new DriveTask(Constants.CUBE_WIDTH/2, Constants.STANDARD_SPEED);
 	private static final DriveTask BETWEEN_CUBES_LONG = new DriveTask(Constants.CUBE_WIDTH/2 + Constants.CUBE_DISTANCE - Constants.BOT_OFFSET, Constants.STANDARD_SPEED);
@@ -24,12 +24,20 @@ public class DriveTask extends Task {
 	
 	private double distance;
 	private int speed;
+	private int ETValue = 0;
+	
 	
 	public DriveTask (double distance, int speed) {
 		this.distance = distance;
 		this.speed = speed;
 	}
+	/*
 	
+	public void moveUntilET(){
+		while(ETSensor.getValueHigh() > 450){
+			new DriveTask()
+		}
+	}*/
 	public double getDistance() {
 		return distance;
 	}
@@ -37,5 +45,10 @@ public class DriveTask extends Task {
 	public double getSpeed() {
 		return speed;
 	}
+	
+	public double getETValue() {
+		return ETValue;
+	}
+
 	
 }

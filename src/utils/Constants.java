@@ -4,6 +4,9 @@ public class Constants {
 	
 	/* ------- Tweakable Settings ------- */
 	
+	
+	public static final int STANDARD_KELP_SPEED = 10;
+	
 	/**
 	 * The default all-around speed in cm/s. Should probably be removed later; use as a stand-in unit for now.
 	 */
@@ -42,11 +45,17 @@ public class Constants {
 	}
 		
 	public static enum Location {
+		//BlockRobot
 		BLOCK_FENCE,
 		BLOCK_CORNER,
 		BLOCK_SIDE,
 		GATHER_START,
-		GAME_START;
+		GAME_START,
+		//KelpRobot
+		FIRST_KELP,
+		SECOND_KELP,
+		DROPOFF
+		;
 		
 		private static final Location[] blockLocations = new Location[] {BLOCK_FENCE, BLOCK_CORNER, BLOCK_SIDE};
 		
