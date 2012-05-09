@@ -2,7 +2,10 @@ package regionals2012;
 
 import java.util.List;
 
+
 import robot.LegoRobot;
+import robot.AdjustBlockRobot;
+import robot.BlockRobot;
 import robot.Robot;
 import robot.BlockRobot;
 import robot.KelpRobot;
@@ -10,11 +13,15 @@ import robot.extentions.GrabRobot;
 
 import utils.Constants;
 import utils.KelpConstants;
-import utils.pathfinding.BlockTask;
 import utils.pathfinding.DriveTask;
 import utils.pathfinding.GrabTask;
 import utils.pathfinding.KelpTask;
 import utils.pathfinding.ReleaseTask;
+import utils.pathfinding.AdjustBlockTask;
+import utils.pathfinding.GetBlockTask;
+import utils.pathfinding.DriveTask;
+import utils.pathfinding.GrabTask;
+import utils.pathfinding.ListTask;
 import utils.pathfinding.Task;
 import utils.pathfinding.TurnTask;
 import utils.vision.Block;
@@ -59,9 +66,15 @@ public class TaskRunner implements Runnable, KelpConstants {
 				System.out.println("Grabbed.");
 			} else if (task instanceof ReleaseTask && robot instanceof GrabRobot){
 				((GrabRobot)robot).release();
-			} else if (task instanceof BlockTask && robot instanceof BlockRobot) {
-				BlockTask blockTask = (BlockTask) task;
-				Block.setBlock(blockTask.getLocation(), blockTask.getBlock());
+			} else if (task instanceof GetBlockTask && robot instanceof BlockRobot) {
+				GetBlockTask getBlockTask = (GetBlockTask) task;
+				Block.setBlock(getBlockTask.getLocation(), getBlockTask.getBlock());
+			} else if (task instanceof AdjustBlockTask && robot instanceof BlockRobot) {
+				AdjustBlockRobot adjRobot = (AdjustBlockRobot)robot;
+				adjRobot.adjustBlock();
+			} else if (task instanceof ListTask) {
+				ListTask tList = (ListTask)task;
+				new TaskRunner(robot, tList.getTaskChain()).run();
 			}
 		}
 	}
