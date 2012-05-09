@@ -11,17 +11,20 @@ import cbc.sensors.buttons.BlackButton;
 import cbc.sensors.buttons.RightButton;
 import cbc.sensors.buttons.UpButton;
 import cbc.sensors.digital.Touch;
+
+
 import robot.LegoRobot;
 import robot.KelpRobot;
 import utils.Constants;
+import utils.KelpConstants;
 
-public class KelpDrive {
+public class KelpDrive implements KelpConstants {
 	public static void main (String[] args){
 
-		Servo servoR = new Servo(LegoRobot.SERVO_RIGHT_PORT);
-		Servo servoL = new Servo(LegoRobot.SERVO_LEFT_PORT);
-		Motor armM = new Motor(LegoRobot.ARM_MOTOR_PORT);
-		Analog ETSensor = new Analog(LegoRobot.ET_PORT);
+		Servo servoR = new Servo(SERVO_RIGHT_PORT);
+		Servo servoL = new Servo(SERVO_LEFT_PORT);
+		Motor armM = new Motor(ARM_MOTOR_PORT);
+		Analog ETSensor = new Analog(ET_PORT);
 
 		KelpRobot kelpRobot = new KelpRobot();
 		BlackButton blackButton = new BlackButton();
@@ -49,10 +52,9 @@ public class KelpDrive {
 				kelpRobot.getClaw().close();  
 				//kelpRobot.getDriveTrain().rotateDegrees(-90, kelpRobot.getDriveTrain().getMaxCmps()/2);
 			} else if (leftButton.getValue() == true){
-				kelpRobot.grab();       
+				kelpRobot.grab(); 
 			} else if (downButton.getValue() == true){ 
-				
-				kelpRobot.getDriveTrain().directDrive(kelpRobot.getDriveTrain().getMaxCmps(), kelpRobot.getDriveTrain().getMaxCmps()*.845);
+				kelpRobot.getDriveTrain().directDrive(kelpRobot.getDriveTrain().getMaxCmps(), kelpRobot.getDriveTrain().getMaxCmps());//.845));
 				/*kelpRobot.getArm().goToPos(0);
 				//try { Thread.sleep(4000); } catch (Exception e) {}
 				System.out.println("END OF DOWN! ServoR: " + servoR.getPosition() + "ServoL: " + servoL.getPosition()); */

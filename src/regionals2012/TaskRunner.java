@@ -9,6 +9,7 @@ import robot.KelpRobot;
 import robot.extentions.GrabRobot;
 
 import utils.Constants;
+import utils.KelpConstants;
 import utils.pathfinding.BlockTask;
 import utils.pathfinding.DriveTask;
 import utils.pathfinding.GrabTask;
@@ -18,7 +19,7 @@ import utils.pathfinding.Task;
 import utils.pathfinding.TurnTask;
 import utils.vision.Block;
 
-public class TaskRunner implements Runnable {
+public class TaskRunner implements Runnable, KelpConstants {
 
 	private Robot robot;
 	private List<Task> taskChain;
@@ -46,7 +47,7 @@ public class TaskRunner implements Runnable {
 				} else {
 					if (robot instanceof KelpRobot)
 						robot.getDriveTrain().moveAtCmps(driveTask.getSpeed());
-					while(driveTask.getETValue() > LegoRobot.ET_STOP_VALUE){}
+					while(driveTask.getETValue() > ET_STOP_VALUE){}
 					robot.getDriveTrain().kill();
 				}
 			} else if (task instanceof TurnTask) {

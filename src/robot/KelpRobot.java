@@ -3,14 +3,28 @@ package robot;
 
 import cbc.motors.Motor;
 import cbc.motors.Servo;
+import cbc.movement.plugins.MovementPlugin;
+import cbc.movement.plugins.motor.Wheel;
 import cbc.sensors.analog.Analog;
 import cbc.sensors.digital.Touch;
 import robot.extentions.ArmRobot;
 import robot.extentions.ClawRobot;
 import robot.extentions.GrabRobot;
+import utils.KelpConstants;
 
-public class KelpRobot extends LegoRobot implements ArmRobot, ClawRobot, GrabRobot {
+public class KelpRobot extends LegoRobot implements ArmRobot, ClawRobot, GrabRobot, KelpConstants {
+	
 
+
+	public KelpRobot() {
+		super(new Wheel(WHEEL_LEFT_PORT, WHEEL_CIRCUMFERENCE), new Wheel(WHEEL_RIGHT_PORT, WHEEL_CIRCUMFERENCE, EFFICIENCY_VALUE), WHEEL_DISTANCE);
+		// TODO Auto-generated constructor stub
+	}
+
+	public KelpRobot(MovementPlugin plugin) {
+		super(plugin);
+		// TODO Auto-generated constructor stub
+	}
 
 
 	Servo servoR = new Servo(SERVO_RIGHT_PORT);
@@ -21,12 +35,15 @@ public class KelpRobot extends LegoRobot implements ArmRobot, ClawRobot, GrabRob
 
 	public static final class Values{
 		static final int[] armLevels = {0,1};
+
+		public Values() {
+			super();
+			// TODO Auto-generated constructor stub
+		}
 	}
 
 
-	public KelpRobot() {
-		super();
-	}
+
 
 	Arm arm = new Arm(Values.armLevels){
 		public void goToPos(int pos) {
