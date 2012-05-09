@@ -79,7 +79,7 @@ public class KelpRobot extends LegoRobot implements ArmRobot, ClawRobot, GrabRob
 		public void open() {
 			try {
 				armM.moveAtVelocity(500);
-				while(armM.getPosition() < 3000){}
+				while(armM.getPosition() < 2500){}
 				armM.off();
 				Thread.sleep(100);
 
@@ -127,16 +127,21 @@ public class KelpRobot extends LegoRobot implements ArmRobot, ClawRobot, GrabRob
 	}
 
 	public void grab() { //should move forward while raising claw while spinning arm
-		claw.open();
-		arm.goToPos(0);
-		while(ETSensor.getValueHigh() > 450){
-			super.getDriveTrain().moveAtCmps(ETSensor.getValueHigh()-400);
+		getClaw().close();
+		getArm().goToPos(2);
+		while(ETSensor.getValueHigh() < 410){
+			getDriveTrain().moveAtCmps(5);
 		}
-		super.getDriveTrain().kill();
-		claw.close();
-		super.getDriveTrain().moveAtCmps(-50);
-		arm.goToPos(1);
-		super.getDriveTrain().kill();
+		getDriveTrain().kill();
+		getDriveTrain().moveCm(-10, 4);
+		getClaw().halfOpen();
+		getArm().goToPos(0);
+		getDriveTrain().moveCm(10, 4);
+		getClaw().close();
+		getDriveTrain().moveCm(4, 4);
+		getDriveTrain().moveAtCmps(-3.7);
+		getArm().goToPos(2); 
+		getDriveTrain().kill();
 	}
 
 	public void release(){

@@ -21,7 +21,7 @@ public abstract class LegoRobot extends Robot {
 	public static final int ARM_MOTOR_PORT = 1;
 	public static final int ET_PORT = 0;
 	public static final int ARM_TOUCH_PORT = 8;
-	public static final int ET_STOP_VALUE = 450;
+	public static final int ET_STOP_VALUE = 400;
 	
 	public static Wheel wheelR =  new Wheel(WHEEL_RIGHT_PORT, WHEEL_CIRCUMFERENCE);
 	public static Wheel wheelL = new Wheel(WHEEL_LEFT_PORT, WHEEL_CIRCUMFERENCE);

@@ -5,7 +5,7 @@ public class Constants {
 	/* ------- Tweakable Settings ------- */
 	
 	
-	public static final int STANDARD_KELP_SPEED = 800;
+	public static final int STANDARD_KELP_SPEED = 10;
 	
 	/**
 	 * The default all-around speed in cm/s. Should probably be removed later; use as a stand-in unit for now.
