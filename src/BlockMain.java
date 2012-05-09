@@ -12,7 +12,7 @@ import robot.BlockRobot;
 import utils.vision.Block;
 import utils.pathfinding.TaskException;
 
-public class Main {
+public class BlockMain {
 
 	/**
 	 * @param args
