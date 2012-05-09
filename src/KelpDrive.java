@@ -38,32 +38,25 @@ public class KelpDrive implements KelpConstants {
 		servoR.setPosition(1024); 
 		servoL.setPosition(1024);     
 		ETSensor.setFloating(true); 
-
+ 
 		while(blackButton.getValue() == false){
 			if (rightButton.getValue() == true){
 				kelpRobot.getDriveTrain().moveCm(Constants.inchesToCentimeters(24), kelpRobot.getDriveTrain().getMaxCmps());
 				//max is 1210 ticks per second
 			} else if (aButton.getValue() == true){  
-				/*kelpRobot.getDriveTrain().moveAtCmps(kelpRobot.getDriveTrain().getMaxCmps()/2);
-				try { Thread.sleep(4000); } catch (Exception e) {}
-				kelpRobot.getDriveTrain().kill();*/
 				kelpRobot.getClaw().open();
 			} else if (bButton.getValue() == true){
-				kelpRobot.getClaw().close();  
-				//kelpRobot.getDriveTrain().rotateDegrees(-90, kelpRobot.getDriveTrain().getMaxCmps()/2);
+				kelpRobot.getClaw().close();
 			} else if (leftButton.getValue() == true){
 				kelpRobot.grab(); 
 			} else if (downButton.getValue() == true){ 
-				kelpRobot.getDriveTrain().directDrive(kelpRobot.getDriveTrain().getMaxCmps(), kelpRobot.getDriveTrain().getMaxCmps());//.845));
-				/*kelpRobot.getArm().goToPos(0);
-				//try { Thread.sleep(4000); } catch (Exception e) {}
-				System.out.println("END OF DOWN! ServoR: " + servoR.getPosition() + "ServoL: " + servoL.getPosition()); */
+				kelpRobot.getDriveTrain().directDrive(kelpRobot.getDriveTrain().getMaxCmps(), kelpRobot.getDriveTrain().getMaxCmps());//.845));	
 			} else if (upButton.getValue() == true){
 				kelpRobot.getDriveTrain().rotateDegrees(90, 15);
-				
-				/*kelpRobot.getArm().goToPos(2);
-				//try { Thread.sleep(4000); } catch (Exception e) {}
-				System.out.println("END OF UP! ServoR: " + servoR.getPosition() + "ServoL: " + servoL.getPosition());*/
+			} else {  
+				//kelpRobot.
+				//Servo.allOff();
+				Motor.allOff();
 			}
 			System.out.println("LOOPBACK! ServoR: " + servoR.getPosition() + "ServoL: " + servoL.getPosition());
 		}

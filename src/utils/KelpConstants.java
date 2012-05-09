@@ -13,6 +13,6 @@ public interface KelpConstants {//extends Constants {
 	public static final int ET_PORT = 0;
 	public static final int ARM_TOUCH_PORT = 8;
 	public static final int ET_STOP_VALUE = 400;
-	public static final double EFFICIENCY_VALUE =  1.18343195;
+	public static final double EFFICIENCY_VALUE =  1.16;
 	
 }
