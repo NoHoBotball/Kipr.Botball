@@ -31,13 +31,7 @@ public class DriveTask implements Task {
 		this.distance = distance;
 		this.speed = speed;
 	}
-	/*
 	
-	public void moveUntilET(){
-		while(ETSensor.getValueHigh() > 450){
-			new DriveTask()
-		}
-	}*/
 	public double getDistance() {
 		return distance;
 	}
