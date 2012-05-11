@@ -1,6 +1,6 @@
  package utils.pathfinding;
 
-public class GrabTask implements Task {
+public class GrabTask extends Task {
 	
 	private static GrabTask task = new GrabTask();
 	

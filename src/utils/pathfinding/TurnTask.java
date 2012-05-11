@@ -3,7 +3,7 @@ package utils.pathfinding;
 import utils.Constants;
 
 
-public class TurnTask implements Task {
+public class TurnTask extends Task {
 	private static final TurnTask TURN_CW = new TurnTask(-90, Constants.STANDARD_SPEED);
 	private static final TurnTask TURN_CCW = new TurnTask(90, Constants.STANDARD_SPEED);
 

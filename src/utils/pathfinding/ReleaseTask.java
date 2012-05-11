@@ -1,6 +1,6 @@
  package utils.pathfinding;
 
-public class ReleaseTask implements Task {
+public class ReleaseTask extends Task {
 	
 	private static ReleaseTask task = new ReleaseTask();
 	

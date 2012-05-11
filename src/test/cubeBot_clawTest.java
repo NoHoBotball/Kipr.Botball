@@ -1,12 +1,12 @@
 package test;
 
-import cbccore.motors.Servo;
-import cbccore.sensors.buttons.*;
-import cbccore.create.Create;
-import cbccore.create.CreateConnectException;
-import cbccore.movement.plugins.MovementPlugin;
-import cbccore.movement.plugins.create.CreateMovementPlugin;
-import cbccore.movement.DriveTrain;
+import cbc.motors.Servo;
+import cbc.sensors.buttons.*;
+import cbc.create.Create;
+import cbc.create.CreateConnectException;
+import cbc.movement.plugins.MovementPlugin;
+import cbc.movement.plugins.create.CreateMovementPlugin;
+import cbc.movement.DriveTrain;
 
 class Main {
 	public static void main(String[] args) {

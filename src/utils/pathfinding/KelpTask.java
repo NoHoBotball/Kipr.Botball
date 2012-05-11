@@ -3,7 +3,7 @@ package utils.pathfinding;
 import utils.Constants;
 import utils.Constants.Location;
 
-public class KelpTask implements Task{
+public class KelpTask extends Task{
 	private Location location;
 	
 	KelpTask(Location location) {
