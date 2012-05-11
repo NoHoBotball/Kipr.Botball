@@ -1,6 +1,6 @@
 package utils.pathfinding;
 
-public interface Task {
+public abstract class Task {
 	
 
 }

@@ -1,3 +1,4 @@
+
 package robot;
 
 
@@ -184,4 +185,3 @@ public class KelpRobot extends LegoRobot implements ArmRobot, ClawRobot, GrabRob
 		return ETSensor.getValueHigh();
 	}
 }
-
