@@ -1,10 +1,27 @@
 package utils.pathfinding;
 
-public class ETDriveTask extends DriveTask {
+public class ETDriveTask  {
 
-	public ETDriveTask(double distance, int speed) {
-		super(distance, speed);
-		// TODO Auto-generated constructor stub
+	private double distance;
+	private int speed;
+	private int ETValue;
+
+	public ETDriveTask(double distance, int speed, int ETValue) {
+		this.distance = distance;
+		this.speed = speed;
+		this.ETValue = ETValue;
+	}
+	
+	public double getDistance() {
+		return distance;
+	}
+	
+	public double getSpeed() {
+		return speed;
+	}
+	
+	public double getETValue() {
+		return ETValue;
 	}
 
 }

@@ -12,6 +12,7 @@ import utils.Constants;
 import utils.KelpConstants;
 import utils.pathfinding.BlockTask;
 import utils.pathfinding.DriveTask;
+import utils.pathfinding.ETDriveTask;
 import utils.pathfinding.GrabTask;
 import utils.pathfinding.KelpTask;
 import utils.pathfinding.ReleaseTask;
@@ -43,7 +44,13 @@ public class TaskRunner implements Runnable, KelpConstants {
 					robot.getDriveTrain().moveCm(Constants.inchesToCentimeters(driveTask.getDistance()), -driveTask.getSpeed());
 				if (robot instanceof KelpRobot)
 					robot.getDriveTrain().moveCm(Constants.inchesToCentimeters(driveTask.getDistance()), driveTask.getSpeed());
-
+			} else if (task instanceof ETDriveTask){
+				ETDriveTask ETDriveTask = (ETDriveTask) task;
+				robot.getDriveTrain().moveAtCmps(ETDriveTask.getSpeed());
+			//	while(KelpRobot.getETSensorValue() < ETDriveTask.getETValue()){
+					
+				//}
+				
 			} else if (task instanceof TurnTask) {
 				TurnTask turnTask = (TurnTask) task;
 				//robot.getDriveTrain().rotateDegrees(turnTask.getAngle(), turnTask.getSpeed());

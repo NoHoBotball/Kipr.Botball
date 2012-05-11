@@ -18,12 +18,10 @@ public class KelpRobot extends LegoRobot implements ArmRobot, ClawRobot, GrabRob
 
 	public KelpRobot() {
 		super(new Wheel(WHEEL_LEFT_PORT, WHEEL_CIRCUMFERENCE), new Wheel(WHEEL_RIGHT_PORT, WHEEL_CIRCUMFERENCE), WHEEL_DISTANCE);
-		// TODO Auto-generated constructor stub
 	}
 
 	public KelpRobot(MovementPlugin plugin) {
 		super(plugin);
-		// TODO Auto-generated constructor stub
 	}
 
 
@@ -146,7 +144,7 @@ public class KelpRobot extends LegoRobot implements ArmRobot, ClawRobot, GrabRob
 	public void grab() { //should move forward while raising claw while spinning arm
 		getClaw().close();
 		getArm().goToPos(2);
-		while(ETSensor.getValueHigh() < 410){
+		while(getETSensor().getValueHigh() < 410){
 			getDriveTrain().moveAtCmps(5);
 		}
 		getDriveTrain().kill();
@@ -166,8 +164,8 @@ public class KelpRobot extends LegoRobot implements ArmRobot, ClawRobot, GrabRob
 	}
 
 	public void release(){
-		while(ETSensor.getValueHigh() > 450){
-			super.getDriveTrain().moveAtCmps(ETSensor.getValueHigh()-400);
+		while(getETSensor().getValueHigh() > 450){
+			super.getDriveTrain().moveAtCmps(getETSensor().getValueHigh()-400);
 		}
 		super.getDriveTrain().kill();
 		arm.goToPos(1);
@@ -176,6 +174,14 @@ public class KelpRobot extends LegoRobot implements ArmRobot, ClawRobot, GrabRob
 		claw.halfOpen();
 		arm.goToPos(0);
 		super.getDriveTrain().kill();
+	}
+
+	public Analog getETSensor() {
+		return ETSensor;
+	}
+	
+	public int getETSensorValue() {
+		return ETSensor.getValueHigh();
 	}
 }
 
