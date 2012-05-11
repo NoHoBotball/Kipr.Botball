@@ -39,20 +39,17 @@ public class TaskRunner implements Runnable, KelpConstants {
 
 				//Added code because create moves forward w/ negative values and lego with positive
 				//or is it ok since we can just flip motor terminals for lego?
-				if (driveTask.getETValue() == 0){
-					if (robot instanceof BlockRobot)
-						robot.getDriveTrain().moveCm(Constants.inchesToCentimeters(driveTask.getDistance()), -driveTask.getSpeed());
-					if (robot instanceof KelpRobot)
-						robot.getDriveTrain().moveCm(Constants.inchesToCentimeters(driveTask.getDistance()), driveTask.getSpeed());
-				} else {
-					if (robot instanceof KelpRobot)
-						robot.getDriveTrain().moveAtCmps(driveTask.getSpeed());
-					while(driveTask.getETValue() > ET_STOP_VALUE){}
-					robot.getDriveTrain().kill();
-				}
+				if (robot instanceof BlockRobot)
+					robot.getDriveTrain().moveCm(Constants.inchesToCentimeters(driveTask.getDistance()), -driveTask.getSpeed());
+				if (robot instanceof KelpRobot)
+					robot.getDriveTrain().moveCm(Constants.inchesToCentimeters(driveTask.getDistance()), driveTask.getSpeed());
+
 			} else if (task instanceof TurnTask) {
 				TurnTask turnTask = (TurnTask) task;
-				robot.getDriveTrain().rotateDegrees(turnTask.getAngle(), turnTask.getSpeed());
+				//robot.getDriveTrain().rotateDegrees(turnTask.getAngle(), turnTask.getSpeed());
+				if(turnTask.getAngle() < 0){
+					//robot.getDriveTrain.
+				}
 			} else if (task instanceof GrabTask && robot instanceof GrabRobot) {
 				System.out.println("Claw, go!");
 				((GrabRobot)robot).grab();

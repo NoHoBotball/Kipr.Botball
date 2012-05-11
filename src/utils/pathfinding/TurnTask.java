@@ -10,8 +10,12 @@ public class TurnTask implements Task {
 	private int angle;
 	private int speed;
 
-	public static TurnTask turn(int degrees) {
-		return new TurnTask(degrees, Constants.STANDARD_SPEED);
+	public TurnTask turnCW() {
+		return TURN_CW;
+	}
+	
+	public TurnTask turnCCW() {
+		return TURN_CCW;
 	}
 
 	public TurnTask (int angle, int speed) {

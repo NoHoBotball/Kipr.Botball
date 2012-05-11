@@ -17,7 +17,7 @@ public class KelpRobot extends LegoRobot implements ArmRobot, ClawRobot, GrabRob
 
 
 	public KelpRobot() {
-		super(new Wheel(WHEEL_LEFT_PORT, WHEEL_CIRCUMFERENCE), new Wheel(WHEEL_RIGHT_PORT, WHEEL_CIRCUMFERENCE, EFFICIENCY_VALUE), WHEEL_DISTANCE);
+		super(new Wheel(WHEEL_LEFT_PORT, WHEEL_CIRCUMFERENCE), new Wheel(WHEEL_RIGHT_PORT, WHEEL_CIRCUMFERENCE), WHEEL_DISTANCE);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -153,15 +153,14 @@ public class KelpRobot extends LegoRobot implements ArmRobot, ClawRobot, GrabRob
 		getDriveTrain().moveCm(-10, 4);
 		getClaw().halfOpen();
 		getArm().goToPos(0);
-		getDriveTrain().moveCm(10, 4);
+		getDriveTrain().moveCm(6.75, 4);
 	//	if(getDriveTrain().)
 		armM.moveAtVelocity(-500);
-		getDriveTrain().moveCm(4, 3);
+		getDriveTrain().moveCm(5.5, 3);
 		while(armM.getPosition() > 0){}
 		armM.clearPositionCounter();
 		armM.off();
-		//getDriveTrain().moveCm(4, 4);
-		getDriveTrain().moveAtCmps(-3.7);
+		getDriveTrain().moveAtCmps(-3); 
 		getArm().goToPos(2); 
 		getDriveTrain().kill();
 	}

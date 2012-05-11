@@ -42,20 +42,20 @@ public class KelpTaskChain {
 
 		//TODO: Fill out and plan opening moves.
 		if (firstOrSecond == 1){
-			tasks.add(TurnTask.turn(90));
+			tasks.add(new TurnTask (90, Constants.STANDARD_KELP_SPEED));
 			tasks.add(new DriveTask(Constants.inchesToCentimeters(27), Constants.STANDARD_KELP_SPEED)); //Exit SB
-			tasks.add(TurnTask.turn(90)); //turn CCW
+			tasks.add(new TurnTask (90, Constants.STANDARD_KELP_SPEED)); //turn CCW
 			tasks.add(new DriveTask(Constants.inchesToCentimeters(19), Constants.STANDARD_KELP_SPEED)); //drive forward 
-			tasks.add(TurnTask.turn(90)); //turn CCW
+			tasks.add(new TurnTask (90, Constants.STANDARD_KELP_SPEED)); //turn CCW
 			tasks.add(new DriveTask(Constants.STANDARD_KELP_SPEED, 450));
 			tasks.add(new DriveTask(Constants.inchesToCentimeters(18.25), -Constants.STANDARD_KELP_SPEED));
-			tasks.add(TurnTask.turn(-90));
+			tasks.add(new TurnTask (-90, Constants.STANDARD_KELP_SPEED));
 		} else if (firstOrSecond == 2){
 			tasks.add(new DriveTask(-100, Constants.STANDARD_KELP_SPEED));
-			tasks.add(TurnTask.turn(90)); //turn CCW
+			tasks.add(new TurnTask (90, Constants.STANDARD_KELP_SPEED)); //turn CCW
 			tasks.add(new DriveTask(Constants.STANDARD_KELP_SPEED, 450));
 			tasks.add(new DriveTask(1232, -Constants.STANDARD_KELP_SPEED));
-			tasks.add(TurnTask.turn(90));
+			tasks.add(new TurnTask (90, Constants.STANDARD_KELP_SPEED));
 		} else {
 			System.out.println("ERROR: firstOrSecond must be either 1 or 2.");
 		}
@@ -102,10 +102,10 @@ public class KelpTaskChain {
 				) throw new TaskException("Robot must be in the correct position and have the correct heading to generate this task chain");
 
 
-		tasks.add(TurnTask.turn(90));
+		tasks.add(new TurnTask (90, Constants.STANDARD_KELP_SPEED));
 		tasks.add(new DriveTask(Constants.STANDARD_KELP_SPEED, 450));
 		tasks.add(new DriveTask(-100, Constants.STANDARD_KELP_SPEED));
-		tasks.add(TurnTask.turn(90));
+		tasks.add(new TurnTask (90, Constants.STANDARD_KELP_SPEED));
 		tasks.add(ReleaseTask.getTask());
 
 
