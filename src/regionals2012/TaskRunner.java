@@ -4,11 +4,11 @@ import java.util.List;
 
 
 import robot.LegoRobot;
-import robot.AdjustBlockRobot;
 import robot.BlockRobot;
 import robot.Robot;
 import robot.BlockRobot;
 import robot.KelpRobot;
+import robot.extentions.AdjustBlockRobot;
 import robot.extentions.GrabRobot;
 
 import utils.Constants;
