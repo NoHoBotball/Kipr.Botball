@@ -32,7 +32,8 @@ public class TaskRunner implements Runnable, KelpConstants {
 	private List<Task> taskChain;
 
 	public TaskRunner (Robot robot, List<Task> taskChain) {
-		this.taskChain = taskChain;	
+		this.taskChain = taskChain;
+		this.robot = robot;
 	}
 
 	@Override
