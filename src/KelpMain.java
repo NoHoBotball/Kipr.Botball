@@ -23,37 +23,36 @@ public class KelpMain {
 
 		BlackButton blackButton = new BlackButton();
 		KelpRobot robot = new KelpRobot();
+
+		//while(!blackButton.getValue()){}
 		
-		while(blackButton.getValue() == false){}
-
-		//try {
-
-
-
-		TaskRunner toFirstKelpChain = new TaskRunner(robot, KelpTaskChain.moveToKelpChain(1));
-		toFirstKelpChain.run();
-
-		TaskRunner getFirstKelpChain = new TaskRunner(robot, KelpTaskChain.getKelpChain());
-		getFirstKelpChain.run();
-
-		TaskRunner returnFirstKelpChain = new TaskRunner(robot, KelpTaskChain.returnKelpChain());
-		returnFirstKelpChain.run();
-
+		System.out.println("GO..");
 		
-		
-		TaskRunner toSecondKelpChain = new TaskRunner(robot, KelpTaskChain.moveToKelpChain(2));
-		toSecondKelpChain.run();
-		
-		TaskRunner getSecondKelpChain = new TaskRunner(robot, KelpTaskChain.getKelpChain());
-		getSecondKelpChain.run();
+		try {
+			
+			new TaskRunner(robot, KelpTaskChain.moveToKelpChain(1)).run();
 
-		TaskRunner returnSecondKelpChain = new TaskRunner(robot, KelpTaskChain.returnKelpChain());
-		returnSecondKelpChain.run(); 
+			TaskRunner getFirstKelpChain = new TaskRunner(robot, KelpTaskChain.getKelpChain());
+			getFirstKelpChain.run();
 
-	} /*catch (TaskException e){
+			TaskRunner returnFirstKelpChain = new TaskRunner(robot, KelpTaskChain.returnKelpChain());
+			returnFirstKelpChain.run();
+
+
+
+			TaskRunner toSecondKelpChain = new TaskRunner(robot, KelpTaskChain.moveToKelpChain(2));
+			toSecondKelpChain.run();
+
+			TaskRunner getSecondKelpChain = new TaskRunner(robot, KelpTaskChain.getKelpChain());
+			getSecondKelpChain.run();
+
+			TaskRunner returnSecondKelpChain = new TaskRunner(robot, KelpTaskChain.returnKelpChain());
+			returnSecondKelpChain.run(); 
+
+		} catch (TaskException e){
 			e.printStackTrace();
-		} */
+		} 
 
+	}
 }
-
 

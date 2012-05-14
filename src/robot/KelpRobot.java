@@ -30,8 +30,9 @@ public class KelpRobot extends LegoRobot implements ArmRobot, ClawRobot, GrabRob
 	Servo servoL = new Servo(SERVO_LEFT_PORT);
 	Motor armM = new Motor(ARM_MOTOR_PORT);
 	Touch armTouch = new Touch(ARM_TOUCH_PORT);
-	Analog ETSensor = new Analog(ET_PORT);
-
+	static Analog ETSensor = new Analog(ET_PORT);
+	static int ETValue = ETSensor.getValueHigh();
+	
 	public static final class Values{
 		static final int[] armLevels = {0,1};
 
@@ -52,7 +53,6 @@ public class KelpRobot extends LegoRobot implements ArmRobot, ClawRobot, GrabRob
 					servoL.setPosition(servoL.getPosition() + 30);
 					System.out.println("ServoR: " + servoR.getPosition() + "ServoL: " + servoL.getPosition());
 				}
-
 				servoR.setPosition(348);
 				servoL.setPosition(1700);
 			}
@@ -60,12 +60,12 @@ public class KelpRobot extends LegoRobot implements ArmRobot, ClawRobot, GrabRob
 				while(servoR.getPosition() > 1024 + 30){
 					servoR.setPosition(servoR.getPosition() - 30);
 					servoL.setPosition(servoL.getPosition() + 30);
-					System.out.println("ServoR: " + servoR.getPosition() + "ServoL: " + servoL.getPosition());
+					System.out.println("POS 1 ServoR: " + servoR.getPosition() + "ServoL: " + servoL.getPosition());
 				}
-				while(servoL.getPosition() < 1024 - 30){
+				while(servoR.getPosition() < 1024 - 30){
 					servoR.setPosition(servoR.getPosition() + 30);
 					servoL.setPosition(servoL.getPosition() - 30);
-					System.out.println("ServoR: " + servoR.getPosition() + "ServoL: " + servoL.getPosition());
+					System.out.println("POS 1 ServoR: " + servoR.getPosition() + "ServoL: " + servoL.getPosition());
 				}
 				servoR.setPosition(1024);
 				servoL.setPosition(1024);
@@ -79,10 +79,6 @@ public class KelpRobot extends LegoRobot implements ArmRobot, ClawRobot, GrabRob
 				servoR.setPosition(2000);
 				servoL.setPosition(48);
 			}
-			/*case 2: //SET TO MIDDLE
-					servoR.setPosition(1024);
-					servoL.setPosition(1024);
-			}*/
 		}
 	};
 
@@ -152,7 +148,7 @@ public class KelpRobot extends LegoRobot implements ArmRobot, ClawRobot, GrabRob
 		getDriveTrain().moveCm(-10, 4);
 		getClaw().halfOpen();
 		getArm().goToPos(0);
-		getDriveTrain().moveCm(6.75, 4);
+		getDriveTrain().moveCm(6.95, 4);
 	//	if(getDriveTrain().)
 		armM.moveAtVelocity(-500);
 		getDriveTrain().moveCm(5.5, 3);
@@ -160,8 +156,9 @@ public class KelpRobot extends LegoRobot implements ArmRobot, ClawRobot, GrabRob
 		armM.clearPositionCounter();
 		armM.off();
 		getDriveTrain().moveAtCmps(-3); 
-		getArm().goToPos(2); 
+		getArm().goToPos(1);
 		getDriveTrain().kill();
+		getArm().goToPos(2);
 	}
 
 	public void release(){
@@ -181,7 +178,7 @@ public class KelpRobot extends LegoRobot implements ArmRobot, ClawRobot, GrabRob
 		return ETSensor;
 	}
 	
-	public int getETSensorValue() {
-		return ETSensor.getValueHigh();
+	public static int getETSensorValue() {
+		return ETValue;
 	}
 }

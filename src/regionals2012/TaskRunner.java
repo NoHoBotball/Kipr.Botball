@@ -34,37 +34,30 @@ public class TaskRunner implements Runnable, KelpConstants {
 
 	public TaskRunner (Robot robot, List<Task> taskChain) {
 		this.taskChain = taskChain;	
+		this.robot = robot; 
 	}
 
 	@Override
 	public void run() {
-		//How to use this code for KelpBot?
-		// Loop through all tasks in chain
 		for (Task task : taskChain) {
 			// Handle task type
 			if (task instanceof DriveTask) {
 				DriveTask driveTask = (DriveTask) task;
-
-				//Added code because create moves forward w/ negative values and lego with positive
-				//or is it ok since we can just flip motor terminals for lego?
-				if (robot instanceof BlockRobot)
-					robot.getDriveTrain().moveCm(Constants.inchesToCentimeters(driveTask.getDistance()), -driveTask.getSpeed());
-				if (robot instanceof KelpRobot)
-					robot.getDriveTrain().moveCm(Constants.inchesToCentimeters(driveTask.getDistance()), driveTask.getSpeed());
+				robot.getDriveTrain().moveCm(Constants.inchesToCentimeters(driveTask.getDistance()), driveTask.getSpeed());
 			} else if (task instanceof ETDriveTask){
 				ETDriveTask ETDriveTask = (ETDriveTask) task;
+				//if (robot instanceof KelpRobot)
 				robot.getDriveTrain().moveAtCmps(ETDriveTask.getSpeed());
-			//	while(KelpRobot.getETSensorValue() < ETDriveTask.getETValue()){
-					
-				//}
-				
+				while(KelpRobot.getETSensorValue() < ETDriveTask.getETValue()){}
+				robot.getDriveTrain().kill();
 			} else if (task instanceof TurnTask) {
 				TurnTask turnTask = (TurnTask) task;
-				//robot.getDriveTrain().rotateDegrees(turnTask.getAngle(), turnTask.getSpeed());
-				if(turnTask.getAngle() < 0){
-					//robot.getDriveTrain.
-				}
-			} else if (task instanceof GrabTask && robot instanceof GrabRobot) {
+				robot
+				.getDriveTrain()
+				.rotateDegrees(
+						turnTask.getAngle(),
+						turnTask.getSpeed());
+			}else if (task instanceof GrabTask && robot instanceof GrabRobot) {
 				System.out.println("Claw, go!");
 				((GrabRobot)robot).grab();
 				System.out.println("Grabbed.");

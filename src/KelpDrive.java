@@ -48,9 +48,9 @@ public class KelpDrive implements KelpConstants {
 			} else if (aButton.getValue() == true){  
 				kelpRobot.getClaw().open();      
 			} else if (bButton.getValue() == true){  
-				kelpRobot.getClaw().close();
+				kelpRobot.getClaw().close();  
 			} else if (leftButton.getValue() == true){ 
-				kelpRobot.grab();    
+				kelpRobot.grab();     
 			} else if (downButton.getValue() == true){ 
 				kelpRobot.getDriveTrain().directDrive(kelpRobot.getDriveTrain().getMaxCmps(), kelpRobot.getDriveTrain().getMaxCmps());//.845));	
 			} else if (upButton.getValue() == true){
