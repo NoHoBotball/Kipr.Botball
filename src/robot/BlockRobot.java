@@ -5,9 +5,10 @@ import cbc.create.CreateConnectException;
 import robot.extentions.AdjustBlockRobot;
 import robot.extentions.ArmRobot;
 import robot.extentions.ClawRobot;
+import robot.extentions.GetBlockRobot;
 import robot.extentions.GrabRobot;
 
-public class BlockRobot extends CreateRobot implements ArmRobot, ClawRobot, GrabRobot, AdjustBlockRobot {
+public class BlockRobot extends CreateRobot implements ArmRobot, ClawRobot, GrabRobot, GetBlockRobot, AdjustBlockRobot {
 
 	public static final class Values{
 		static final int[] armLevels = {0,1,2};

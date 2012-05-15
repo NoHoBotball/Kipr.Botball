@@ -1,6 +1,6 @@
 package utils;
 
-public interface KelpConstants {//extends Constants {
+public interface KelpConstants {
 	public static final int WHEEL_RIGHT_PORT = 3; 
 	//Was determining L/R at perspective with claw forward. JVM does it the other way, so I switched it to right 3 left 0.
 	public static final int WHEEL_LEFT_PORT = 0;
@@ -14,5 +14,6 @@ public interface KelpConstants {//extends Constants {
 	public static final int ARM_TOUCH_PORT = 8;
 	public static final int ET_STOP_VALUE = 400;
 	public static final double EFFICIENCY_VALUE =  1.16;
-	
+	public static final int STANDARD_KELP_SPEED = 10;
+
 }

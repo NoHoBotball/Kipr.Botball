@@ -1,6 +1,6 @@
 package utils.vision;
 
-import utils.Constants.Location;
+import utils.pathfinding.Location;
 
 /* ------- Block Data ------- */
 /**
@@ -73,6 +73,27 @@ public enum Block {
 		if (index < 0 || index > 2)
 			throw new IllegalArgumentException("Block index cannot be greater than 2.");
 		return blockOrder[index];
+	}
+	
+	/**
+	 * Sets the color of a block, specified by its location.
+	 * 
+	 * Block 0 is the block near the fence, 1 is the corner block, 2 is the block near the board edge.
+	 * 
+	 * @param location block location
+	 * @param b block color to use
+	 */
+	public static Block getBlock(Location location) {
+		Block block = null;
+		int index;
+		for(index = 0; index < Location.getBlockLocations().length; index++){
+			if(location == Location.getBlockLocations()[index]){
+				block = Block.getBlock(index);
+				break;
+			}
+		}
+		if(block == null) throw new IllegalArgumentException("Location not found or Block not found at location.");
+		return block;
 	}
 	
 	/**

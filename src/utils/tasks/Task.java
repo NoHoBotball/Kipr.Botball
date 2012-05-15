@@ -1,4 +1,4 @@
-package utils.pathfinding;
+package utils.tasks;
 
 public abstract class Task {
 	

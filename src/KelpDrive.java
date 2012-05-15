@@ -15,7 +15,7 @@ import cbc.sensors.digital.Touch;
 
 import robot.LegoRobot;
 import robot.KelpRobot;
-import utils.Constants;
+import utils.Conversions;
 import utils.KelpConstants;
 
 public class KelpDrive implements KelpConstants {
@@ -41,7 +41,7 @@ public class KelpDrive implements KelpConstants {
  
 		while(blackButton.getValue() == false){
 			if (rightButton.getValue() == true){
-				kelpRobot.getDriveTrain().moveCm(Constants.inchesToCentimeters(24), kelpRobot.getDriveTrain().getMaxCmps());
+				kelpRobot.getDriveTrain().moveCm(Conversions.inToCm(24), kelpRobot.getDriveTrain().getMaxCmps());
 				//max is 1210 ticks per second
 			} else if (aButton.getValue() == true){  
 				kelpRobot.getClaw().open();

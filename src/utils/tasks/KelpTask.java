@@ -1,12 +1,11 @@
-package utils.pathfinding;
+package utils.tasks;
 
-import utils.Constants.Location;
-import utils.vision.Block;
+import utils.pathfinding.Location;
 
-public class GetBlockTask extends Task{
+public class KelpTask extends Task{
 	private Location location;
 	
-	GetBlockTask(Location location) {
+	KelpTask(Location location) {
 		for(Location testLocation : Location.getBlockLocations()){
 			if(location == testLocation){
 				this.location = testLocation;
@@ -22,7 +21,4 @@ public class GetBlockTask extends Task{
 		return location;
 	}
 	
-	public Block getBlock() {
-		return 	Block.getBlock();
-	}
 }
