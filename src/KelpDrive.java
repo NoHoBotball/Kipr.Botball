@@ -1,5 +1,4 @@
 
-
 import cbc.motors.Motor;
 import cbc.motors.Servo;
 import cbc.sensors.analog.Analog;
@@ -16,7 +15,7 @@ import cbc.sensors.digital.Touch;
 
 import robot.LegoRobot;
 import robot.KelpRobot;
-import utils.Constants;
+import utils.Conversions;
 import utils.KelpConstants;
 
 public class KelpDrive implements KelpConstants {
@@ -42,7 +41,7 @@ public class KelpDrive implements KelpConstants {
 
 		while(blackButton.getValue() == false){
 			if (rightButton.getValue() == true){
-				kelpRobot.getDriveTrain().moveCm(Constants.inchesToCentimeters(24), 5);
+				kelpRobot.getDriveTrain().moveCm(Conversions.inToCm(24), 5);
 			} else if (aButton.getValue() == true){  
 				kelpRobot.getClaw().open();        
 			} else if (bButton.getValue() == true){  
@@ -52,7 +51,7 @@ public class KelpDrive implements KelpConstants {
 			} else if (downButton.getValue() == true){ 
 				kelpRobot.getDriveTrain().directDrive(kelpRobot.getDriveTrain().getMaxCmps(), kelpRobot.getDriveTrain().getMaxCmps());//.845));	
 			} else if (upButton.getValue() == true){
-				kelpRobot.getDriveTrain().moveCm(Constants.inchesToCentimeters(24), kelpRobot.getDriveTrain().getMaxCmps());
+				kelpRobot.getDriveTrain().moveCm(Conversions.inToCm(24), kelpRobot.getDriveTrain().getMaxCmps());
 			} else {     
 				Motor.allOff();
 			} 

@@ -3,19 +3,18 @@ package regionals2012;
 import java.util.ArrayList;
 import java.util.List;
 
-import robot.KelpRobot;
+import utils.tasks.DriveTask;
+import utils.tasks.ETDriveTask;
+import utils.tasks.GrabTask;
+import utils.tasks.ReleaseTask;
+import utils.tasks.Task;
+import utils.tasks.TaskException;
+import utils.tasks.TurnTask;
+import utils.Conversions;
+import utils.KelpConstants;
+import utils.pathfinding.Location;
+import utils.pathfinding.Direction;
 
-import utils.Constants;
-import utils.Constants.Location;
-import utils.Constants.Direction;
-import utils.pathfinding.DriveTask;
-import utils.pathfinding.ETDriveTask;
-import utils.pathfinding.GrabTask;
-import utils.pathfinding.ReleaseTask;
-import utils.pathfinding.Task;
-import utils.pathfinding.TaskException;
-import utils.pathfinding.TurnTask;
-import utils.vision.Block;
 
 /**
  * Put all tasks chains to be generated throughout the duration
@@ -23,7 +22,12 @@ import utils.vision.Block;
  * class as static methods.
  *
  */
-public class KelpTaskChain {
+
+public class KelpTaskChain implements KelpConstants {
+	// Store robot state as the chain builds
+	static Location location = Location.GAME_START; // Robot is in starting position for block grabbing
+	static Direction offset = Direction.CENTER; // Robot is on exact spot; different values define where the bot is relative to a block's center position
+	static Direction heading = Direction.SOUTH; // Robot is facing down
 
 
 
@@ -32,22 +36,22 @@ public class KelpTaskChain {
 
 		if (firstOrSecond == 1){
 			tasks.add(TurnTask.turnCCW());
-			tasks.add(new DriveTask(27, Constants.STANDARD_KELP_SPEED)); //Exit SB
+			tasks.add(new DriveTask(27, STANDARD_KELP_SPEED)); //Exit SB
 			tasks.add(TurnTask.turnCCW());
-			tasks.add(new DriveTask(19, Constants.STANDARD_KELP_SPEED)); //drive forward 
+			tasks.add(new DriveTask(19, STANDARD_KELP_SPEED)); //drive forward 
 			tasks.add(TurnTask.turnCCW());
-			tasks.add(new ETDriveTask(Constants.STANDARD_KELP_SPEED, 950));
-			tasks.add(new DriveTask(-18.25, Constants.STANDARD_KELP_SPEED));
+			tasks.add(new ETDriveTask(STANDARD_KELP_SPEED, 950));
+			tasks.add(new DriveTask(-18.25, STANDARD_KELP_SPEED));
 			tasks.add(TurnTask.turnCW());
 		} else if (firstOrSecond == 2){
-			tasks.add(new DriveTask(-100, Constants.STANDARD_KELP_SPEED));
+			tasks.add(new DriveTask(-100, STANDARD_KELP_SPEED));
 			tasks.add(TurnTask.turnCCW());
-			tasks.add(new ETDriveTask(Constants.STANDARD_KELP_SPEED, 410));
-			tasks.add(new DriveTask(-1232, Constants.STANDARD_KELP_SPEED));
+			tasks.add(new ETDriveTask(STANDARD_KELP_SPEED, 410));
+			tasks.add(new DriveTask(-1232, STANDARD_KELP_SPEED));
 			tasks.add(TurnTask.turnCCW());
-		} else 
+		} else {
 			System.out.println("ERROR: firstOrSecond must be either 1 or 2.");
-
+		}
 		return tasks;
 	}
 
@@ -62,12 +66,12 @@ public class KelpTaskChain {
 
 	public static List<Task> returnKelpChain() throws TaskException{
 		// Initialize task chain
-		List<Task> tasks = new ArrayList<Task>();
-		
+		List<Task> tasks = new ArrayList<Task>();		
 		tasks.add(TurnTask.turnCCW());
-		tasks.add(new ETDriveTask(Constants.STANDARD_KELP_SPEED, 410));
-		tasks.add(new DriveTask(-100, Constants.STANDARD_KELP_SPEED));
+		tasks.add(new ETDriveTask(STANDARD_KELP_SPEED, 410));
+		tasks.add(new DriveTask(-100, STANDARD_KELP_SPEED));
 		tasks.add(TurnTask.turnCCW());
+
 		tasks.add(ReleaseTask.getTask());
 
 		return tasks;

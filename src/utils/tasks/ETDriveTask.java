@@ -1,8 +1,8 @@
-package utils.pathfinding;
+package utils.tasks;
+
 
 public class ETDriveTask extends Task{
 
-	private double distance;
 	private int speed;
 	private int ETValue;
 

@@ -1,11 +1,9 @@
 package utils;
 
-public class Constants {
-	
+public interface GameConstants {
 	/* ------- Tweakable Settings ------- */
 	
 	
-	public static final int STANDARD_KELP_SPEED = 10;
 	
 	/**
 	 * The default all-around speed in cm/s. Should probably be removed later; use as a stand-in unit for now.
@@ -44,60 +42,10 @@ public class Constants {
 	 */
 	public static final double GAME_BOARD_WIDTH = 96;
 	
+	
+
 	/**
-	 * Converts an inch amount to centimeters.
-	 * 
-	 * @param inches
-	 * @return centimeters
+	 * The width of the entire game board in inches.
 	 */
-	public static double inchesToCentimeters(double inches) {
-		return 2.54 * inches;
-	}
-		
-	public static enum Location {
-		//BlockRobot
-		BLOCK_FENCE,
-		BLOCK_CORNER,
-		BLOCK_SIDE,
-		GATHER_START,
-		GAME_START,
-		//KelpRobot
-		FIRST_KELP,
-		SECOND_KELP,
-		DROPOFF
-		;
-		
-		private static final Location[] blockLocations = new Location[] {BLOCK_FENCE, BLOCK_CORNER, BLOCK_SIDE};
-		
-		public static Location[] getBlockLocations() {
-			return blockLocations;
-		}
-	}
-	
-	public static enum Direction {
-		CENTER,
-		NORTH (90),
-		SOUTH (270),
-		EAST (0),
-		WEST (180);
-		
-		private int heading;
-		
-		Direction() {
-			this.heading = -1;
-		}
-		
-		Direction(int heading) {
-			this.heading = heading;
-		}
-		
-		public int getHeading() {
-			return heading;
-		}
-		
-		public int degreesTo(Direction d) {
-			return d.getHeading() - this.getHeading();
-		}
-	}
-	
+	public static final double _GAME_BOARD_WIDTH = 96;
 }
