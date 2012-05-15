@@ -31,7 +31,7 @@ public class KelpRobot extends LegoRobot implements ArmRobot, ClawRobot, GrabRob
 	Motor armM = new Motor(ARM_MOTOR_PORT);
 	Touch armTouch = new Touch(ARM_TOUCH_PORT);
 	static Analog ETSensor = new Analog(ET_PORT);
-	static int ETValue = ETSensor.getValueHigh();
+	static int ETValue;
 	
 	public static final class Values{
 		static final int[] armLevels = {0,1};
@@ -138,7 +138,7 @@ public class KelpRobot extends LegoRobot implements ArmRobot, ClawRobot, GrabRob
 		return claw;
 	}
 
-	public void grab() { //should move forward while raising claw while spinning arm
+	public void grab() {
 		getClaw().close();
 		getArm().goToPos(2);
 		while(getETSensor().getValueHigh() < 410){
@@ -149,9 +149,8 @@ public class KelpRobot extends LegoRobot implements ArmRobot, ClawRobot, GrabRob
 		getClaw().halfOpen();
 		getArm().goToPos(0);
 		getDriveTrain().moveCm(6.95, 4);
-	//	if(getDriveTrain().)
 		armM.moveAtVelocity(-500);
-		getDriveTrain().moveCm(5.5, 3);
+		getDriveTrain().moveCm(5.25, 3);
 		while(armM.getPosition() > 0){}
 		armM.clearPositionCounter();
 		armM.off();
@@ -162,16 +161,15 @@ public class KelpRobot extends LegoRobot implements ArmRobot, ClawRobot, GrabRob
 	}
 
 	public void release(){
-		while(getETSensor().getValueHigh() > 450){
-			super.getDriveTrain().moveAtCmps(getETSensor().getValueHigh()-400);
-		}
-		super.getDriveTrain().kill();
+		getDriveTrain().moveAtCmps(4);
+		while(getETSensor().getValueHigh() > 410){}
+		getDriveTrain().kill();
 		arm.goToPos(1);
 		claw.open();
-		super.getDriveTrain().moveAtCmps(-100);
-		claw.halfOpen();
+		getDriveTrain().moveAtCmps(-100);
+		claw.close();
 		arm.goToPos(0);
-		super.getDriveTrain().kill();
+		getDriveTrain().kill();
 	}
 
 	public Analog getETSensor() {
@@ -179,6 +177,6 @@ public class KelpRobot extends LegoRobot implements ArmRobot, ClawRobot, GrabRob
 	}
 	
 	public static int getETSensorValue() {
-		return ETValue;
+		return ETValue = ETSensor.getValueHigh();
 	}
 }

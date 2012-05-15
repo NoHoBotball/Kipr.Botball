@@ -28,40 +28,30 @@ public class KelpTaskChain {
 
 
 	public static List<Task> moveToKelpChain(int firstOrSecond) throws TaskException{
-		// Initialize task chain
 		List<Task> tasks = new ArrayList<Task>();
 
-
-		//TODO: Fill out and plan opening moves.
 		if (firstOrSecond == 1){
-			System.out.println("first");
+			tasks.add(TurnTask.turnCCW());
+			tasks.add(new DriveTask(27, Constants.STANDARD_KELP_SPEED)); //Exit SB
+			tasks.add(TurnTask.turnCCW());
+			tasks.add(new DriveTask(19, Constants.STANDARD_KELP_SPEED)); //drive forward 
+			tasks.add(TurnTask.turnCCW());
+			tasks.add(new ETDriveTask(Constants.STANDARD_KELP_SPEED, 950));
+			tasks.add(new DriveTask(-18.25, Constants.STANDARD_KELP_SPEED));
 			tasks.add(TurnTask.turnCW());
-			tasks.add(new DriveTask(Constants.inchesToCentimeters(27), Constants.STANDARD_KELP_SPEED)); //Exit SB
-			tasks.add(new TurnTask (90, Constants.STANDARD_KELP_SPEED)); //turn CCW
-			tasks.add(new DriveTask(Constants.inchesToCentimeters(19), Constants.STANDARD_KELP_SPEED)); //drive forward 
-			tasks.add(new TurnTask (90, Constants.STANDARD_KELP_SPEED)); //turn CCW
-			tasks.add(new ETDriveTask(Constants.STANDARD_KELP_SPEED, 450));
-			tasks.add(new DriveTask(Constants.inchesToCentimeters(18.25), -Constants.STANDARD_KELP_SPEED));
-			tasks.add(new TurnTask (-90, Constants.STANDARD_KELP_SPEED));
 		} else if (firstOrSecond == 2){
 			tasks.add(new DriveTask(-100, Constants.STANDARD_KELP_SPEED));
-			tasks.add(new TurnTask (-90, Constants.STANDARD_KELP_SPEED));
-			tasks.add(new ETDriveTask(Constants.STANDARD_KELP_SPEED, 450));
+			tasks.add(TurnTask.turnCCW());
+			tasks.add(new ETDriveTask(Constants.STANDARD_KELP_SPEED, 410));
 			tasks.add(new DriveTask(-1232, Constants.STANDARD_KELP_SPEED));
-			tasks.add(new TurnTask (90, Constants.STANDARD_KELP_SPEED));
-		} else {
+			tasks.add(TurnTask.turnCCW());
+		} else 
 			System.out.println("ERROR: firstOrSecond must be either 1 or 2.");
-		}
 
-
-
-
-		// Robot is in starting position for block grabbing 
 		return tasks;
 	}
 
 	public static List<Task> getKelpChain() throws TaskException {
-
 		List<Task> tasks = new ArrayList<Task>();
 
 		tasks.add(GrabTask.getTask());
@@ -71,23 +61,16 @@ public class KelpTaskChain {
 
 
 	public static List<Task> returnKelpChain() throws TaskException{
-
 		// Initialize task chain
 		List<Task> tasks = new ArrayList<Task>();
-
-
-
-		tasks.add(new TurnTask (180, Constants.STANDARD_KELP_SPEED));
-		tasks.add(new ETDriveTask(Constants.STANDARD_KELP_SPEED, 450));
+		
+		tasks.add(TurnTask.turnCCW());
+		tasks.add(new ETDriveTask(Constants.STANDARD_KELP_SPEED, 410));
 		tasks.add(new DriveTask(-100, Constants.STANDARD_KELP_SPEED));
-		tasks.add(new TurnTask (90, Constants.STANDARD_KELP_SPEED));
+		tasks.add(TurnTask.turnCCW());
 		tasks.add(ReleaseTask.getTask());
 
-
-
-
 		return tasks;
-
 	}
 
 }

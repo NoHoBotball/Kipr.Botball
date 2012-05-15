@@ -46,17 +46,14 @@ public class TaskRunner implements Runnable, KelpConstants {
 				robot.getDriveTrain().moveCm(Constants.inchesToCentimeters(driveTask.getDistance()), driveTask.getSpeed());
 			} else if (task instanceof ETDriveTask){
 				ETDriveTask ETDriveTask = (ETDriveTask) task;
-				//if (robot instanceof KelpRobot)
 				robot.getDriveTrain().moveAtCmps(ETDriveTask.getSpeed());
-				while(KelpRobot.getETSensorValue() < ETDriveTask.getETValue()){}
+				while(KelpRobot.getETSensorValue() < ETDriveTask.getETValue()){
+					System.out.println(KelpRobot.getETSensorValue() + " " + ETDriveTask.getETValue());
+				}
 				robot.getDriveTrain().kill();
 			} else if (task instanceof TurnTask) {
 				TurnTask turnTask = (TurnTask) task;
-				robot
-				.getDriveTrain()
-				.rotateDegrees(
-						turnTask.getAngle(),
-						turnTask.getSpeed());
+				robot.getDriveTrain().rotateDegrees(turnTask.getAngle(), turnTask.getSpeed());
 			}else if (task instanceof GrabTask && robot instanceof GrabRobot) {
 				System.out.println("Claw, go!");
 				((GrabRobot)robot).grab();

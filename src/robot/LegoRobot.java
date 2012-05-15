@@ -10,7 +10,7 @@ public abstract class LegoRobot extends Robot {
 	public LegoRobot(Wheel lWheel, Wheel rWheel, double trainWidth) {
 		super(new DriveTrain(new MotorMovementPlugin(lWheel, rWheel, trainWidth)));
 	}
-	
+
 	public LegoRobot(MovementPlugin plugin) {
 		super(new DriveTrain(plugin));
 	}

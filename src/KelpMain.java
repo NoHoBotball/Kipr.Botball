@@ -16,21 +16,23 @@ import utils.pathfinding.TaskException;
 public class KelpMain {
 
 	/**
-	 * @param args
-	 * @throws TaskException 
-	 */
+	 * @param args   
+	 * @throws TaskException  
+	 */  
 	public static void main(String[] args) throws TaskException {
 
 		BlackButton blackButton = new BlackButton();
 		KelpRobot robot = new KelpRobot();
 
-		//while(!blackButton.getValue()){}
+		robot.getArm().goToPos(2); 
+		while(!blackButton.getValue()){}
 		
-		System.out.println("GO..");
+		System.out.println("Starting Tasks.");
 		
 		try {
 			
-			new TaskRunner(robot, KelpTaskChain.moveToKelpChain(1)).run();
+			TaskRunner toFirstKelpChain = new TaskRunner(robot, KelpTaskChain.moveToKelpChain(1));
+			toFirstKelpChain.run();
 
 			TaskRunner getFirstKelpChain = new TaskRunner(robot, KelpTaskChain.getKelpChain());
 			getFirstKelpChain.run();
@@ -52,7 +54,6 @@ public class KelpMain {
 		} catch (TaskException e){
 			e.printStackTrace();
 		} 
-
 	}
 }
 

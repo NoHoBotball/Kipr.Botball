@@ -34,33 +34,28 @@ public class KelpDrive implements KelpConstants {
 		AButton aButton = new AButton();
 		BButton bButton = new BButton();
 		LeftButton leftButton = new LeftButton();
-	 	RightButton rightButton = new RightButton();
-	 	
+		RightButton rightButton = new RightButton();
+
 		servoR.setPosition(1024); 
 		servoL.setPosition(1024);       
 		ETSensor.setFloating(true); 
- 
+
 		while(blackButton.getValue() == false){
 			if (rightButton.getValue() == true){
-				//kelpRobot.getDriveTrain().moveCm(Constants.inchesToCentimeters(24), kelpRobot.getDriveTrain().getMaxCmps());
-				//max is 1210 ticks per second
 				kelpRobot.getDriveTrain().moveCm(Constants.inchesToCentimeters(24), 5);
 			} else if (aButton.getValue() == true){  
-				kelpRobot.getClaw().open();      
+				kelpRobot.getClaw().open();        
 			} else if (bButton.getValue() == true){  
 				kelpRobot.getClaw().close();  
 			} else if (leftButton.getValue() == true){ 
-				kelpRobot.grab();     
+				kelpRobot.grab();      
 			} else if (downButton.getValue() == true){ 
 				kelpRobot.getDriveTrain().directDrive(kelpRobot.getDriveTrain().getMaxCmps(), kelpRobot.getDriveTrain().getMaxCmps());//.845));	
 			} else if (upButton.getValue() == true){
 				kelpRobot.getDriveTrain().moveCm(Constants.inchesToCentimeters(24), kelpRobot.getDriveTrain().getMaxCmps());
-				//kelpRobot.getDriveTrain().rotateDegrees(90, 15);
 			} else {     
-				//kelpRobot.
-				//Servo.allOff();
 				Motor.allOff();
-			}
+			} 
 			System.out.println("LOOPBACK! ServoR: " + servoR.getPosition() + "ServoL: " + servoL.getPosition());
 		}
 	} 
