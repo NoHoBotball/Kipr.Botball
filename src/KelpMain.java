@@ -1,17 +1,12 @@
-import java.util.List;
 
-
-import cbc.sensors.buttons.AButton;
-import cbc.sensors.buttons.BButton;
 import cbc.sensors.buttons.BlackButton;
 
 import regionals2012.KelpTaskChain;
 import regionals2012.TaskRunner;
-import robot.BlockRobot;
 import robot.KelpRobot;
 
-import utils.vision.Block;
-import utils.pathfinding.TaskException; 
+import utils.tasks.TaskException;
+
 
 public class KelpMain {
 
