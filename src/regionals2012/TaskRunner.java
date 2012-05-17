@@ -43,10 +43,10 @@ public class TaskRunner implements Runnable, KelpConstants {
 			if (task instanceof DriveTask) {
 				DriveTask driveTask = (DriveTask) task;
 				robot.getDriveTrain().moveCm((Conversions.inToCm(driveTask.getDistance())/1.3) - 2, STANDARD_KELP_SPEED);
-				if(driveTask.getSpeed() > 0 )
+				if(driveTask.getDistance() > 0 )
 					robot.getDriveTrain().moveCm(2, STANDARD_KELP_SPEED/2);
-				else if(driveTask.getSpeed() < 0)
-					robot.getDriveTrain().moveCm(-2, STANDARD_KELP_SPEED/2);
+				else if(driveTask.getDistance() < 0)
+					robot.getDriveTrain().moveCm(2, STANDARD_KELP_SPEED/2);
 				//robot.getDriveTrain().moveCm(KelpRobot.calibratedValue(KelpConstants.calibrator,Conversions.inToCm( driveTask.getDistance())), driveTask.getSpeed());
 			}
 
