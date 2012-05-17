@@ -6,6 +6,8 @@ public class TurnTask extends Task {
 	
 	private double angle;
 	private double speed;
+	private double radius;
+	private boolean isArcTurn;
 
 	private static double default_speed;
 
@@ -36,12 +38,22 @@ public class TurnTask extends Task {
 	public TurnTask (double angle, double speed) {
 		this.angle = angle;
 		this.speed = speed;
+		this.isArcTurn = false;
 		default_speed = speed;
 	}
 	
 	public TurnTask (double angle) {
 		this.angle = angle;
+		this.isArcTurn = false;
 		this.speed = default_speed;
+	}
+	
+	public TurnTask (double angle, double speed, double radius){
+		this.angle = angle;
+		this.speed = speed;
+		this.radius = radius;
+		this.speed = default_speed;
+		this.isArcTurn = true;
 	}
 
 	public double getAngle() {
@@ -52,4 +64,11 @@ public class TurnTask extends Task {
 		return speed;
 	}
 	
+	public double getRadius() {
+		return radius;
+	}
+	
+	public boolean isArcTurn(){
+		return isArcTurn;
+	}
 }

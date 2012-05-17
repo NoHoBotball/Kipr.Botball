@@ -11,14 +11,14 @@ import utils.tasks.TaskException;
 public class KelpMain { 
 
 	/**
-	 * @param args     
+	 * @param args      
 	 * @throws TaskException    
 	 */  
 	public static void main(String[] args) throws TaskException {
 
-		BlackButton blackButton = new BlackButton();
+		BlackButton blackButton = new BlackButton(); 
 		KelpRobot robot = new KelpRobot();
-
+ 
 		robot.getArm().goToPos(2); 
 		KelpRobot.getETSensor().setFloating(true);
 		while(!blackButton.getValue()){}
@@ -35,9 +35,9 @@ public class KelpMain {
 
 			TaskRunner returnFirstKelpChain = new TaskRunner(robot, KelpTaskChain.returnKelpChain(1));
 			returnFirstKelpChain.run();
+          
      
-     
-  
+      
 			TaskRunner toSecondKelpChain = new TaskRunner(robot, KelpTaskChain.moveToKelpChain(2));
 			toSecondKelpChain.run();
   

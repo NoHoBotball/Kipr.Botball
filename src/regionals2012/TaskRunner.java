@@ -42,33 +42,54 @@ public class TaskRunner implements Runnable, KelpConstants {
 			// Handle task type
 			if (task instanceof DriveTask) {
 				DriveTask driveTask = (DriveTask) task;
-				robot.getDriveTrain().moveCm(Conversions.inToCm(driveTask.getDistance())/1.3, STANDARD_KELP_SPEED);
+				robot.getDriveTrain().moveCm((Conversions.inToCm(driveTask.getDistance())/1.3) - 2, STANDARD_KELP_SPEED);
+				if(driveTask.getSpeed() > 0 )
+					robot.getDriveTrain().moveCm(2, STANDARD_KELP_SPEED/2);
+				else if(driveTask.getSpeed() < 0)
+					robot.getDriveTrain().moveCm(-2, STANDARD_KELP_SPEED/2);
 				//robot.getDriveTrain().moveCm(KelpRobot.calibratedValue(KelpConstants.calibrator,Conversions.inToCm( driveTask.getDistance())), driveTask.getSpeed());
-			} else if (task instanceof ETDriveTask){
+			}
+
+			else if (task instanceof ETDriveTask){
 				ETDriveTask ETDriveTask = (ETDriveTask) task;
 				robot.getDriveTrain().moveAtCmps(ETDriveTask.getSpeed());
 				while(KelpRobot.getETSensorValue() < ETDriveTask.getETValue()){
 					System.out.println(KelpRobot.getETSensorValue() + " " + ETDriveTask.getETValue());
 				}
 				if(ETDriveTask.getSpeed() > 0)
-					robot.getDriveTrain().moveCm(7,3);
+					robot.getDriveTrain().moveCm(5,3);
 				robot.getDriveTrain().kill();
-			} else if (task instanceof TurnTask) {
+			} 
+
+			else if (task instanceof TurnTask) {
 				TurnTask turnTask = (TurnTask) task;
-				robot.getDriveTrain().rotateDegrees(turnTask.getAngle(), turnTask.getSpeed());
-				//double distanceToTravel =  (KelpConstants.ROBOT_TURN_CIRCUMFERENCE*(turnTask.getAngle()/360))/1.3;
-				//robot.getDriveTrain().rotateDegrees((distanceToTravel/KelpConstants.ROBOT_TURN_CIRCUMFERENCE)*360, turnTask.getSpeed());
-			}else if (task instanceof GrabTask && robot instanceof GrabRobot) {
+				if (turnTask.isArcTurn() == false)
+					robot.getDriveTrain().rotateDegrees(turnTask.getAngle(), turnTask.getSpeed());
+				else if(turnTask.isArcTurn() == true)
+					robot.getDriveTrain().moveCurveDegrees(turnTask.getAngle(), turnTask.getRadius(), turnTask.getSpeed());
+					//double distanceToTravel =  (KelpConstants.ROBOT_TURN_CIRCUMFERENCE*(turnTask.getAngle()/360))/1.3;
+					//robot.getDriveTrain().rotateDegrees((distanceToTravel/KelpConstants.ROBOT_TURN_CIRCUMFERENCE)*360, turnTask.getSpeed());
+			} 
+
+			else if (task instanceof GrabTask && robot instanceof GrabRobot) {
 				System.out.println("Claw, go!");
 				((GrabRobot)robot).grab();
-			} else if (task instanceof ReleaseTask && robot instanceof GrabRobot){
+			} 
+
+			else if (task instanceof ReleaseTask && robot instanceof GrabRobot){
 				((GrabRobot)robot).release();
-			} else if (task instanceof GetBlockTask && robot instanceof GetBlockRobot) {
+			} 
+
+			else if (task instanceof GetBlockTask && robot instanceof GetBlockRobot) {
 				GetBlockTask getBlockTask = (GetBlockTask) task;
 				Block.setBlock(getBlockTask.getLocation(), getBlockTask.getBlock());
-			} else if (task instanceof AdjustBlockTask && robot instanceof BlockRobot) {
+			} 
+
+			else if (task instanceof AdjustBlockTask && robot instanceof BlockRobot) {
 				((AdjustBlockRobot)robot).adjustBlock();
-			} else if (task instanceof ListTask) {
+			} 
+
+			else if (task instanceof ListTask) {
 				ListTask tList = (ListTask)task;
 				new TaskRunner(robot, tList.getTaskChain()).run();
 			}

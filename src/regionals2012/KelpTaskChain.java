@@ -33,27 +33,33 @@ public class KelpTaskChain implements KelpConstants {
 		if (firstOrSecond == 1){
 			tasks.add(TurnTask.turnCCW(15));
 			tasks.add(new DriveTask(27, STANDARD_KELP_SPEED)); //27
-			tasks.add(TurnTask.turnCCW());
-			tasks.add(new DriveTask(24, STANDARD_KELP_SPEED)); //drive forward 
-			tasks.add(TurnTask.turnCCW());
+			/*tasks.add(TurnTask.turnCCW());
+			tasks.add(new DriveTask(26, STANDARD_KELP_SPEED)); //drive forward 
+			tasks.add(TurnTask.turnCCW());*/
+			tasks.add(new TurnTask(280, 15, -Conversions.inToCm(6)));
 			tasks.add(new ETDriveTask(STANDARD_KELP_SPEED, 950));
-			tasks.add(new DriveTask(0,0));
+			tasks.add(new DriveTask(2,4));
 			tasks.add(new ETDriveTask(-STANDARD_KELP_SPEED, 255));
 			tasks.add(new DriveTask(-20, STANDARD_KELP_SPEED));
 			tasks.add(TurnTask.turnCW());
 		} else if (firstOrSecond == 2){
 			tasks.add(new DriveTask(-5, STANDARD_KELP_SPEED));
 			tasks.add(TurnTask.turnCCW());
-			tasks.add(new TurnTask(5,-STANDARD_KELP_SPEED));
-			tasks.add(new ETDriveTask(STANDARD_KELP_SPEED, 950));
-			tasks.add(new DriveTask(0,0));
-			tasks.add(new ETDriveTask(-STANDARD_KELP_SPEED, 255));
+			tasks.add(new TurnTask(.5,-STANDARD_KELP_SPEED));
+			tasks.add(new ETDriveTask(50, 950));
+			tasks.add(new DriveTask(3,4));
+			/*tasks.add(new DriveTask(0,0));
+			tasks.add(new ETDriveTask(-STANDARD_KELP_SPEED, 255));*/
 			tasks.add(new DriveTask(-12, STANDARD_KELP_SPEED));
 			tasks.add(TurnTask.turnCCW());
 		} else {
 			System.out.println("ERROR: firstOrSecond must be either 1 or 2.");
 		}
 		return tasks;
+		
+		/*In the event that BlockRobot takes too long to accomplish its task, KelpRobot can
+		 * drive forward at max speed to MPA PVC. From there, it can turn CCW, get the far Kelp first, then allow 
+		 * BlockRobot to complete its task while it gets the close Kelp. */
 	}
 
 	public static List<Task> getKelpChain() throws TaskException {
@@ -73,18 +79,21 @@ public class KelpTaskChain implements KelpConstants {
 		if(firstOrSecond == 1){
 			tasks.add(TurnTask.turnAround());
 			tasks.add(new TurnTask(30,-STANDARD_KELP_SPEED));
+			tasks.add(new ETDriveTask(STANDARD_KELP_SPEED, 900));
+			//tasks.add(new TurnTask(20, STANDARD_KELP_SPEED));
+			//tasks.add(new ETDriveTask(STANDARD_KELP_SPEED, 960));
+			tasks.add(new DriveTask(4,4));
 		}
 		if(firstOrSecond == 2){
 			tasks.add(TurnTask.turnCCW());
-			tasks.add(new TurnTask(5,-STANDARD_KELP_SPEED));
-			tasks.add(new ETDriveTask(STANDARD_KELP_SPEED, 960));
+			tasks.add(new TurnTask(3,-STANDARD_KELP_SPEED));
+			tasks.add(new ETDriveTask(50, 900));
 			tasks.add(new DriveTask(-4, STANDARD_KELP_SPEED));
 			tasks.add(TurnTask.turnCCW());
+			tasks.add(new ETDriveTask(STANDARD_KELP_SPEED, 960));
+			//tasks.add(new DriveTask(3,4));
 		}
-		tasks.add(new ETDriveTask(STANDARD_KELP_SPEED, 450));
-		tasks.add(new TurnTask(20,STANDARD_KELP_SPEED));
-		tasks.add(new ETDriveTask(STANDARD_KELP_SPEED, 960));
-		tasks.add(new DriveTask(7,4));
+		
 
 		tasks.add(ReleaseTask.getTask());
 
