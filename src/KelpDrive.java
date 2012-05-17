@@ -15,8 +15,10 @@ import cbc.sensors.digital.Touch;
 
 import robot.LegoRobot;
 import robot.KelpRobot;
+import robot.extentions.GrabRobot;
 import utils.Conversions;
 import utils.KelpConstants;
+import utils.tasks.GrabTask;
 
 public class KelpDrive implements KelpConstants {
 	public static void main (String[] args){
@@ -35,27 +37,37 @@ public class KelpDrive implements KelpConstants {
 		LeftButton leftButton = new LeftButton();
 		RightButton rightButton = new RightButton();
 
-		servoR.setPosition(1024); 
-		servoL.setPosition(1024);       
-		ETSensor.setFloating(true); 
+		while(servoL.getPosition() > 48){
+			servoR.setPosition(servoR.getPosition() + 30);
+			servoL.setPosition(servoL.getPosition() - 30);
+			System.out.println("ServoR: " + servoR.getPosition() + "ServoL: " + servoL.getPosition());
+		}
+		servoR.setPosition(2000);
+		servoL.setPosition(48);
+		ETSensor.setFloating(true);  
 
-		while(blackButton.getValue() == false){
+		while(blackButton.getValue() == false){   
 			if (rightButton.getValue() == true){
-				kelpRobot.getDriveTrain().moveCm(Conversions.inToCm(24), 5);
-			} else if (aButton.getValue() == true){  
-				kelpRobot.getClaw().open();        
+				double x = Math.random() * 20;
+				System.out.println("Should move " + x + " inches.");
+				kelpRobot.getDriveTrain().moveCm(Conversions.inToCm(x)/1.13, 10);
+				//kelpRobot.getDriveTrain().moveCm(KelpRobot.calibratedValue(KelpConstants.calibrator,Conversions.inToCm(x)), 10);
+			} else if (aButton.getValue() == true){   
+				kelpRobot.getClaw().open();         
 			} else if (bButton.getValue() == true){  
 				kelpRobot.getClaw().close();  
 			} else if (leftButton.getValue() == true){ 
 				kelpRobot.grab();      
 			} else if (downButton.getValue() == true){ 
-				kelpRobot.getDriveTrain().directDrive(kelpRobot.getDriveTrain().getMaxCmps(), kelpRobot.getDriveTrain().getMaxCmps());//.845));	
+				double distanceToTravel =  (KelpConstants.ROBOT_TURN_CIRCUMFERENCE*(90/360))/1.3;
+				kelpRobot.getDriveTrain().rotateDegrees((distanceToTravel/KelpConstants.ROBOT_TURN_CIRCUMFERENCE)*360,10 );
+				//kelpRobot.getDriveTrain().rotateDegrees(90, degreesPerSecond)
 			} else if (upButton.getValue() == true){
 				kelpRobot.getDriveTrain().moveCm(Conversions.inToCm(24), kelpRobot.getDriveTrain().getMaxCmps());
 			} else {     
 				Motor.allOff();
 			} 
-			System.out.println("LOOPBACK! ServoR: " + servoR.getPosition() + "ServoL: " + servoL.getPosition());
+			//System.out.println("LOOPBACK! ServoR: " + servoR.getPosition() + "ServoL: " + servoL.getPosition());
 		}
 	} 
 }

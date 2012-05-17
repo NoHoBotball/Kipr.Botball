@@ -8,11 +8,11 @@ import robot.KelpRobot;
 import utils.tasks.TaskException;
 
 
-public class KelpMain {
+public class KelpMain { 
 
 	/**
-	 * @param args   
-	 * @throws TaskException  
+	 * @param args     
+	 * @throws TaskException    
 	 */  
 	public static void main(String[] args) throws TaskException {
 
@@ -20,30 +20,31 @@ public class KelpMain {
 		KelpRobot robot = new KelpRobot();
 
 		robot.getArm().goToPos(2); 
+		KelpRobot.getETSensor().setFloating(true);
 		while(!blackButton.getValue()){}
 		
 		System.out.println("Starting Tasks.");
-		
+		 
 		try {
-			
+			 
 			TaskRunner toFirstKelpChain = new TaskRunner(robot, KelpTaskChain.moveToKelpChain(1));
 			toFirstKelpChain.run();
 
 			TaskRunner getFirstKelpChain = new TaskRunner(robot, KelpTaskChain.getKelpChain());
 			getFirstKelpChain.run();
 
-			TaskRunner returnFirstKelpChain = new TaskRunner(robot, KelpTaskChain.returnKelpChain());
+			TaskRunner returnFirstKelpChain = new TaskRunner(robot, KelpTaskChain.returnKelpChain(1));
 			returnFirstKelpChain.run();
-
-
-
+     
+     
+  
 			TaskRunner toSecondKelpChain = new TaskRunner(robot, KelpTaskChain.moveToKelpChain(2));
 			toSecondKelpChain.run();
-
+  
 			TaskRunner getSecondKelpChain = new TaskRunner(robot, KelpTaskChain.getKelpChain());
 			getSecondKelpChain.run();
 
-			TaskRunner returnSecondKelpChain = new TaskRunner(robot, KelpTaskChain.returnKelpChain());
+			TaskRunner returnSecondKelpChain = new TaskRunner(robot, KelpTaskChain.returnKelpChain(2));
 			returnSecondKelpChain.run(); 
 
 		} catch (TaskException e){

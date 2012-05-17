@@ -51,5 +51,5 @@ public class TurnTask extends Task {
 	public double getSpeed() {
 		return speed;
 	}
-
+	
 }

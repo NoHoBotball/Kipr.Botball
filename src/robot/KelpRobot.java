@@ -4,6 +4,7 @@ package robot;
 
 import cbc.motors.Motor;
 import cbc.motors.Servo;
+import cbc.movement.efficiency.regression.LSRLEfficiencyCalibrator;
 import cbc.movement.plugins.MovementPlugin;
 import cbc.movement.plugins.motor.Wheel;
 import cbc.sensors.analog.Analog;
@@ -32,6 +33,7 @@ public class KelpRobot extends LegoRobot implements ArmRobot, ClawRobot, GrabRob
 	Touch armTouch = new Touch(ARM_TOUCH_PORT);
 	static Analog ETSensor = new Analog(ET_PORT);
 	static int ETValue;
+
 	
 	public static final class Values{
 		static final int[] armLevels = {0,1};
@@ -161,22 +163,27 @@ public class KelpRobot extends LegoRobot implements ArmRobot, ClawRobot, GrabRob
 	}
 
 	public void release(){
-		getDriveTrain().moveAtCmps(4);
+		/*getDriveTrain().moveAtCmps(4);
 		while(getETSensor().getValueHigh() > 410){}
-		getDriveTrain().kill();
-		arm.goToPos(1);
+		getDriveTrain().kill();*/
+		arm.goToPos(2);
 		claw.open();
-		getDriveTrain().moveAtCmps(-100);
+	//	getDriveTrain().moveAtCmps(-100);
 		claw.close();
-		arm.goToPos(0);
+		arm.goToPos(2);
 		getDriveTrain().kill();
 	}
 
-	public Analog getETSensor() {
+	public static Analog getETSensor() {
 		return ETSensor;
 	}
 	
 	public static int getETSensorValue() {
 		return ETValue = ETSensor.getValueHigh();
 	}
+	/*
+	public static double calibratedValue(LSRLEfficiencyCalibrator calibrator, double value){
+		System.out.println (calibrator.getSlope() + " " + calibrator.getIntercept());
+		return (calibrator.getSlope() * value) + calibrator.getIntercept();
+	}*/
 }
