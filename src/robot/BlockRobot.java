@@ -2,16 +2,22 @@
 package robot;
 
 import cbc.create.CreateConnectException;
+import cbc.motors.Servo;
 import robot.extentions.AdjustBlockRobot;
 import robot.extentions.ArmRobot;
 import robot.extentions.ClawRobot;
 import robot.extentions.GetBlockRobot;
 import robot.extentions.GrabRobot;
+import utils.BlockConstants;
+import utils.Conversions;
 
 public class BlockRobot extends CreateRobot implements ArmRobot, ClawRobot, GrabRobot, GetBlockRobot, AdjustBlockRobot {
-
+	
+	private static boolean grabbedFirstBlock = false;
+	
 	public static final class Values{
 		static final int[] armLevels = {0,1,2};
+		static final int[] clawLevels = {0,1,2};
 	}
 	
 	
@@ -20,14 +26,11 @@ public class BlockRobot extends CreateRobot implements ArmRobot, ClawRobot, Grab
 	}
 	
 	private Arm arm = new Arm(Values.armLevels){
+		private Servo s1 = new Servo(BlockConstants.CLAW_VERTICAL_PORT_1), s2 = new Servo(BlockConstants.CLAW_VERTICAL_PORT_2);
 		@Override
 		public void goToPos(int pos) {
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			// TODO: Implement arm motion
+			s1.setPosition(pos, false);
+			s2.setPosition(pos, true);
 		}
 	};
 	
@@ -38,28 +41,18 @@ public class BlockRobot extends CreateRobot implements ArmRobot, ClawRobot, Grab
 	
 	
 	private Claw claw = new Claw(){
+		private Servo s = new Servo(BlockConstants.CLAW_CONTROL_PORT);
 		@Override
 		public void open() {
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			// TODO: Implement claw motion
+			s.setPosition(Values.clawLevels[2], true);
 		}
 		@Override
 		public void close() {
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			// TODO: Implement claw motion
+			s.setPosition(Values.clawLevels[0], true);
 		}
 		@Override
 		public void halfOpen() {
-			// TODO Auto-generated method stub
-			
+			s.setPosition(Values.clawLevels[1], true);
 		}
 	};
 	
@@ -70,19 +63,29 @@ public class BlockRobot extends CreateRobot implements ArmRobot, ClawRobot, Grab
 	
 	@Override
 	public void grab() {
-		
+		if (!grabbedFirstBlock) {
+			arm.lower();
+			driveTrain.moveCm(Conversions.inToCm(5), BlockConstants.APPROACH_SPEED);
+			claw.close();
+			grabbedFirstBlock = true;
+		} else {
+			driveTrain.moveCm(Conversions.inToCm(BlockConstants.CLAW_FREE - BlockConstants.DROP_DIST), BlockConstants.APPROACH_SPEED);
+			claw.open();
+			driveTrain.moveCm(Conversions.inToCm(-4), BlockConstants.APPROACH_SPEED);
+			arm.lower();
+			driveTrain.moveCm(Conversions.inToCm(3), BlockConstants.APPROACH_SPEED);
+			claw.close();
+		}
 	}
 
 	@Override
 	public void release() {
-		// TODO Auto-generated method stub
-		
+		// TODO Implement release code
 	}
 
 	@Override
 	public void adjustBlock() {
 		// TODO Auto-generated method stub
-		
 	}
 
 }

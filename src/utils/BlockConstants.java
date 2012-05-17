@@ -39,7 +39,10 @@ public interface BlockConstants extends GameConstants{
 	public static final int STANDARD_ET_VALUE = 0;
 	public static final int APPROACH_ET_VALUE = 0;
 	public static final int RETREAT_ET_VALUE = 0;
-
-
+	
+	/* ------------- Ports ------------- */
+	
+	public static final int CLAW_VERTICAL_PORT_1 = 0, CLAW_VERTICAL_PORT_2 = 1; // TODO Set to correct values
+	public static final int CLAW_CONTROL_PORT = 2; // TODO Set to correct value
 	
 }
