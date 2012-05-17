@@ -7,13 +7,9 @@ public class GetBlockTask extends Task{
 	private Location location;
 	
 	public GetBlockTask(Location location) {
-		for(Location testLocation : Location.getBlockLocations()){
-			if(location == testLocation){
-				this.location = testLocation;
-				break;
-			}
-		}
+		this.location = location;
 	}
+
 	/**
 	 * 
 	 * @return The location that the robot was in when this task was queued.

@@ -1,21 +1,18 @@
 package utils;
 
 public interface GameConstants {
-	/* ------- Tweakable Settings ------- */
-	
-	
-	
-	/**
-	 * The default all-around speed in cm/s. Should probably be removed later; use as a stand-in unit for now.
-	 */
-	public static final int STANDARD_SPEED = 20;
-	
+
 	/* ------- Measurements ------- */
 	
 	/**
-	 * The distance the bot is from a block when it picks it up.
+	 * The width of each cube in inches.
 	 */
-	public static final double BOT_OFFSET = 0.5; // TODO: Set to correct value
+	public static final double CUBE = 4;
+	
+	/**
+	 * The distance between the edges of each cube in inches.
+	 */
+	public static final double CUBE_DIST = 22;
 	
 	/**
 	 * The distance to robot has to move to be in line with the first block.
@@ -25,27 +22,15 @@ public interface GameConstants {
 	/**
 	 * The distance the robot must travel to be one BOT_OFFSET away from the first block.
 	 */
-	public static final double STARTING_DISTANCE_HORIZONAL = 30; // TODO: Set to correct value
+	public static final double STARTING_DISTANCE_HORIZONTAL = 30; // TODO: Set to correct value
 	
 	/**
-	 * The width of each cube in inches.
+	 * The distance the robot must travel SOUTH from EAST of CENTER to get to STACK.
 	 */
-	public static final double CUBE_WIDTH = 4;
-	
-	/**
-	 * The distance between the edges of each cube in inches.
-	 */
-	public static final double CUBE_DISTANCE = 22;
+	public static final double STACK_DIST = 0;
 	
 	/**
 	 * The width of the entire game board in inches.
 	 */
 	public static final double GAME_BOARD_WIDTH = 96;
-	
-	
-
-	/**
-	 * The width of the entire game board in inches.
-	 */
-	public static final double _GAME_BOARD_WIDTH = 96;
-}
+	}

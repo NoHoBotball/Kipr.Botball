@@ -1,13 +1,15 @@
 package utils.tasks;
 
+import utils.pathfinding.Direction;
+
 
 
 public class TurnTask extends Task {
 	
-	private double angle;
-	private double speed;
+	private double angle; //in degrees
+	private double speed; //in degrees per second
 
-	private static double default_speed;
+	private static double default_speed = 10;
 
 	public static TurnTask turnCW() {
 		return new TurnTask( 90, default_speed);
@@ -29,11 +31,20 @@ public class TurnTask extends Task {
 		this.angle = angle;
 		this.speed = speed;
 		default_speed = speed;
+		while(angle > 180) angle -= 360;
+		while(angle <-180) angle += 360;
+	}
+	
+	public TurnTask (Direction from, Direction to, double speed) {
+		new TurnTask(from.degreesTo(to), speed);
+	}
+	
+	public TurnTask (Direction from, Direction to) {
+		new TurnTask(from.degreesTo(to));
 	}
 	
 	public TurnTask (double angle) {
-		this.angle = angle;
-		this.speed = default_speed;
+		new TurnTask(angle, default_speed);
 	}
 
 	public double getAngle() {

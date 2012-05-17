@@ -46,25 +46,14 @@ public class BlockMain {
 						break;
 					}
 				}
-				
-				try {
-					Thread.sleep(200);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
 			}
-		
-		
-
 			
 			new TaskRunner(robot, BlockTaskChain.openingMoves()).run();
-			
 			if (Block.getBlock(0) == Block.RED)
-				new TaskRunner(robot, BlockTaskChain.grabFirstBlock()).run();
-			
+				new TaskRunner(robot, BlockTaskChain.grabBlock()).run();
 			new TaskRunner(robot, BlockTaskChain.getBlockOrder()).run();
 			
-			new TaskRunner(robot, BlockTaskChain.getBlockGatherChain(blocks, blocks[0] == Block.RED ? 1 : 0)).run();
+			new TaskRunner(robot, BlockTaskChain.gatherBlocks(blocks, blocks[0] == Block.RED ? 1 : 0)).run();
 			
 		} catch (TaskException e){
 			e.printStackTrace();

@@ -3,10 +3,10 @@ package utils.tasks;
 
 public class ETDriveTask extends Task{
 
-	private int speed;
+	private double speed;
 	private int ETValue;
 
-	public ETDriveTask( int speed, int ETValue) {
+	public ETDriveTask( double speed, int ETValue) {
 		this.speed = speed;
 		this.ETValue = ETValue;
 	}
@@ -16,7 +16,7 @@ public class ETDriveTask extends Task{
 		return speed;
 	}
 	
-	public double getETValue() {
+	public int getETValue() {
 		return ETValue;
 	}
 
