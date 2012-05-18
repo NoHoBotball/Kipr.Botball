@@ -17,7 +17,7 @@ public class BlockRobot extends CreateRobot implements ArmRobot, ClawRobot, Grab
 	
 	public static final class Values{
 		static final int[] armLevels = {0,1,2};
-		static final int[] clawLevels = {0,1,2};
+		static final int[] clawLevels = {0,575,1150};
 	}
 	
 	
