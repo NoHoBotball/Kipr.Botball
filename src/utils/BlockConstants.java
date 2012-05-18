@@ -2,7 +2,7 @@ package utils;
 
 public interface BlockConstants extends GameConstants{
 	/* ------- Measurements ------- */
-	/* ----All values in inches----*/
+	/* --- All values in inches --- */
 	
 
 	
@@ -21,8 +21,8 @@ public interface BlockConstants extends GameConstants{
 	 * 
 	 */
 	public static final double ARM_BUFFER = 1;
-	public static final double GRAB_DIST = 2.5;//inches
-	public static final double DROP_DIST = 3.5;//inches
+	public static final double GRAB_DIST = 2.5;
+	public static final double DROP_DIST = 3.5;
 	
 	public static final double CUBE_DIST_LONG = CUBE_DIST + CUBE;
 	public static final double CUBE_DIST_SHORT = CUBE_DIST + CUBE/2 - CLAW_FREE;

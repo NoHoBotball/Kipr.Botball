@@ -21,10 +21,7 @@ public class BlockRobot extends CreateRobot implements ArmRobot, ClawRobot, Grab
 		static final int[] clawLevels = {0,575,1150};
 	}
 	
-	
-	public BlockRobot() throws CreateConnectException {
-		super();
-	}
+	public BlockRobot() throws CreateConnectException {}
 	
 	private Arm arm = new Arm(Values.armLevels){
 		private Servo s1 = new Servo(ARM_PORT_1), s2 = new Servo(ARM_PORT_2);

@@ -2,30 +2,24 @@ package regionals2012;
 
 import java.util.List;
 
-
-import robot.LegoRobot;
-import robot.BlockRobot;
-import robot.Robot;
-import robot.BlockRobot;
 import robot.KelpRobot;
+import robot.Robot;
 import robot.extentions.AdjustBlockRobot;
 import robot.extentions.GetBlockRobot;
 import robot.extentions.GrabRobot;
 import robot.extentions.StackBlockRobot;
-
+import utils.Conversions;
+import utils.KelpConstants;
 import utils.tasks.AdjustBlockTask;
 import utils.tasks.DriveTask;
 import utils.tasks.ETDriveTask;
-import utils.tasks.SeeBlockTask;
 import utils.tasks.GrabTask;
-import utils.tasks.KelpTask;
 import utils.tasks.ListTask;
 import utils.tasks.ReleaseTask;
+import utils.tasks.SeeBlockTask;
 import utils.tasks.StackBlockTask;
 import utils.tasks.Task;
 import utils.tasks.TurnTask;
-import utils.Conversions;
-import utils.KelpConstants;
 import utils.vision.Block;
 
 public class TaskRunner implements Runnable, KelpConstants {
