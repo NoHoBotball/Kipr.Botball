@@ -3,10 +3,10 @@ package utils.tasks;
 import utils.pathfinding.Location;
 import utils.vision.Block;
 
-public class GetBlockTask extends Task{
+public class SeeBlockTask extends Task{
 	private Location location;
 	
-	public GetBlockTask(Location location) {
+	public SeeBlockTask(Location location) {
 		this.location = location;
 	}
 
@@ -19,6 +19,6 @@ public class GetBlockTask extends Task{
 	}
 	
 	public Block getBlock() {
-		return 	Block.getBlock();
+		return 	Block.seeBlock();
 	}
 }

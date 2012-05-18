@@ -11,15 +11,17 @@ import robot.KelpRobot;
 import robot.extentions.AdjustBlockRobot;
 import robot.extentions.GetBlockRobot;
 import robot.extentions.GrabRobot;
+import robot.extentions.StackBlockRobot;
 
 import utils.tasks.AdjustBlockTask;
 import utils.tasks.DriveTask;
 import utils.tasks.ETDriveTask;
-import utils.tasks.GetBlockTask;
+import utils.tasks.SeeBlockTask;
 import utils.tasks.GrabTask;
 import utils.tasks.KelpTask;
 import utils.tasks.ListTask;
 import utils.tasks.ReleaseTask;
+import utils.tasks.StackBlockTask;
 import utils.tasks.Task;
 import utils.tasks.TurnTask;
 import utils.Conversions;
@@ -56,11 +58,13 @@ public class TaskRunner implements Runnable, KelpConstants {
 				((GrabRobot)robot).grab();
 			} else if (task instanceof ReleaseTask && robot instanceof GrabRobot){
 				((GrabRobot)robot).release();
-			} else if (task instanceof GetBlockTask && robot instanceof GetBlockRobot) {
-				GetBlockTask getBlockTask = (GetBlockTask) task;
+			} else if (task instanceof SeeBlockTask && robot instanceof GetBlockRobot) {
+				SeeBlockTask getBlockTask = (SeeBlockTask) task;
 				Block.setBlock(getBlockTask.getLocation(), getBlockTask.getBlock());
-			} else if (task instanceof AdjustBlockTask && robot instanceof BlockRobot) {
+			} else if (task instanceof AdjustBlockTask && robot instanceof AdjustBlockRobot) {
 				((AdjustBlockRobot)robot).adjustBlock();
+			} else if (task instanceof StackBlockTask && robot instanceof StackBlockRobot) {
+				((StackBlockRobot)robot).stack();
 			} else if (task instanceof ListTask) {
 				ListTask tList = (ListTask)task;
 				new TaskRunner(robot, tList.getTaskChain()).run();

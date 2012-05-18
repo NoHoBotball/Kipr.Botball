@@ -27,7 +27,7 @@ public interface GameConstants {
 	/**
 	 * The distance the robot must travel SOUTH from EAST of CENTER to get to STACK.
 	 */
-	public static final double STACK_DIST = 0;
+	public static final double STACK_DIST = 20;
 	
 	/**
 	 * The width of the entire game board in inches.

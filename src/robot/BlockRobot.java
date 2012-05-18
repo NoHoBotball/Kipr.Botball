@@ -7,8 +7,9 @@ import robot.extentions.ArmRobot;
 import robot.extentions.ClawRobot;
 import robot.extentions.GetBlockRobot;
 import robot.extentions.GrabRobot;
+import robot.extentions.StackBlockRobot;
 
-public class BlockRobot extends CreateRobot implements ArmRobot, ClawRobot, GrabRobot, GetBlockRobot, AdjustBlockRobot {
+public class BlockRobot extends CreateRobot implements ArmRobot, ClawRobot, GrabRobot, GetBlockRobot, AdjustBlockRobot, StackBlockRobot {
 
 	public static final class Values{
 		static final int[] armLevels = {0,1,2};
@@ -70,18 +71,22 @@ public class BlockRobot extends CreateRobot implements ArmRobot, ClawRobot, Grab
 	
 	@Override
 	public void grab() {
-		
+		// TODO: implement grab functionality
 	}
 
 	@Override
 	public void release() {
-		// TODO Auto-generated method stub
-		
+		// TODO: implement release functionality		
 	}
 
 	@Override
 	public void adjustBlock() {
-		// TODO Auto-generated method stub
+		// TODO: implement adjust functionality		
+	}
+
+	@Override
+	public void stack() {
+		// TODO: implement stack funcitionality
 		
 	}
 

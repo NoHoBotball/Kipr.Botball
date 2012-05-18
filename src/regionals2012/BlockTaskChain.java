@@ -6,9 +6,10 @@ import java.util.List;
 import utils.tasks.AdjustBlockTask;
 import utils.tasks.DriveTask;
 import utils.tasks.ETDriveTask;
-import utils.tasks.GetBlockTask;
+import utils.tasks.SeeBlockTask;
 import utils.tasks.GrabTask;
 import utils.tasks.ListTask;
+import utils.tasks.StackBlockTask;
 import utils.tasks.Task;
 import utils.tasks.TaskException;
 import utils.tasks.TurnTask;
@@ -27,13 +28,12 @@ import utils.vision.Block;
 public class BlockTaskChain implements GameConstants, BlockConstants {
 	
 	static int startingBlock = 0;
-	static int blockGrabbed = -1;
+	static int blocksGrabbed = 0;
 
 	// Store robot state as the chain builds
 	private static Block[] blocks = new Block[3];
 	private static Location location = Location.GAME_START; // Robot is in starting position for block grabbing
 	private static Direction heading = Direction.NORTH; // Robot is facing up
-	private static Direction offset = Direction.CENTER; // Robot is on exact spot; different values define where the bot is relative to a block's center position
 	private static List<Task> tasks;
 	private static List<Task> _tasks;
 	
@@ -51,17 +51,19 @@ public class BlockTaskChain implements GameConstants, BlockConstants {
 		turn(heading, STANDARD_TURN_SPEED);
 		drive(0, STANDARD_SPEED);
 
-		// Move to FENCE
+		//Move to CENTER
 		drive(-STARTING_DISTANCE_VERTICAL);//drive backwards
-		turn(Direction.EAST);//Turn towards center of field
-		drive(STARTING_DISTANCE_HORIZONTAL);//drive towards center of field
-		turn(Direction.SOUTH);//turn SOUTH
+		turn(Direction.WEST);
+		drive(-STARTING_DISTANCE_HORIZONTAL);//drive to center of field
+		location = Location.CENTER;
 		
-		//Robot is now at the fence
-		location = Location.BLOCK_FENCE;
+		//Get the color of the first block
+		seeBlock(Location.BLOCK_SIDE);
+		adjust(Location.BLOCK_SIDE);
 		
-		//Get color of first Block and center around that block;
-		getBlock(location);
+		//Go to and get the color of the second block
+		toFence();
+		seeBlock();
 		adjust();
 		
 		return restoreTasks(tasks);
@@ -70,14 +72,14 @@ public class BlockTaskChain implements GameConstants, BlockConstants {
 	public static List<Task> getBlockOrder() throws TaskException {
 		saveTasks();
 
-		// Store robot state as the chain builds
 		checkPos(Location.BLOCK_FENCE, Direction.SOUTH);
 		
 		//drive BLOCK_CORNER in order to see second block
 		drive(CUBE_DIST_LONG);
 		location = Location.BLOCK_CORNER;
+		
 		//"see" second block
-		getBlock();
+		seeBlock();
 		adjust();
 		
 		//determine order of blocks
@@ -92,10 +94,7 @@ public class BlockTaskChain implements GameConstants, BlockConstants {
 				if(Block.getBlock(1) == Block.RED) Block.setBlock(2, Block.YELLOW);
 				else                               Block.setBlock(2, Block.RED);
 		}
-		
-		for(int i = 0; i < 3; i++){
-			
-		}
+		blocks = Block.getBlocks();
 		
 		return restoreTasks(tasks);
 	}
@@ -109,7 +108,8 @@ public class BlockTaskChain implements GameConstants, BlockConstants {
 
 		saveTasks();
 		
-		checkPos(Location.BLOCK_CORNER, Direction.SOUTH, Direction.CENTER);
+		checkPos(Location.BLOCK_CORNER, Direction.SOUTH);
+		BlockTaskChain.startingBlock = startingBlock;
 		
 		// Get block path order
 		Location[] destination = new Location[blocks.length];
@@ -134,16 +134,18 @@ public class BlockTaskChain implements GameConstants, BlockConstants {
 					break;
 			}
 			
-			switch(i) {
-			case 0:
-				grabBlock();
-				break;
-			case 1:
-			case 2:
-				grabBlock();
-				retreat();
-			}			
+			grabBlock();			
 		}
+		return restoreTasks(tasks);		
+	}
+	
+	public static List<Task> retreat() throws TaskException {
+		saveTasks();
+		
+		if(blocksGrabbed < 3 - startingBlock) throw new TaskException("You may not retreat until you accomplish your mission, Soldier.");
+
+		toStack();
+		stackBlock();
 		
 		return restoreTasks(tasks);		
 	}
@@ -291,24 +293,13 @@ public class BlockTaskChain implements GameConstants, BlockConstants {
 	
 	public static List<Task> grabBlock() throws TaskException {
 		saveTasks();
-		// TODO grab Block
-		return restoreTasks(tasks);		
-	}
-	
-	public static List<Task> retreat() throws TaskException {
-		saveTasks();
-		
-		if(blockGrabbed < 0) throw new TaskException("You may not retreat until you accomplish your mission, Soldier.");
-
-		toStack();
-		stackBlock();
-		
+		grabBlock();
 		return restoreTasks(tasks);		
 	}
 
 	public static List<Task> stackBlock() throws TaskException {
 		saveTasks();
-		//TODO: stack Block
+		stack();
 		return restoreTasks(tasks);		
 	}
 
@@ -327,16 +318,14 @@ public class BlockTaskChain implements GameConstants, BlockConstants {
 		return tasks;
 	}
 	
-	private static void checkPos(Location location, Direction heading) throws TaskException {
+	private static void checkPos(Location location) throws TaskException {
 		if(BlockTaskChain.location != location
-		|| BlockTaskChain.heading != heading
 		) throw new TaskException("Robot must be in the correct position and have the correct heading to generate this task chain");
 	}
 	
-	private static void checkPos(Location location, Direction heading, Direction offset) throws TaskException {
+	private static void checkPos(Location location, Direction heading) throws TaskException {
 		if(BlockTaskChain.location != location
 		|| BlockTaskChain.heading != heading
-		|| BlockTaskChain.offset != offset
 		) throw new TaskException("Robot must be in the correct position and have the correct heading to generate this task chain");
 	}
 	
@@ -356,6 +345,11 @@ public class BlockTaskChain implements GameConstants, BlockConstants {
 		add(new ETDriveTask(speed, ET_VALUE));
 	}
 	
+	private static void grab() {
+		add(GrabTask.getTask());
+		blocksGrabbed++;
+	}
+	
 	private static void turn(Direction heading) {
 		add(new TurnTask(BlockTaskChain.heading, heading));
 		BlockTaskChain.heading = heading;
@@ -368,22 +362,22 @@ public class BlockTaskChain implements GameConstants, BlockConstants {
 	
 	private static void adjust(Location location) {
 		add(new AdjustBlockTask(location));
-		offset = Direction.CENTER;
 	}
 	
 	private static void adjust() {
 		add(new AdjustBlockTask(location));
-		offset = Direction.CENTER;
 	}
 	
-	private static void getBlock(Location location) {
-		add(new GetBlockTask(location));
+	private static void seeBlock(Location location) {
+		add(new SeeBlockTask(location));
 	}
 	
-	private static void getBlock() {
-		add(new GetBlockTask(location));
+	private static void seeBlock() {
+		add(new SeeBlockTask(location));
 	}
 	
-	
+	private static void stack() {
+		add(StackBlockTask.getTask());
+	}
 	
 }

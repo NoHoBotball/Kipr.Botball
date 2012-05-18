@@ -15,6 +15,7 @@ public abstract class CreateRobot extends Robot {
 	                    double leftCmps, double rightCmps) { 
 					leftCm = -leftCm;
 					rightCm = -rightCm;
+					super.moveWheelCm(leftCm, rightCm, leftCmps, rightCmps);
 				}
 			}
 		);
