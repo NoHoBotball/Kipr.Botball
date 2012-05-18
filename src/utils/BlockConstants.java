@@ -32,9 +32,9 @@ public interface BlockConstants extends GameConstants{
 	 * The default all-around speed in cm/s. Should probably be removed later; use as a stand-in unit for now.
 	 */
 	public static final int STANDARD_TURN_SPEED = 30;
-	public static final int STANDARD_SPEED = -20;
-	public static final int APPROACH_SPEED = -10;
-	public static final int RETREAT_SPEED  = -40;
+	public static final int STANDARD_SPEED = 20;
+	public static final int APPROACH_SPEED = 10;
+	public static final int RETREAT_SPEED  = 40;
 	
 	public static final int STANDARD_ET_VALUE = 0;
 	public static final int APPROACH_ET_VALUE = 0;
