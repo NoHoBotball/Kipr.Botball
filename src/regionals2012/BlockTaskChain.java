@@ -21,7 +21,7 @@ import utils.vision.Block;
 
 /**
  * Put all tasks chains to be generated throughout the duration
- * of the 2012 Bobtall Greater LA regional competition in this
+ * of the 2012 Botball Greater LA regional competition in this
  * class as static methods.
  *
  */

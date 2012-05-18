@@ -35,17 +35,13 @@ public class KelpRobot extends LegoRobot implements ArmRobot, ClawRobot, GrabRob
 	
 	public static final class Values{
 		static final int[] armLevels = {0,1};
-
-		public Values() {
-			super();
-			// TODO Auto-generated constructor stub
-		}
 	}
 
 
 
 
 	Arm arm = new Arm(Values.armLevels){
+		@Override
 		public void goToPos(int pos) {
 			if(pos == 0){
 				while(servoR.getPosition() > 348){
@@ -82,12 +78,14 @@ public class KelpRobot extends LegoRobot implements ArmRobot, ClawRobot, GrabRob
 		}
 	};
 
+	@Override
 	public Arm getArm() {
 		return arm;
 	}
 
 
 	Claw claw = new Claw(){
+		@Override
 		public void open() {
 			try {
 				armM.moveAtVelocity(500);
@@ -100,6 +98,7 @@ public class KelpRobot extends LegoRobot implements ArmRobot, ClawRobot, GrabRob
 			}
 			// Lower kelp arm
 		}
+		@Override
 		public void close() {
 			try {
 				armM.moveAtVelocity(-500);
@@ -115,6 +114,7 @@ public class KelpRobot extends LegoRobot implements ArmRobot, ClawRobot, GrabRob
 			}
 			// Raise kelp arm
 		}
+		@Override
 		public void halfOpen() {
 			try {
 				/*while(armTouch.getValue() == false){}
@@ -134,10 +134,12 @@ public class KelpRobot extends LegoRobot implements ArmRobot, ClawRobot, GrabRob
 		}
 	};
 
+	@Override
 	public Claw getClaw() {
 		return claw;
 	}
 
+	@Override
 	public void grab() { //should move forward while raising claw while spinning arm
 		getClaw().close();
 		getArm().goToPos(2);
@@ -161,6 +163,7 @@ public class KelpRobot extends LegoRobot implements ArmRobot, ClawRobot, GrabRob
 		getArm().goToPos(2);
 	}
 
+	@Override
 	public void release(){
 		while(getETSensor().getValueHigh() > 450){
 			super.getDriveTrain().moveAtCmps(getETSensor().getValueHigh()-400);
