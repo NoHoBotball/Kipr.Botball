@@ -61,6 +61,11 @@ public class BlockRobot extends CreateRobot implements ArmRobot, ClawRobot, Grab
 			// TODO Auto-generated method stub
 			
 		}
+		@Override
+		public void quarterOpen() {
+			// TODO Auto-generated method stub
+			
+		}
 	};
 	
 	@Override

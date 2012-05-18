@@ -3,6 +3,7 @@ package regionals2012;
 import java.util.ArrayList;
 import java.util.List;
 
+import utils.tasks.ArmTask;
 import utils.tasks.DriveTask;
 import utils.tasks.ETDriveTask;
 import utils.tasks.GrabTask;
@@ -10,6 +11,7 @@ import utils.tasks.ReleaseTask;
 import utils.tasks.Task;
 import utils.tasks.TaskException;
 import utils.tasks.TurnTask;
+import utils.tasks.WaitTask;
 import utils.Conversions;
 import utils.KelpConstants;
 import utils.pathfinding.Location;
@@ -32,25 +34,32 @@ public class KelpTaskChain implements KelpConstants {
 
 		if (firstOrSecond == 1){
 			tasks.add(TurnTask.turnCCW(15));
-			tasks.add(new DriveTask(27, STANDARD_KELP_SPEED)); //27
-			/*tasks.add(TurnTask.turnCCW());
-			tasks.add(new DriveTask(26, STANDARD_KELP_SPEED)); //drive forward 
-			tasks.add(TurnTask.turnCCW());*/
-			tasks.add(new TurnTask(280, 15, -Conversions.inToCm(6)));
+			tasks.add(new DriveTask(26, STANDARD_KELP_SPEED)); //27
+			tasks.add(TurnTask.turnCCW());
+			tasks.add(new DriveTask(15, STANDARD_KELP_SPEED)); //drive forward 
+			tasks.add(new ArmTask());
+			tasks.add(new DriveTask(-6, STANDARD_KELP_SPEED)); //8
+			tasks.add(new ArmTask());
+			tasks.add(new DriveTask(16, STANDARD_KELP_SPEED));
+			tasks.add(TurnTask.turnCCW());
+			//tasks.add(new TurnTask(225, 18, -Conversions.inToCm(6)));
 			tasks.add(new ETDriveTask(STANDARD_KELP_SPEED, 950));
-			tasks.add(new DriveTask(2,4));
-			tasks.add(new ETDriveTask(-STANDARD_KELP_SPEED, 255));
-			tasks.add(new DriveTask(-20, STANDARD_KELP_SPEED));
+			tasks.add(new DriveTask(4,4));
+			tasks.add(new WaitTask(3000));
+			tasks.add(new DriveTask(-14, STANDARD_KELP_SPEED/2));
+			//tasks.add(new ETDriveTask(-STANDARD_KELP_SPEED, 400));
+			//tasks.add(new DriveTask(-20, STANDARD_KELP_SPEED));
 			tasks.add(TurnTask.turnCW());
 		} else if (firstOrSecond == 2){
 			tasks.add(new DriveTask(-5, STANDARD_KELP_SPEED));
 			tasks.add(TurnTask.turnCCW());
 			tasks.add(new TurnTask(.5,-STANDARD_KELP_SPEED));
-			tasks.add(new ETDriveTask(50, 950));
-			tasks.add(new DriveTask(3,4));
+			tasks.add(new ETDriveTask(75, 950));
+			tasks.add(new DriveTask(4,4));
 			/*tasks.add(new DriveTask(0,0));
 			tasks.add(new ETDriveTask(-STANDARD_KELP_SPEED, 255));*/
-			tasks.add(new DriveTask(-12, STANDARD_KELP_SPEED));
+			tasks.add(new DriveTask(-10, STANDARD_KELP_SPEED));
+			tasks.add(new WaitTask(3000));
 			tasks.add(TurnTask.turnCCW());
 		} else {
 			System.out.println("ERROR: firstOrSecond must be either 1 or 2.");
@@ -77,8 +86,8 @@ public class KelpTaskChain implements KelpConstants {
 
 		tasks.add(new DriveTask(-8, STANDARD_KELP_SPEED));
 		if(firstOrSecond == 1){
-			tasks.add(TurnTask.turnAround());
-			tasks.add(new TurnTask(30,-STANDARD_KELP_SPEED));
+			tasks.add(TurnTask.turnCCW());
+			tasks.add(new TurnTask(-70, -STANDARD_KELP_SPEED));
 			tasks.add(new ETDriveTask(STANDARD_KELP_SPEED, 900));
 			//tasks.add(new TurnTask(20, STANDARD_KELP_SPEED));
 			//tasks.add(new ETDriveTask(STANDARD_KELP_SPEED, 960));
@@ -87,7 +96,7 @@ public class KelpTaskChain implements KelpConstants {
 		if(firstOrSecond == 2){
 			tasks.add(TurnTask.turnCCW());
 			tasks.add(new TurnTask(3,-STANDARD_KELP_SPEED));
-			tasks.add(new ETDriveTask(50, 900));
+			tasks.add(new ETDriveTask(75, 900));
 			tasks.add(new DriveTask(-4, STANDARD_KELP_SPEED));
 			tasks.add(TurnTask.turnCCW());
 			tasks.add(new ETDriveTask(STANDARD_KELP_SPEED, 960));
