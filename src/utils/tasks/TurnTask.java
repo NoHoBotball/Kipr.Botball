@@ -14,6 +14,10 @@ public class TurnTask extends Task {
 	public static TurnTask turnCW() throws TaskException {
 		return new TurnTask( 90, default_speed);
 	}
+	
+	public static TurnTask turnAround() throws TaskException {
+		return new TurnTask( 180, default_speed);
+	}
 
 	public static TurnTask turnCCW() throws TaskException {
 		return new TurnTask(-90, default_speed);
@@ -25,6 +29,10 @@ public class TurnTask extends Task {
 
 	public static TurnTask turnCCW(double speed) throws TaskException {
 		return new TurnTask(-90, speed);
+	}
+	
+	public static TurnTask turnAround(double speed) throws TaskException {
+		return new TurnTask( 180, speed);
 	}
 
 	public TurnTask (double angle, double speed) throws TaskException {
@@ -54,5 +62,5 @@ public class TurnTask extends Task {
 	public double getSpeed() {
 		return speed;
 	}
-
+	
 }
