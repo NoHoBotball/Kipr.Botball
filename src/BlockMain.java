@@ -1,5 +1,4 @@
 import cbc.create.Create;
-import cbc.create.Create.Mode;
 import cbc.create.CreateConnectException;
 import cbc.sensors.buttons.AButton;
 import cbc.sensors.buttons.BButton;
@@ -18,49 +17,53 @@ public class BlockMain {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-
-		try {
-			Block[] blocks = new Block[3];
-			
-			BlockRobot robot = new BlockRobot();
-			new Create().connect();
-
-			System.out.println("Input block formation (A = RED, B = YELLOW, BLACK = BLUE):");
-
-			for (int i = 0; i < 3; i++) {
-
-				System.out.print("Block " + i + ":");
-
-				while(true){
-					if (new AButton().isPushed()) {
-						blocks[i] = Block.RED;
-						while(new AButton().isPushed());
-						System.out.println("RED");
-						break;
-					} else if (new BButton().isPushed()) {
-						blocks[i] = Block.YELLOW;
-						while(new BButton().isPushed());
-						System.out.println("YELLOW");
-						break;
-					} else if (new BlackButton().isPushed()){
-						blocks[i] = Block.BLUE;
-						while(new BlackButton().isPushed());
-						System.out.println("BLUE");
-						break;
+		int eCount = 0;
+		while(true) {
+			try {
+				Block[] blocks = new Block[3];
+				
+				BlockRobot robot = new BlockRobot();
+				new Create().connect();
+	
+				System.out.println("Input block formation (A = RED, B = YELLOW, BLACK = BLUE):");
+	
+				for (int i = 0; i < 3; i++) {
+	
+					System.out.print("Block " + i + ":");
+	
+					while(true){
+						if (new AButton().isPushed()) {
+							blocks[i] = Block.RED;
+							while(new AButton().isPushed());
+							System.out.println("RED");
+							break;
+						} else if (new BButton().isPushed()) {
+							blocks[i] = Block.YELLOW;
+							while(new BButton().isPushed());
+							System.out.println("YELLOW");
+							break;
+						} else if (new BlackButton().isPushed()){
+							blocks[i] = Block.BLUE;
+							while(new BlackButton().isPushed());
+							System.out.println("BLUE");
+							break;
+						}
 					}
 				}
+	
+				new TaskRunner(robot, BlockTaskChain.openingMoves()).run();
+				new TaskRunner(robot, BlockTaskChain.getBlockOrder()).run();
+				new TaskRunner(robot, BlockTaskChain.gatherBlocks(blocks, 0)).run();
+				break;
+			} catch (TaskException e){
+				e.printStackTrace();
+			} catch (CreateConnectException e){
+				eCount++;
+				System.out.println("Create Connect failure.");
+				if(eCount > 5)e.printStackTrace();
+				else continue;
 			}
-
-			new TaskRunner(robot, BlockTaskChain.openingMoves()).run();
-			new TaskRunner(robot, BlockTaskChain.getBlockOrder()).run();
-			new TaskRunner(robot, BlockTaskChain.gatherBlocks(blocks, 0)).run();
-			
-		} catch (TaskException e){
-			e.printStackTrace();
-		} catch (CreateConnectException e){
-			e.printStackTrace();
 		}
-
 	}
 
 }
