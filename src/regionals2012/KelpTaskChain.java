@@ -26,7 +26,6 @@ import utils.pathfinding.Direction;
 public class KelpTaskChain implements KelpConstants {
 	// Store robot state as the chain builds
 	static Location location = Location.GAME_START; // Robot is in starting position for block grabbing
-	static Direction offset = Direction.CENTER; // Robot is on exact spot; different values define where the bot is relative to a block's center position
 	static Direction heading = Direction.SOUTH; // Robot is facing down
 
 

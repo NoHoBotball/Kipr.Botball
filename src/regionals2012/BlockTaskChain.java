@@ -350,12 +350,12 @@ public class BlockTaskChain implements GameConstants, BlockConstants {
 		blocksGrabbed++;
 	}
 	
-	private static void turn(Direction heading) {
+	private static void turn(Direction heading) throws TaskException {
 		add(new TurnTask(BlockTaskChain.heading, heading));
 		BlockTaskChain.heading = heading;
 	}
 	
-	private static void turn(Direction heading, double speed) {
+	private static void turn(Direction heading, double speed) throws TaskException {
 		add(new TurnTask(BlockTaskChain.heading, heading, speed));
 		BlockTaskChain.heading = heading;
 	}

@@ -53,6 +53,8 @@ public class TaskRunner implements Runnable, KelpConstants {
 			} else if (task instanceof TurnTask) {
 				TurnTask turnTask = (TurnTask) task;
 				robot.getDriveTrain().rotateDegrees(turnTask.getAngle(), turnTask.getSpeed());
+				System.out.println("Turning " + turnTask.getAngle() + 
+						           "deg at " + turnTask.getSpeed() + " deg/sec");
 			}else if (task instanceof GrabTask && robot instanceof GrabRobot) {
 				System.out.println("Claw, go!");
 				((GrabRobot)robot).grab();

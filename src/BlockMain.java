@@ -23,7 +23,6 @@ public class BlockMain {
 				Block[] blocks = new Block[3];
 				
 				BlockRobot robot = new BlockRobot();
-				new Create().connect();
 	
 				System.out.println("Input block formation (A = RED, B = YELLOW, BLACK = BLUE):");
 	

@@ -13,8 +13,10 @@ public abstract class CreateRobot extends Robot {
 			@Override
 			protected void moveWheelCm(double leftCm, double rightCm, //positions
 	                    double leftCmps, double rightCmps) { 
-					leftCm = -leftCm;
-					rightCm = -rightCm;
+					if(leftCm<0 && rightCm<0 || leftCm>0 && rightCm>0){
+						leftCm = -leftCm;
+						rightCm = -rightCm;
+					}
 					super.moveWheelCm(leftCm, rightCm, leftCmps, rightCmps);
 				}
 			}
@@ -25,8 +27,10 @@ public abstract class CreateRobot extends Robot {
 			@Override
 			protected void moveWheelCm(double leftCm, double rightCm, //positions
 	                    double leftCmps, double rightCmps) { 
+				if(leftCm<0 && rightCm<0 || leftCm>0 && rightCm>0){
 					leftCm = -leftCm;
 					rightCm = -rightCm;
+				}
 				}
 			}
 		);
@@ -40,8 +44,10 @@ public abstract class CreateRobot extends Robot {
 			@Override
 			protected void moveWheelCm(double leftCm, double rightCm, //positions
 	                    double leftCmps, double rightCmps) { 
+				if(leftCm<0 && rightCm<0 || leftCm>0 && rightCm>0){
 					leftCm = -leftCm;
 					rightCm = -rightCm;
+				}
 				}
 			}
 		);
