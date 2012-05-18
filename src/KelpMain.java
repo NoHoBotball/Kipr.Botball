@@ -7,26 +7,32 @@ import robot.KelpRobot;
 
 import utils.tasks.TaskException;
 
+  
+public class KelpMain {  
 
-public class KelpMain { 
-
-	/**
-	 * @param args     
+	/** 
+	 * @param args      
 	 * @throws TaskException    
-	 */  
+	 */        
 	public static void main(String[] args) throws TaskException {
-
-		BlackButton blackButton = new BlackButton();
+ 
+		BlackButton blackButton = new BlackButton(); 
 		KelpRobot robot = new KelpRobot();
 
 		robot.getArm().goToPos(2); 
-		KelpRobot.getETSensor().setFloating(true);
+		     
 		while(!blackButton.getValue()){}
+		  
+		robot.getDriveTrain().moveCm(25,4);
+		robot.getDriveTrain().moveCm(-13, 4);
+		robot.getETSensor().setFloating(true);
 		
-		System.out.println("Starting Tasks.");
-		 
+		while(!blackButton.getValue()){}
+
+		System.out.println("Starting Tasks."); 
+
 		try {
-			 
+
 			TaskRunner toFirstKelpChain = new TaskRunner(robot, KelpTaskChain.moveToKelpChain(1));
 			toFirstKelpChain.run();
 
@@ -35,12 +41,13 @@ public class KelpMain {
 
 			TaskRunner returnFirstKelpChain = new TaskRunner(robot, KelpTaskChain.returnKelpChain(1));
 			returnFirstKelpChain.run();
-     
-     
-  
+
+
+
+
 			TaskRunner toSecondKelpChain = new TaskRunner(robot, KelpTaskChain.moveToKelpChain(2));
 			toSecondKelpChain.run();
-  
+
 			TaskRunner getSecondKelpChain = new TaskRunner(robot, KelpTaskChain.getKelpChain());
 			getSecondKelpChain.run();
 

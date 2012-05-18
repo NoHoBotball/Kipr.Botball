@@ -7,6 +7,9 @@ public interface ClawRobot {
 		public abstract void open();
 		public abstract void close();
 		public abstract void halfOpen();
+		public abstract void quarterOpen();
 	}
+
+
 }
 

@@ -50,7 +50,10 @@ public class BlockRobot extends CreateRobot implements ArmRobot, ClawRobot, Grab
 		}
 		@Override
 		public void halfOpen() {
-			s.setPosition(Values.clawLevels[1], true);
+			s.setPosition(Values.clawLevels[1], true);			
+		}
+		@Override
+		public void quarterOpen() {
 		}
 	};
 	
