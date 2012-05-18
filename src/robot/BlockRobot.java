@@ -13,7 +13,7 @@ import utils.Conversions;
 
 public class BlockRobot extends CreateRobot implements ArmRobot, ClawRobot, GrabRobot, GetBlockRobot, AdjustBlockRobot {
 	
-	private static boolean grabbedFirstBlock = false;
+	private boolean grabbedFirstBlock = false;
 	
 	public static final class Values{
 		static final int[] armLevels = {0,1,2};
@@ -26,7 +26,7 @@ public class BlockRobot extends CreateRobot implements ArmRobot, ClawRobot, Grab
 	}
 	
 	private Arm arm = new Arm(Values.armLevels){
-		private Servo s1 = new Servo(BlockConstants.CLAW_VERTICAL_PORT_1), s2 = new Servo(BlockConstants.CLAW_VERTICAL_PORT_2);
+		private Servo s1 = new Servo(BlockConstants.ARM_PORT_1), s2 = new Servo(BlockConstants.ARM_PORT_2);
 		@Override
 		public void goToPos(int pos) {
 			s1.setPosition(pos, false);
@@ -71,9 +71,9 @@ public class BlockRobot extends CreateRobot implements ArmRobot, ClawRobot, Grab
 		} else {
 			driveTrain.moveCm(Conversions.inToCm(BlockConstants.CLAW_FREE - BlockConstants.DROP_DIST), BlockConstants.APPROACH_SPEED);
 			claw.open();
-			driveTrain.moveCm(Conversions.inToCm(-4), BlockConstants.APPROACH_SPEED);
+			driveTrain.moveCm(Conversions.inToCm(-(BlockConstants.ARM_BUFFER + 1)), BlockConstants.APPROACH_SPEED);
 			arm.lower();
-			driveTrain.moveCm(Conversions.inToCm(3), BlockConstants.APPROACH_SPEED);
+			driveTrain.moveCm(Conversions.inToCm(BlockConstants.ARM_BUFFER), BlockConstants.APPROACH_SPEED);
 			claw.close();
 		}
 	}
