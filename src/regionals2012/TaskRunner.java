@@ -17,6 +17,7 @@ import utils.tasks.AdjustBlockTask;
 import utils.tasks.ArmTask;
 import utils.tasks.DriveTask;
 import utils.tasks.ETDriveTask;
+import utils.tasks.SlowDriveTask;
 import utils.tasks.GrabTask;
 import utils.tasks.ListTask;
 import utils.tasks.ReleaseTask;
@@ -46,29 +47,30 @@ public class TaskRunner implements Runnable, KelpConstants {
 			// Handle task type
 			if (task instanceof DriveTask) {
 				DriveTask driveTask = (DriveTask) task;
-				
-				if(robot instanceof KelpRobot){
-					robot.getDriveTrain().moveCm(Conversions.inToCm(driveTask.getDistance()) - 5, driveTask.getSpeed());
-					if(driveTask.getDistance() > 0 )
-						robot.getDriveTrain().moveCm(5, driveTask.getSpeed()/2);
-					else if(driveTask.getDistance() < 0)
-						robot.getDriveTrain().moveCm(-5, driveTask.getSpeed()/2);
-				} 
-				else
-					robot.getDriveTrain().moveCm(Conversions.inToCm(driveTask.getDistance()), driveTask.getSpeed());
-			} else if (task instanceof ETDriveTask && robot instanceof ETRobot ){
-				ETDriveTask ETDriveTask = (ETDriveTask) task;
-				ETRobot jRobot = (ETRobot)robot;
-				robot.getDriveTrain().moveAtCmps(ETDriveTask.getSpeed());
-				while(jRobot.getETSensorValue() < ETDriveTask.getETValue()){
-					System.out.println(jRobot.getETSensorValue() + " " + ETDriveTask.getETValue());
+				robot.getDriveTrain().moveCm(Conversions.inToCm(driveTask.getDistance()), driveTask.getSpeed());
+			} else if (task instanceof SlowDriveTask){
+				SlowDriveTask slowDriveTask = (SlowDriveTask) task;
+				if(slowDriveTask.getDistance() > 0){
+					robot.getDriveTrain().moveCm(Conversions.inToCm(slowDriveTask.getDistance() - slowDriveTask.getSlowDistance()), slowDriveTask.getSpeed());
+					robot.getDriveTrain().moveCm(Conversions.inToCm(slowDriveTask.getSlowDistance()), slowDriveTask.getSpeed()/2); 
+				} else if (slowDriveTask.getDistance() < 0){
+					robot.getDriveTrain().moveCm(Conversions.inToCm(slowDriveTask.getDistance() + slowDriveTask.getSlowDistance()), slowDriveTask.getSpeed());
+					robot.getDriveTrain().moveCm(Conversions.inToCm(-slowDriveTask.getSlowDistance()), slowDriveTask.getSpeed()/2);
+				}
+			} else if (task instanceof ETDriveTask && robot instanceof ETRobot){
+				ETDriveTask etDriveTask = (ETDriveTask) task;
+				robot.getDriveTrain().moveAtCmps(etDriveTask.getSpeed());
+				//	ETRobot jRobot = (ETRobot) robot;
+				System.out.println("" + ((ETRobot)robot).getETSensor().getValueHigh() + " " + etDriveTask.getETValue());
+				while(((ETRobot)robot).getETSensor().getValueHigh() < etDriveTask.getETValue()){
+					System.out.println("" + ((ETRobot)robot).getETSensor().getValueHigh() + " " + etDriveTask.getETValue());
 				}
 				robot.getDriveTrain().kill();
 			} else if (task instanceof TurnTask) {
 				TurnTask turnTask = (TurnTask) task;
 				robot.getDriveTrain().rotateDegrees(turnTask.getAngle(), turnTask.getSpeed());
 				System.out.println("Turning " + turnTask.getAngle() + 
-						           "deg at " + turnTask.getSpeed() + " deg/sec");
+						"deg at " + turnTask.getSpeed() + " deg/sec");
 			} else if (task instanceof GrabTask && robot instanceof GrabRobot) {
 				System.out.println("Claw, go!");
 				((GrabRobot)robot).grab();

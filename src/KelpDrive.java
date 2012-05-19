@@ -63,10 +63,12 @@ public class KelpDrive implements KelpConstants {
 				kelpRobot.getDriveTrain().rotateDegrees((distanceToTravel/KelpConstants.ROBOT_TURN_CIRCUMFERENCE)*360,10 );
 				//kelpRobot.getDriveTrain().rotateDegrees(90, degreesPerSecond)
 			} else if (upButton.getValue() == true){
-				double x = Math.random() * 20;
-				System.out.println("Should move " + x + " inches.");
-				kelpRobot.getDriveTrain().moveCm(-Conversions.inToCm(x), 10); 
-			} else {      
+				kelpRobot.getDriveTrain().moveAtCmps(20);
+				while(kelpRobot.getETSensor().getValueHigh() < 950){
+					System.out.println(kelpRobot.getETSensor().getValueHigh() + " " + 950);
+				}
+				kelpRobot.getDriveTrain().kill();
+			} else {              
 				Motor.allOff();
 			} 
 			//System.out.println("LOOPBACK! ServoR: " + servoR.getPosition() + "ServoL: " + servoL.getPosition());
