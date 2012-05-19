@@ -6,13 +6,17 @@ import utils.pathfinding.Direction;
 
 public class TurnTask extends Task {
 	
-	private double angle; //in degrees
-	private double speed; //in degrees per second
-
+	private double angle;
+	private double speed;
+	
 	private static double default_speed = Double.NaN;
 
 	public static TurnTask turnCW() throws TaskException {
 		return new TurnTask( 90, default_speed);
+	}
+	
+	public static TurnTask turnAround() throws TaskException {
+		return new TurnTask( 180, default_speed);
 	}
 
 	public static TurnTask turnCCW() throws TaskException {
@@ -25,6 +29,10 @@ public class TurnTask extends Task {
 
 	public static TurnTask turnCCW(double speed) throws TaskException {
 		return new TurnTask(-90, speed);
+	}
+	
+	public static TurnTask turnAround(double speed) throws TaskException {
+		return new TurnTask( 180, speed);
 	}
 
 	public TurnTask (double angle, double speed) throws TaskException {
@@ -43,8 +51,8 @@ public class TurnTask extends Task {
 	}
 	
 	public TurnTask (double angle) throws TaskException {
-		this(angle, default_speed);
-		if(default_speed == Double.NaN) throw new TaskException("You must set a default speed.");
+		this(angle , default_speed);
+		if(default_speed == Double.NaN) throw new TaskException("Default_speed must be set before it is used");
 	}
 
 	public double getAngle() {
@@ -54,5 +62,4 @@ public class TurnTask extends Task {
 	public double getSpeed() {
 		return speed;
 	}
-
 }

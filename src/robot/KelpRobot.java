@@ -4,6 +4,7 @@ package robot;
 
 import cbc.motors.Motor;
 import cbc.motors.Servo;
+import cbc.movement.efficiency.regression.LSRLEfficiencyCalibrator;
 import cbc.movement.plugins.MovementPlugin;
 import cbc.movement.plugins.motor.Wheel;
 import cbc.sensors.analog.Analog;
@@ -14,11 +15,11 @@ import robot.extentions.GrabRobot;
 import utils.KelpConstants;
 
 public class KelpRobot extends LegoRobot implements ArmRobot, ClawRobot, GrabRobot, KelpConstants {
-	
+
 
 
 	public KelpRobot() {
-		super(new Wheel(WHEEL_LEFT_PORT, WHEEL_CIRCUMFERENCE), new Wheel(WHEEL_RIGHT_PORT, WHEEL_CIRCUMFERENCE), WHEEL_DISTANCE);
+		super(new Wheel(WHEEL_LEFT_PORT, WHEEL_CIRCUMFERENCE, 1.13261), new Wheel(WHEEL_RIGHT_PORT, WHEEL_CIRCUMFERENCE, 1.13261), WHEEL_DISTANCE);
 	}
 
 	public KelpRobot(MovementPlugin plugin) {
@@ -31,22 +32,27 @@ public class KelpRobot extends LegoRobot implements ArmRobot, ClawRobot, GrabRob
 	Motor armM = new Motor(ARM_MOTOR_PORT);
 	Touch armTouch = new Touch(ARM_TOUCH_PORT);
 	static Analog ETSensor = new Analog(ET_PORT);
-	static int ETValue = ETSensor.getValueHigh();
-	
+	static int ETValue;
+	boolean doingSecondKelp = false;
+
 	public static final class Values{
 		static final int[] armLevels = {0,1};
+
+		public Values() {
+			super();
+			// TODO Auto-generated constructor stub
+		}
 	}
 
 
 
 
 	Arm arm = new Arm(Values.armLevels){
-		@Override
 		public void goToPos(int pos) {
 			if(pos == 0){
 				while(servoR.getPosition() > 348){
-					servoR.setPosition(servoR.getPosition() - 30);
-					servoL.setPosition(servoL.getPosition() + 30);
+					servoR.setPosition(servoR.getPosition() - 50);
+					servoL.setPosition(servoL.getPosition() + 50);
 					System.out.println("ServoR: " + servoR.getPosition() + "ServoL: " + servoL.getPosition());
 				}
 				servoR.setPosition(348);
@@ -54,13 +60,13 @@ public class KelpRobot extends LegoRobot implements ArmRobot, ClawRobot, GrabRob
 			}
 			else if (pos == 1){
 				while(servoR.getPosition() > 1024 + 30){
-					servoR.setPosition(servoR.getPosition() - 30);
-					servoL.setPosition(servoL.getPosition() + 30);
+					servoR.setPosition(servoR.getPosition() - 50);
+					servoL.setPosition(servoL.getPosition() + 50);
 					System.out.println("POS 1 ServoR: " + servoR.getPosition() + "ServoL: " + servoL.getPosition());
 				}
 				while(servoR.getPosition() < 1024 - 30){
-					servoR.setPosition(servoR.getPosition() + 30);
-					servoL.setPosition(servoL.getPosition() - 30);
+					servoR.setPosition(servoR.getPosition() + 50);
+					servoL.setPosition(servoL.getPosition() - 50);
 					System.out.println("POS 1 ServoR: " + servoR.getPosition() + "ServoL: " + servoL.getPosition());
 				}
 				servoR.setPosition(1024);
@@ -68,8 +74,8 @@ public class KelpRobot extends LegoRobot implements ArmRobot, ClawRobot, GrabRob
 			}
 			else if (pos == 2){
 				while(servoL.getPosition() > 48){
-					servoR.setPosition(servoR.getPosition() + 30);
-					servoL.setPosition(servoL.getPosition() - 30);
+					servoR.setPosition(servoR.getPosition() + 50);
+					servoL.setPosition(servoL.getPosition() - 50);
 					System.out.println("ServoR: " + servoR.getPosition() + "ServoL: " + servoL.getPosition());
 				}
 				servoR.setPosition(2000);
@@ -78,17 +84,15 @@ public class KelpRobot extends LegoRobot implements ArmRobot, ClawRobot, GrabRob
 		}
 	};
 
-	@Override
 	public Arm getArm() {
 		return arm;
 	}
 
 
 	Claw claw = new Claw(){
-		@Override
 		public void open() {
 			try {
-				armM.moveAtVelocity(500);
+				armM.moveAtVelocity(1000);
 				while(armM.getPosition() < 2500){}
 				armM.off();
 				Thread.sleep(100);
@@ -98,10 +102,9 @@ public class KelpRobot extends LegoRobot implements ArmRobot, ClawRobot, GrabRob
 			}
 			// Lower kelp arm
 		}
-		@Override
 		public void close() {
 			try {
-				armM.moveAtVelocity(-500);
+				armM.moveAtVelocity(-1000);
 				/*while(armTouch.getValue() == false){}
 				armM.off();*/
 				while(armM.getPosition() > 0){}
@@ -114,19 +117,37 @@ public class KelpRobot extends LegoRobot implements ArmRobot, ClawRobot, GrabRob
 			}
 			// Raise kelp arm
 		}
-		@Override
 		public void halfOpen() {
 			try {
 				/*while(armTouch.getValue() == false){}
 				armM.off();*/
 				if(armM.getPosition() > 1450){
-					armM.moveAtVelocity(-500);
+					armM.moveAtVelocity(-1000);
 				}
 				if(armM.getPosition() < 1350){
-					armM.moveAtVelocity(500);
+					armM.moveAtVelocity(1000);
 				}
-				while(armM.getPosition() > 1450 || armM.getPosition() < 1350 ){}
+				while(armM.getPosition() > 1450 || armM.getPosition() < 1350){}
 				armM.off();
+				//armM.off();
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		public void quarterOpen() {
+			try {
+				/*while(armTouch.getValue() == false){}
+				armM.off();*/
+				if(armM.getPosition() > 535 + 50){
+					armM.moveAtVelocity(-1000);
+				}
+				if(armM.getPosition() < 535 - 50){
+					armM.moveAtVelocity(1000);
+				}
+				while(armM.getPosition() > 535 + 50 || armM.getPosition() < 535 - 50){}
+				armM.off();
+				//armM.off();
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
@@ -134,54 +155,74 @@ public class KelpRobot extends LegoRobot implements ArmRobot, ClawRobot, GrabRob
 		}
 	};
 
-	@Override
 	public Claw getClaw() {
 		return claw;
 	}
 
-	@Override
-	public void grab() { //should move forward while raising claw while spinning arm
+	public void grab() {
 		getClaw().close();
 		getArm().goToPos(2);
-		while(getETSensor().getValueHigh() < 410){
-			getDriveTrain().moveAtCmps(5);
+		while(getETSensor().getValueHigh() < 300){//370){//410){
+			getDriveTrain().moveAtCmps(20);//5);
+		}
+		while(getETSensor().getValueHigh() < 410){//370){//410){
+			getDriveTrain().moveAtCmps(5);//5);
 		}
 		getDriveTrain().kill();
-		getDriveTrain().moveCm(-10, 4);
-		getClaw().halfOpen();
+		getDriveTrain().moveCm(-12, 4); // -10 //-13
 		getArm().goToPos(0);
-		getDriveTrain().moveCm(6.95, 4);
-	//	if(getDriveTrain().)
+		getClaw().halfOpen(); 
+		getDriveTrain().moveCm(7.5, 4); //6.95
 		armM.moveAtVelocity(-500);
-		getDriveTrain().moveCm(5.5, 3);
+		getDriveTrain().moveCm(5.25, 3);
 		while(armM.getPosition() > 0){}
 		armM.clearPositionCounter();
 		armM.off();
-		getDriveTrain().moveAtCmps(-3); 
+		getDriveTrain().moveAtCmps(-3); //-5 //-3
 		getArm().goToPos(1);
 		getDriveTrain().kill();
 		getArm().goToPos(2);
 	}
 
-	@Override
 	public void release(){
-		while(getETSensor().getValueHigh() > 450){
-			super.getDriveTrain().moveAtCmps(getETSensor().getValueHigh()-400);
-		}
-		super.getDriveTrain().kill();
-		arm.goToPos(1);
+		/*getDriveTrain().moveAtCmps(4);
+		while(getETSensor().getValueHigh() > 410){}
+		getDriveTrain().kill();*/
+		arm.goToPos(2);
 		claw.open();
-		super.getDriveTrain().moveAtCmps(-100);
-		claw.halfOpen();
-		arm.goToPos(0);
-		super.getDriveTrain().kill();
+		//	getDriveTrain().moveAtCmps(-100);
+
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		if(doingSecondKelp == false){
+			claw.close();
+			arm.goToPos(2);
+		} else if (doingSecondKelp == true){
+			claw.halfOpen();
+			arm.goToPos(0);
+		}
+
+		doingSecondKelp = true;
+
+		//getDriveTrain().kill();
 	}
+
 
 	public Analog getETSensor() {
 		return ETSensor;
 	}
-	
-	public static int getETSensorValue() {
-		return ETValue;
+
+	public int getETSensorValue() {
+		return ETValue = ETSensor.getValueHigh();
 	}
+
+	/*
+	public static double calibratedValue(LSRLEfficiencyCalibrator calibrator, double value){
+		System.out.println (calibrator.getSlope() + " " + calibrator.getIntercept());
+		return (calibrator.getSlope() * value) + calibrator.getIntercept();
+	}*/
 }
