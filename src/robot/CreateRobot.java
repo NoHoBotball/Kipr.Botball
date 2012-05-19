@@ -8,7 +8,7 @@ import cbc.movement.plugins.create.CreateMovementPlugin;
 
 public abstract class CreateRobot extends Robot {
 
-	CreateRobot() throws CreateConnectException {
+	protected CreateRobot() throws CreateConnectException {
 		super(new DriveTrain(new CreateMovementPlugin(new Create())) {
 			@Override
 			protected void moveWheelCm(double leftCm, double rightCm, //positions
@@ -22,7 +22,7 @@ public abstract class CreateRobot extends Robot {
 			}
 		);
 	}
-	CreateRobot(double leftEfficiency, double rightEfficiency) throws CreateConnectException {
+	protected CreateRobot(double leftEfficiency, double rightEfficiency) throws CreateConnectException {
 		super(new DriveTrain(new CreateMovementPlugin(new Create(),leftEfficiency, rightEfficiency)){
 			@Override
 			protected void moveWheelCm(double leftCm, double rightCm, //positions
@@ -35,11 +35,11 @@ public abstract class CreateRobot extends Robot {
 			}
 		);
 	}
-	CreateRobot(IEfficiencyCalibrator leftEfficiency, IEfficiencyCalibrator rightEfficiency) throws CreateConnectException {
+	protected CreateRobot(IEfficiencyCalibrator leftEfficiency, IEfficiencyCalibrator rightEfficiency) throws CreateConnectException {
 		this(leftEfficiency, rightEfficiency, false);
 	}
 	
-	CreateRobot(IEfficiencyCalibrator leftEfficiency, IEfficiencyCalibrator rightEfficiency, boolean fullMode) throws CreateConnectException {
+	protected CreateRobot(IEfficiencyCalibrator leftEfficiency, IEfficiencyCalibrator rightEfficiency, boolean fullMode) throws CreateConnectException {
 		super(new DriveTrain(new CreateMovementPlugin(new Create(), leftEfficiency, rightEfficiency, fullMode)){
 			@Override
 			protected void moveWheelCm(double leftCm, double rightCm, //positions

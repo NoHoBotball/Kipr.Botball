@@ -46,16 +46,7 @@ public class TaskRunner implements Runnable, KelpConstants {
 			// Handle task type
 			if (task instanceof DriveTask) {
 				DriveTask driveTask = (DriveTask) task;
-				
-				if(robot instanceof KelpRobot){
-					robot.getDriveTrain().moveCm(Conversions.inToCm(driveTask.getDistance()) - 5, driveTask.getSpeed());
-					if(driveTask.getDistance() > 0 )
-						robot.getDriveTrain().moveCm(5, driveTask.getSpeed()/2);
-					else if(driveTask.getDistance() < 0)
-						robot.getDriveTrain().moveCm(-5, driveTask.getSpeed()/2);
-				} 
-				else
-					robot.getDriveTrain().moveCm(Conversions.inToCm(driveTask.getDistance()), driveTask.getSpeed());
+				robot.getDriveTrain().moveCm(Conversions.inToCm(driveTask.getDistance()), driveTask.getSpeed());
 			} else if (task instanceof ETDriveTask && robot instanceof ETRobot ){
 				ETDriveTask ETDriveTask = (ETDriveTask) task;
 				ETRobot jRobot = (ETRobot)robot;
