@@ -18,11 +18,11 @@ public class KelpMain {
  
 		BlackButton blackButton = new BlackButton(); 
 		KelpRobot robot = new KelpRobot();
-
+ 
 		robot.getArm().goToPos(2); 
 		     
 		while(!blackButton.getValue()){}
-		  
+		   
 		robot.getDriveTrain().moveCm(25,4);
 		robot.getDriveTrain().moveCm(-13, 4);
 		KelpRobot.getETSensor().setFloating(true);
@@ -42,8 +42,8 @@ public class KelpMain {
 			TaskRunner returnFirstKelpChain = new TaskRunner(robot, KelpTaskChain.returnKelpChain(1));
 			returnFirstKelpChain.run();
 
-
-
+   
+ 
 
 			TaskRunner toSecondKelpChain = new TaskRunner(robot, KelpTaskChain.moveToKelpChain(2));
 			toSecondKelpChain.run();

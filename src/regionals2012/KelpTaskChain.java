@@ -40,20 +40,21 @@ public class KelpTaskChain implements KelpConstants {
 			tasks.add(new ArmTask());
 			tasks.add(new DriveTask(-6, STANDARD_KELP_SPEED)); //8
 			tasks.add(new ArmTask());
-			tasks.add(new DriveTask(16, STANDARD_KELP_SPEED));
+			tasks.add(new DriveTask(20, STANDARD_KELP_SPEED));
 			tasks.add(TurnTask.turnCCW());
 			//tasks.add(new TurnTask(225, 18, -Conversions.inToCm(6)));
 			tasks.add(new ETDriveTask(STANDARD_KELP_SPEED, 950));
 			tasks.add(new DriveTask(4,4));
-			tasks.add(new WaitTask(3000));
+			//tasks.add(new WaitTask(3000));
 			tasks.add(new DriveTask(-14, STANDARD_KELP_SPEED/2));
 			//tasks.add(new ETDriveTask(-STANDARD_KELP_SPEED, 400));
 			//tasks.add(new DriveTask(-20, STANDARD_KELP_SPEED));
-			tasks.add(TurnTask.turnCW());
+			//tasks.add(TurnTask.turnCW());
+			tasks.add(new TurnTask(100)); 
 		} else if (firstOrSecond == 2){
 			tasks.add(new DriveTask(-5, STANDARD_KELP_SPEED));
 			tasks.add(TurnTask.turnCCW());
-			tasks.add(new TurnTask(.5,-STANDARD_KELP_SPEED));
+			tasks.add(new TurnTask(2,-STANDARD_KELP_SPEED)); //.5
 			tasks.add(new ETDriveTask(75, 950));
 			tasks.add(new DriveTask(4,4));
 			/*tasks.add(new DriveTask(0,0));
@@ -87,15 +88,18 @@ public class KelpTaskChain implements KelpConstants {
 		tasks.add(new DriveTask(-8, STANDARD_KELP_SPEED));
 		if(firstOrSecond == 1){
 			tasks.add(TurnTask.turnCCW());
-			tasks.add(new TurnTask(-70, -STANDARD_KELP_SPEED));
+			tasks.add(new TurnTask(-45, -STANDARD_KELP_SPEED));
+			tasks.add(new ETDriveTask(STANDARD_KELP_SPEED, 700));
+			tasks.add(new TurnTask(-45, -STANDARD_KELP_SPEED));
 			tasks.add(new ETDriveTask(STANDARD_KELP_SPEED, 900));
 			//tasks.add(new TurnTask(20, STANDARD_KELP_SPEED));
 			//tasks.add(new ETDriveTask(STANDARD_KELP_SPEED, 960));
 			tasks.add(new DriveTask(4,4));
 		}
 		if(firstOrSecond == 2){
+			tasks.add(new DriveTask(5, STANDARD_KELP_SPEED));
 			tasks.add(TurnTask.turnCCW());
-			tasks.add(new TurnTask(3,-STANDARD_KELP_SPEED));
+			tasks.add(new TurnTask(5,-STANDARD_KELP_SPEED)); //2
 			tasks.add(new ETDriveTask(75, 900));
 			tasks.add(new DriveTask(-4, STANDARD_KELP_SPEED));
 			tasks.add(TurnTask.turnCCW());
@@ -105,7 +109,7 @@ public class KelpTaskChain implements KelpConstants {
 		
 
 		tasks.add(ReleaseTask.getTask());
-
+		
 		return tasks;
 	}
 

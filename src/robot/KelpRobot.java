@@ -172,7 +172,7 @@ public class KelpRobot extends LegoRobot implements ArmRobot, ClawRobot, GrabRob
 		getDriveTrain().moveCm(-12, 4); // -10 //-13
 		getArm().goToPos(0);
 		getClaw().halfOpen(); 
-		getDriveTrain().moveCm(7.5, 4); //6.95
+		getDriveTrain().moveCm(11, 4); //6.95  //7.5 //9
 		armM.moveAtVelocity(-500);
 		getDriveTrain().moveCm(5.25, 3);
 		while(armM.getPosition() > 0){}
