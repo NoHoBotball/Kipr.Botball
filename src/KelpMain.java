@@ -2,36 +2,37 @@
 import cbc.sensors.buttons.BlackButton;
 
 import regionals2012.KelpTaskChain;
+import regionals2012.KelpTaskChainOld;
 import regionals2012.TaskRunner;
 import robot.KelpRobot;
 import robot.extentions.ETRobot;
 import robot.extentions.GrabRobot;
 
 import utils.tasks.TaskException;
-
+   
 
 public class KelpMain {  
-
-	/** 
-	 * @param args      
+           
+	/**  
+	 * @param args       
 	 * @throws TaskException    
 	 */        
 	public static void main(String[] args) throws TaskException {
-
+  
 		BlackButton blackButton = new BlackButton(); 
 		KelpRobot robot = new KelpRobot();
-
+   
 		robot.getArm().goToPos(2); 
     
-		while(!blackButton.getValue()){}
- 
+	 	while(!blackButton.getValue()){}
+   
 		robot.getDriveTrain().moveCm(25,4);
 		robot.getDriveTrain().moveCm(-13, 4);
 		robot.getETSensor().setFloating(true);
 		while(!blackButton.getValue()){}
 		
 		System.out.println("Starting Tasks."); 
- 
+    
 		try {
 
 			TaskRunner toFirstKelpChain = new TaskRunner(robot, KelpTaskChain.moveToKelpChain(1));

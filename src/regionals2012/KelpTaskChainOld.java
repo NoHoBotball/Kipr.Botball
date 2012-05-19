@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import utils.tasks.ArmTask;
+import utils.tasks.DriveTask;
 import utils.tasks.SlowDriveTask;
 import utils.tasks.ETDriveTask;
 import utils.tasks.GrabTask;
 import utils.tasks.ReleaseTask;
-import utils.tasks.SlowDriveTask;
 import utils.tasks.Task;
 import utils.tasks.TaskException;
 import utils.tasks.TurnTask;
@@ -26,7 +26,7 @@ import utils.pathfinding.Direction;
  *
  */
 
-public class KelpTaskChain implements KelpConstants {
+public class KelpTaskChainOld implements KelpConstants {
 
 	public static List<Task> moveToKelpChain(int firstOrSecond) throws TaskException{
 		List<Task> tasks = new ArrayList<Task>();
@@ -49,6 +49,7 @@ public class KelpTaskChain implements KelpConstants {
 			tasks.add(new SlowDriveTask(-5, STANDARD_KELP_SPEED));
 			tasks.add(TurnTask.turnCCW());
 			tasks.add(new TurnTask(2,-STANDARD_KELP_SPEED)); //.5
+			tasks.add(new DriveTask(65, STANDARD_KELP_SPEED));
 			tasks.add(new ETDriveTask(75, 950));
 			tasks.add(new SlowDriveTask(4,4));
 			tasks.add(new SlowDriveTask(-10, STANDARD_KELP_SPEED));
@@ -92,6 +93,7 @@ public class KelpTaskChain implements KelpConstants {
 			tasks.add(new SlowDriveTask(-3, STANDARD_KELP_SPEED));
 			tasks.add(TurnTask.turnCCW());
 			tasks.add(new TurnTask(7,-STANDARD_KELP_SPEED)); //2
+			tasks.add(new DriveTask(65, STANDARD_KELP_SPEED));
 			tasks.add(new ETDriveTask(75, 900));
 			tasks.add(new SlowDriveTask(-4, STANDARD_KELP_SPEED));
 			tasks.add(TurnTask.turnCCW());

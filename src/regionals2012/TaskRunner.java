@@ -2,7 +2,6 @@ package regionals2012;
 
 import java.util.List;
 
-import robot.KelpRobot;
 import robot.Robot;
 import robot.extentions.AdjustBlockRobot;
 import robot.extentions.ArmRobot;
@@ -11,24 +10,25 @@ import robot.extentions.ETRobot;
 import robot.extentions.GetBlockRobot;
 import robot.extentions.GrabRobot;
 import robot.extentions.StackBlockRobot;
+
 import utils.Conversions;
 import utils.KelpConstants;
 import utils.tasks.AdjustBlockTask;
+import utils.tasks.ArcTurnTask;
 import utils.tasks.ArmTask;
 import utils.tasks.DriveTask;
 import utils.tasks.ETDriveTask;
-import utils.tasks.SlowDriveTask;
 import utils.tasks.GrabTask;
 import utils.tasks.ListTask;
 import utils.tasks.ReleaseTask;
 import utils.tasks.SeeBlockTask;
+import utils.tasks.SlowDriveTask;
 import utils.tasks.StackBlockTask;
 import utils.tasks.Task;
 import utils.tasks.TurnTask;
 import utils.tasks.WaitTask;
-import utils.Conversions;
-import utils.KelpConstants;
-import utils.vision.Block;
+import utils.vision.*;
+
 
 public class TaskRunner implements Runnable, KelpConstants {
 
@@ -50,18 +50,18 @@ public class TaskRunner implements Runnable, KelpConstants {
 				robot.getDriveTrain().moveCm(Conversions.inToCm(driveTask.getDistance()), driveTask.getSpeed());
 			} else if (task instanceof SlowDriveTask){
 				SlowDriveTask slowDriveTask = (SlowDriveTask) task;
-				if(slowDriveTask.getDistance() > 0){
+				if(slowDriveTask.getDistance() > slowDriveTask.getSlowDistance()){
 					robot.getDriveTrain().moveCm(Conversions.inToCm(slowDriveTask.getDistance() - slowDriveTask.getSlowDistance()), slowDriveTask.getSpeed());
 					robot.getDriveTrain().moveCm(Conversions.inToCm(slowDriveTask.getSlowDistance()), slowDriveTask.getSpeed()/2); 
-				} else if (slowDriveTask.getDistance() < 0){
+				} else if (slowDriveTask.getDistance() < -slowDriveTask.getSlowDistance()){
 					robot.getDriveTrain().moveCm(Conversions.inToCm(slowDriveTask.getDistance() + slowDriveTask.getSlowDistance()), slowDriveTask.getSpeed());
 					robot.getDriveTrain().moveCm(Conversions.inToCm(-slowDriveTask.getSlowDistance()), slowDriveTask.getSpeed()/2);
+				} else {
+					robot.getDriveTrain().moveCm(Conversions.inToCm(slowDriveTask.getDistance()), slowDriveTask.getSpeed());
 				}
 			} else if (task instanceof ETDriveTask && robot instanceof ETRobot){
 				ETDriveTask etDriveTask = (ETDriveTask) task;
 				robot.getDriveTrain().moveAtCmps(etDriveTask.getSpeed());
-				//	ETRobot jRobot = (ETRobot) robot;
-				System.out.println("" + ((ETRobot)robot).getETSensor().getValueHigh() + " " + etDriveTask.getETValue());
 				while(((ETRobot)robot).getETSensor().getValueHigh() < etDriveTask.getETValue()){
 					System.out.println("" + ((ETRobot)robot).getETSensor().getValueHigh() + " " + etDriveTask.getETValue());
 				}
@@ -71,6 +71,9 @@ public class TaskRunner implements Runnable, KelpConstants {
 				robot.getDriveTrain().rotateDegrees(turnTask.getAngle(), turnTask.getSpeed());
 				System.out.println("Turning " + turnTask.getAngle() + 
 						"deg at " + turnTask.getSpeed() + " deg/sec");
+			} else if (task instanceof ArcTurnTask){
+				ArcTurnTask arcTurnTask = (ArcTurnTask) task; 
+				robot.getDriveTrain().moveCurveDegrees(arcTurnTask.getAngle(), arcTurnTask.getRadius(), arcTurnTask.getSpeed());
 			} else if (task instanceof GrabTask && robot instanceof GrabRobot) {
 				System.out.println("Claw, go!");
 				((GrabRobot)robot).grab();

@@ -38,8 +38,6 @@ public class TurnTask extends Task {
 	public TurnTask (double angle, double speed) throws TaskException {
 		this.angle = angle;
 		this.speed = default_speed = speed;
-		while(angle > 180.) angle -= 360.;
-		while(angle <-180.) angle += 360.;
 	}
 	
 	public TurnTask (Direction from, Direction to, double speed) throws TaskException {

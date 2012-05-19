@@ -48,26 +48,32 @@ public class KelpDrive implements KelpConstants {
  
 		while(blackButton.getValue() == false){   
 			if (rightButton.getValue() == true){
-				double x = Math.random() * 20;
+				/*double x = Math.random() * 20;
 				System.out.println("Should move " + x + " inches.");
-				kelpRobot.getDriveTrain().moveCm(Conversions.inToCm(x), 10);      //Conversions.inToCm(x)/1.13, 10);
+				kelpRobot.getDriveTrain().moveCm(Conversions.inToCm(x), 10);  */    //Conversions.inToCm(x)/1.13, 10);
 				//kelpRobot.getDriveTrain().moveCm(KelpRobot.calibratedValue(KelpConstants.calibrator,Conversions.inToCm(x)), 10);
+				kelpRobot.getDriveTrain().moveCurveDegrees(90,10, 5);
 			} else if (aButton.getValue() == true){   
-				kelpRobot.getClaw().open();          
+			//	kelpRobot.getClaw().open();      
+				kelpRobot.getDriveTrain().moveCurveDegrees(-90,10, 5);
 			} else if (bButton.getValue() == true){  
-				kelpRobot.getClaw().close();  
+				//kelpRobot.getClaw().close();  
+				kelpRobot.getDriveTrain().moveCurveDegrees(-90,-10, 5);
 			} else if (leftButton.getValue() == true){ 
-				kelpRobot.grab();      
+				//kelpRobot.grab();      
+				kelpRobot.getDriveTrain().moveCurveDegrees(-90,-10, -5);
 			} else if (downButton.getValue() == true){ 
-				double distanceToTravel =  (KelpConstants.ROBOT_TURN_CIRCUMFERENCE*(90/360))/1.3;
-				kelpRobot.getDriveTrain().rotateDegrees((distanceToTravel/KelpConstants.ROBOT_TURN_CIRCUMFERENCE)*360,10 );
+				//double distanceToTravel =  (KelpConstants.ROBOT_TURN_CIRCUMFERENCE*(90/360))/1.3;
+				//kelpRobot.getDriveTrain().rotateDegrees((distanceToTravel/KelpConstants.ROBOT_TURN_CIRCUMFERENCE)*360,10 );
 				//kelpRobot.getDriveTrain().rotateDegrees(90, degreesPerSecond)
+				kelpRobot.getDriveTrain().moveCurveDegrees(90,10, -5);
 			} else if (upButton.getValue() == true){
-				kelpRobot.getDriveTrain().moveAtCmps(20);
-				while(kelpRobot.getETSensor().getValueHigh() < 950){
-					System.out.println(kelpRobot.getETSensor().getValueHigh() + " " + 950);
-				}
-				kelpRobot.getDriveTrain().kill();
+				kelpRobot.getDriveTrain().moveCurveDegrees(-90,10, -5);
+				//kelpRobot.getDriveTrain().moveAtCmps(20);
+				//while(kelpRobot.getETSensor().getValueHigh() < 950){
+					//System.out.println(kelpRobot.getETSensor().getValueHigh() + " " + 950);
+				//}
+				//kelpRobot.getDriveTrain().kill();
 			} else {              
 				Motor.allOff();
 			} 
