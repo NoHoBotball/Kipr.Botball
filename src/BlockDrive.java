@@ -40,21 +40,21 @@ public class BlockDrive implements BlockConstants {
 				heading = Direction.NORTH;
 				tasks = new ArrayList<Task>();
 				if (new DownButton().isPushed()){
-					turn(Direction.SOUTH,15);
+					robot.getArm().lower();
 				} else if (new UpButton().isPushed()){
-					turn(Direction.NORTH);
+					robot.getArm().raise();
 				} else if(new LeftButton().isPushed()){
 					turn(90,15);
 				} else if (new RightButton().isPushed()){
 					turn(-90);
 				} else if (new AButton().isPushed()){
-					dt.rotateDegrees(-90, 15); 
+					robot.grab();
 				} else if (new BButton().isPushed()){
-					dt.rotateDegrees(90, 15); 
+					robot.release();
 				} else {
-					Servo.allOff();
-					Motor.allOff();
-					dt.stop();
+					//Servo.allOff();
+					//Motor.allOff();
+					//dt.stop();
 				}
 				new TaskRunner(robot, tasks).run();
 			}
@@ -63,6 +63,8 @@ public class BlockDrive implements BlockConstants {
 		} catch (TaskException e) {
 			e.printStackTrace();
 		}
+		Servo.allOff();
+		Motor.allOff();
 	}
 	
 	private static void add(Task task) {

@@ -43,7 +43,7 @@ public interface BlockConstants extends GameConstants{
 	
 	/* ------------- Ports ------------- */
 	
-	public static final int ARM_PORT_1 = 0, ARM_PORT_2 = 1; // TODO Set to correct values
-	public static final int CLAW_CONTROL_PORT = 2; // TODO Set to correct value
+	public static final int ARM_PORT_1 = 0, ARM_PORT_2 = 2;
+	public static final int CLAW_CONTROL_PORT = 1;
 	
 }
