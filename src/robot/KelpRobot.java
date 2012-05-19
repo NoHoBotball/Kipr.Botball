@@ -212,11 +212,11 @@ public class KelpRobot extends LegoRobot implements ArmRobot, ClawRobot, GrabRob
 	}
 
 
-	public static Analog getETSensor() {
+	public Analog getETSensor() {
 		return ETSensor;
 	}
 
-	public static int getETSensorValue() {
+	public int getETSensorValue() {
 		return ETValue = ETSensor.getValueHigh();
 	}
 

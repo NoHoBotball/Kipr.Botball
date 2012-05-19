@@ -1,59 +1,58 @@
 package utils.tasks;
 
+import utils.pathfinding.Direction;
+
 
 
 public class TurnTask extends Task {
 	
 	private double angle;
 	private double speed;
-	private double radius;
-	private boolean isArcTurn;
+	
+	private static double default_speed = Double.NaN;
 
-	private static double default_speed;
-
-	public static TurnTask turnCW() {
+	public static TurnTask turnCW() throws TaskException {
 		return new TurnTask( 90, default_speed);
 	}
 	
-	public static TurnTask turnAround() {
+	public static TurnTask turnAround() throws TaskException {
 		return new TurnTask( 180, default_speed);
 	}
 
-	public static TurnTask turnCCW() {
+	public static TurnTask turnCCW() throws TaskException {
 		return new TurnTask(-90, default_speed);
 	}
 	
-	public static TurnTask turnCW(double speed) {
+	public static TurnTask turnCW(double speed) throws TaskException {
 		return new TurnTask( 90, speed);
 	}
 
-	public static TurnTask turnCCW(double speed) {
+	public static TurnTask turnCCW(double speed) throws TaskException {
 		return new TurnTask(-90, speed);
 	}
 	
-	public static TurnTask turnAround(double speed) {
+	public static TurnTask turnAround(double speed) throws TaskException {
 		return new TurnTask( 180, speed);
 	}
 
-	public TurnTask (double angle, double speed) {
+	public TurnTask (double angle, double speed) throws TaskException {
 		this.angle = angle;
-		this.speed = speed;
-		this.isArcTurn = false;
-		default_speed = speed;
+		this.speed = default_speed = speed;
+		while(angle > 180.) angle -= 360.;
+		while(angle <-180.) angle += 360.;
 	}
 	
-	public TurnTask (double angle) {
-		this.angle = angle;
-		this.isArcTurn = false;
-		this.speed = default_speed;
+	public TurnTask (Direction from, Direction to, double speed) throws TaskException {
+		this(from.degreesTo(to), speed);
 	}
 	
-	public TurnTask (double angle, double speed, double radius){
-		this.angle = angle;
-		this.speed = speed;
-		this.radius = radius;
-		this.speed = default_speed;
-		this.isArcTurn = true;
+	public TurnTask (Direction from, Direction to) throws TaskException {
+		this(from.degreesTo(to));
+	}
+	
+	public TurnTask (double angle) throws TaskException {
+		this(angle , default_speed);
+		if(default_speed == Double.NaN) throw new TaskException("Default_speed must be set before it is used");
 	}
 
 	public double getAngle() {
@@ -62,13 +61,5 @@ public class TurnTask extends Task {
 
 	public double getSpeed() {
 		return speed;
-	}
-	
-	public double getRadius() {
-		return radius;
-	}
-	
-	public boolean isArcTurn(){
-		return isArcTurn;
 	}
 }

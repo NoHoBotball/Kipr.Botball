@@ -76,6 +76,18 @@ public enum Block {
 	}
 	
 	/**
+	 * Gets the blockOrder array.
+	 * 
+	 * Block 0 is the block near the fence, 1 is the corner block, 2 is the block near the board edge.
+	 * 
+	 * @param index block index
+	 * @return block color
+	 */
+	public static Block[] getBlocks() {
+		return blockOrder;
+	}
+	
+	/**
 	 * Sets the color of a block, specified by its location.
 	 * 
 	 * Block 0 is the block near the fence, 1 is the corner block, 2 is the block near the board edge.
@@ -101,7 +113,7 @@ public enum Block {
 	 * 
 	 * @return block color
 	 */
-	public static Block getBlock(){
+	public static Block seeBlock(){
 		Block block;
 		
 		Blob red = new Blob(Block.RED.getChannel(), 0);

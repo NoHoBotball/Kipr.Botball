@@ -26,8 +26,6 @@ import utils.pathfinding.Direction;
  */
 
 public class KelpTaskChain implements KelpConstants {
-	// Store robot state as the chain builds
-
 
 	public static List<Task> moveToKelpChain(int firstOrSecond) throws TaskException{
 		List<Task> tasks = new ArrayList<Task>();

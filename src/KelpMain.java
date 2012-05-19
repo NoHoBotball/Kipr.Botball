@@ -25,7 +25,7 @@ public class KelpMain {
 		   
 		robot.getDriveTrain().moveCm(25,4);
 		robot.getDriveTrain().moveCm(-13, 4);
-		KelpRobot.getETSensor().setFloating(true);
+		robot.getETSensor().setFloating(true);
 		
 		while(!blackButton.getValue()){}
 

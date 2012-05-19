@@ -5,7 +5,8 @@ public enum Location {
 	BLOCK_FENCE,
 	BLOCK_CORNER,
 	BLOCK_SIDE,
-	GATHER_START,
+	STACK,
+	CENTER,
 	GAME_START,
 	//KelpRobot
 	FIRST_KELP,

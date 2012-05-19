@@ -3,17 +3,13 @@ package utils.tasks;
 import utils.pathfinding.Location;
 import utils.vision.Block;
 
-public class GetBlockTask extends Task{
+public class SeeBlockTask extends Task{
 	private Location location;
 	
-	public GetBlockTask(Location location) {
-		for(Location testLocation : Location.getBlockLocations()){
-			if(location == testLocation){
-				this.location = testLocation;
-				break;
-			}
-		}
+	public SeeBlockTask(Location location) {
+		this.location = location;
 	}
+
 	/**
 	 * 
 	 * @return The location that the robot was in when this task was queued.
@@ -23,6 +19,6 @@ public class GetBlockTask extends Task{
 	}
 	
 	public Block getBlock() {
-		return 	Block.getBlock();
+		return 	Block.seeBlock();
 	}
 }
