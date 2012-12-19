@@ -35,7 +35,7 @@ class Main {
 				System.out.println(servoL.getPosition() + " " + servoR.getPosition());
 				servoL.setPosition(servoL.getPosition() + 30);
 				servoR.setPosition(servoR.getPosition() - 30);
-				try { Thread.sleep(100); } catch (Exception e) {}
+				try { Thread.sleep(150); } catch (Exception e) {}
 			}
 			while(downButton.getValue() == true){
 				System.out.println(servoL.getPosition() + " " + servoR.getPosition());
